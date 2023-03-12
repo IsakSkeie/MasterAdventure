@@ -1,0 +1,13 @@
+
+	-Transport of oil from wellbore tol the topside seperator
+	-Models give information about uncertainty
+	-Using classical determenistic material, and momentum balance principle
+	-Model uncertaintyto be analyzed
+	
+	
+	-Submersible pumps are used, to increase pressure
+	-Use ideal gas law for liquid, make expression for gas density
+	-isothermal compressanility, coefficient of thermal expansion
+	-relate density to pressure
+	-Dynamic viscosity? Kinematic viscosity
+	-Relationship between production, reservoir pressure and heel pressure

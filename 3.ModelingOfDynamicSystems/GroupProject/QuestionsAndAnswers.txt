@@ -1,0 +1,15 @@
+Spørsmål
+	-dm/dt, hva gjelder det for? Tverssnitt?
+		-Pumps and valves
+
+	-Hvorfor har ventilene ulike ligninger?
+		-Hva skiller ventilene?
+		-Linear equivalent for formation pressure
+		
+	-Hva er rett i 2.1? Boken eller Oppgaven?
+	-Er væsken inkompresibel?
+		-Need to consider this for manifold
+	-dPf, hvor kommer den fra?
+		-pressure drop from friction
+		-Darcy Friction factor
+	
