@@ -45,11 +45,35 @@ rmse_PLS = np.sqrt(np.mean((result - Y[1,:])**2)).round(4)
 # %% [markdown]
 # Plot the results
 
-fig, ax = plt.subplots(figsize = (15,8))
+fig, ax = plt.subplots(figsize = (10,8))
 ax.grid()
 # Plot the three lines on the same axis
-ax.plot(result, label='True Turb',  linewidth = 1)
-ax.plot(Y[0,:], label=f'PCR, RMSE = {rmse_PCR}',alpha = 0.8 ,linewidth = 0.4)
-ax.plot(Y[1,:], label=f'PLS, RMSE = {rmse_PLS}',alpha =0.8, linewidth = 0.4)
+ax.plot(result, label='True Turb',  linewidth = 2)
+#ax.plot(Y[0,:], label=f'PCR, RMSE = {rmse_PCR}',alpha = 0.6 ,linewidth = 1.5)
+ax.plot(Y[1,:], label=f'PLS, RMSE = {rmse_PLS}',alpha =0.6, linewidth = 1.5)
 ax.legend()
+# %% [markdown]
+# FFT
+# apply FFT to each column and compute the magnitude
+path = "Data1month1hSampling.csv"
+df_data = pd.read_csv(path,delimiter=';')
+try:
+    df_data.drop(['time'], axis=1)
+except:
+    print("No Time column present")
+    
+
+#%%
+
+
+Atributes_FFT = ['RIS-QI01_TT_FFT', 'IPU-FB18_FFT', 'SAN3-FB01_FFT', 'ANL1-QI02_FFT', 
+             'ANL1-QI01_FFT', 'SAN3-ML01_FFT', 'POL_FT04_FFT', 'IPU_LT01_FFT', 
+             'SED5-QI11_FFT']
+fft_df = pd.DataFrame(np.abs(np.fft.fft(df_data.values)), columns=df_data.columns)
+
+fft_df.columns = Atributes_FFT
+merged_df = df_data.join(fft_df.set_index('key'), on='key')
+merged_df.to_excel()
+
+plt.plot(fft_df['ANL1-QI01'])
 # %%
