@@ -40,23 +40,42 @@ Y = np.zeros([m, len(df.index)])
 for atrb in range(m):
     for i in range(n):
         Y[atrb] =  Y[atrb] + df[Atributes[i]]*df_coeff[Atributes[i]].loc[atrb]
+        
 
 # %% [markdown]
 # Calculate RMSE
 rmse_PCR = np.sqrt(np.mean((result - Y[0,:])**2)).round(4)
 rmse_PLS = np.sqrt(np.mean((result - Y[1,:])**2)).round(4)
 rmse_PcrV1 = np.sqrt(np.mean((result - Y[2,:])**2)).round(4)
+rmse_PLS1h = np.sqrt(np.mean((result - Y[3,:])**2)).round(4)
+rmse_PLSlog = np.sqrt(np.mean((result - Y[4,:])**2)).round(4)
 # %% [markdown]
 # Plot the results
 
-fig, ax = plt.subplots(figsize = (10,8))
-ax.grid()
-# Plot the three lines on the same axis
-ax.plot(result, label='True Turb',  linewidth = 2)
-ax.plot(Y[0,:], label=f'PCR, RMSE = {rmse_PCR}',alpha = 0.6 ,linewidth = 1.5)
-ax.plot(Y[1,:], label=f'PLS, RMSE = {rmse_PLS}',alpha =0.6, linewidth = 1.5)
-ax.plot(Y[2,:], label=f'PCR_V1, RMSE = {rmse_PcrV1}',alpha =0.6, linewidth = 1.5)
-ax.legend()
+fig, axs = plt.subplots(2, 1, figsize=(10, 12))
+
+# Plot the first subplot
+axs[0].grid()
+axs[0].plot(result, label='True Turb', linewidth=2)
+axs[0].plot(Y[0, :], label=f'PCR, RMSE = {rmse_PCR}', alpha=0.6, linewidth=1.5)
+axs[0].plot(Y[2, :], label=f'PCR_V1, RMSE = {rmse_PcrV1}', alpha=0.6, linewidth=1.5)
+axs[0].legend()
+
+# Plot the second subplot
+axs[1].grid()
+axs[1].plot(result, label='True Turb', linewidth=2)
+axs[1].plot(Y[3, :], label=f'PLS_prediction_1h, RMSE = {rmse_PcrV1}', alpha=0.6, linewidth=1.5)
+axs[1].plot(Y[1, :], label=f'PLS, RMSE = {rmse_PLS}', alpha=0.6, linewidth=1.5)
+axs[1].plot(Y[4, :], label=f'PLS with log, RMSE = {rmse_PLSlog}', alpha=0.6, linewidth=1.5)
+axs[1].legend()
+
+# Set the title and axis labels
+fig.suptitle('Turbidity Predictions')
+axs[0].set_ylabel('Turbidity')
+axs[1].set_ylabel('Turbidity')
+axs[1].set_xlabel('Time')
+
+plt.show()
 
 
 
