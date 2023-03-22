@@ -7,6 +7,7 @@ import pandas as pd
 
 path  =  "ValidatingData.xlsx"
 path  =  "val2__CenterAndScale_MovingAverage.xlsx"
+#path =   "val2.xlsx"
 df = pd.read_excel(path)
 
 # Data is already processed in Unscrambler
@@ -32,8 +33,10 @@ plt.plot(result, linewidth=0.7)
 # %% [markdown]
 # Creating the Creating Modelled Turbidity through Coefficients and Val. Data
 df_coeff = pd.read_excel("ModelCoefficients.xlsx")
+
 m = len(df_coeff.index)
 Y = np.zeros([m, len(df.index)])
+#%%
 for atrb in range(m):
     for i in range(n):
         Y[atrb] =  Y[atrb] + df[Atributes[i]]*df_coeff[Atributes[i]].loc[atrb]
@@ -42,6 +45,7 @@ for atrb in range(m):
 # Calculate RMSE
 rmse_PCR = np.sqrt(np.mean((result - Y[0,:])**2)).round(4)
 rmse_PLS = np.sqrt(np.mean((result - Y[1,:])**2)).round(4)
+rmse_PcrV1 = np.sqrt(np.mean((result - Y[2,:])**2)).round(4)
 # %% [markdown]
 # Plot the results
 
@@ -49,9 +53,15 @@ fig, ax = plt.subplots(figsize = (10,8))
 ax.grid()
 # Plot the three lines on the same axis
 ax.plot(result, label='True Turb',  linewidth = 2)
-#ax.plot(Y[0,:], label=f'PCR, RMSE = {rmse_PCR}',alpha = 0.6 ,linewidth = 1.5)
+ax.plot(Y[0,:], label=f'PCR, RMSE = {rmse_PCR}',alpha = 0.6 ,linewidth = 1.5)
 ax.plot(Y[1,:], label=f'PLS, RMSE = {rmse_PLS}',alpha =0.6, linewidth = 1.5)
+ax.plot(Y[2,:], label=f'PCR_V1, RMSE = {rmse_PcrV1}',alpha =0.6, linewidth = 1.5)
 ax.legend()
+
+
+
+
+
 # %% [markdown]
 # FFT
 # apply FFT to each column and compute the magnitude
@@ -64,8 +74,6 @@ except:
     
 
 #%%
-
-
 Atributes_FFT = ['RIS-QI01_TT_FFT', 'IPU-FB18_FFT', 'SAN3-FB01_FFT', 'ANL1-QI02_FFT', 
              'ANL1-QI01_FFT', 'SAN3-ML01_FFT', 'POL_FT04_FFT', 'IPU_LT01_FFT', 
              'SED5-QI11_FFT']
@@ -76,4 +84,45 @@ merged_df = df_data.join(fft_df.set_index('key'), on='key')
 merged_df.to_excel()
 
 plt.plot(fft_df['ANL1-QI01'])
+# %%
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate some sample data
+t = np.linspace(0, 1, 1000)
+f = 10 # Frequency of the sinusoid
+y = np.sin(2*np.pi*f*t) + 2*np.sin(2*np.pi*2*f*t)
+y = result
+t = np.linspace(0, 1, y.size)
+# Compute the FFT of the data
+fft_y = np.fft.fft(y)
+
+# Create a frequency-domain filter
+freqs = np.fft.fftfreq(len(y), t[1]-t[0])
+mask = np.abs(freqs) < 15*f # Keep only frequencies below 1.5 times the fundamental frequency
+fft_y_filtered = fft_y.copy()
+fft_y_filtered[np.logical_not(mask)] = 0 # Set the high-frequency components to zero
+
+# Transform the filtered FFT back to the time domain
+y_filtered = np.fft.ifft(fft_y_filtered).real
+
+# Plot the original and filtered signals
+fig, axs = plt.subplots(2, 1)
+axs[0].plot(t, y)
+axs[0].set_title('Original signal')
+axs[1].plot(t, y_filtered)
+axs[1].set_title('Filtered signal')
+plt.show()
+
+# %%
+
+fig, ax = plt.subplots(figsize = (10,8))
+ax.grid()
+# Plot the three lines on the same axis
+ax.plot(y, label='Unfiltered',  linewidth = 2)
+#ax.plot(Y[0,:], label=f'PCR, RMSE = {rmse_PCR}',alpha = 0.6 ,linewidth = 1.5)
+ax.plot(y_filtered, label=f'FFT filter',alpha =0.8, linewidth = 1.5)
+ax.legend()
 # %%
