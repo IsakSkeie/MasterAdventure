@@ -1,0 +1,704 @@
+CREATE TABLE [ALARM_CONFIGURATION]
+( 
+	[AlarmId]            char(18)  NOT NULL ,
+	[Tag]                char(18)  NULL ,
+	[AlarmType]          char(18)  NULL ,
+	[AlarmDescription]   char(18)  NULL ,
+	[SeverityName]       char(18)  NOT NULL 
+)
+go
+
+CREATE TABLE [ALARM_DATA]
+( 
+	[AlarmId]            char(18)  NOT NULL ,
+	[ActicationTime]     datetime  NOT NULL ,
+	[Severity]           integer  NULL 
+)
+go
+
+CREATE TABLE [SEVERITY_CONFIGURATION]
+( 
+	[SeverityName]       char(18)  NOT NULL ,
+	[SeverityLevel]      integer  NULL 
+)
+go
+
+CREATE TABLE [TAG_CONFIGURATION]
+( 
+	[TagId]              integer  NOT NULL ,
+	[TagName]            char(18)  NULL ,
+	[ItemId]             char(18)  NULL ,
+	[ItemURL]            char(18)  NULL ,
+	[Description]        char(18)  NULL 
+)
+go
+
+CREATE TABLE [TAG_DATA]
+( 
+	[TimeStamp]          datetime  NOT NULL ,
+	[Value]              char(18)  NULL ,
+	[Quality]            bit  NULL ,
+	[Status]             bit  NULL ,
+	[TagId]              integer  NOT NULL 
+)
+go
+
+ALTER TABLE [ALARM_CONFIGURATION]
+	ADD CONSTRAINT [XPKALARM_CONFIGURATION] PRIMARY KEY  CLUSTERED ([AlarmId] ASC)
+go
+
+ALTER TABLE [ALARM_DATA]
+	ADD CONSTRAINT [XPKALARM_DATA] PRIMARY KEY  CLUSTERED ([AlarmId] ASC,[ActicationTime] ASC)
+go
+
+ALTER TABLE [SEVERITY_CONFIGURATION]
+	ADD CONSTRAINT [XPKSEVERITY_CONFIGURATION] PRIMARY KEY  CLUSTERED ([SeverityName] ASC)
+go
+
+ALTER TABLE [TAG_CONFIGURATION]
+	ADD CONSTRAINT [XPKTAG_CONFIGURATION] PRIMARY KEY  CLUSTERED ([TagId] ASC)
+go
+
+ALTER TABLE [TAG_DATA]
+	ADD CONSTRAINT [XPKTAG_DATA] PRIMARY KEY  CLUSTERED ([TimeStamp] ASC,[TagId] ASC)
+go
+
+
+ALTER TABLE [ALARM_CONFIGURATION]
+	ADD CONSTRAINT [R_4] FOREIGN KEY ([SeverityName]) REFERENCES [SEVERITY_CONFIGURATION]([SeverityName])
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+ALTER TABLE [ALARM_CONFIGURATION]
+	ADD CONSTRAINT [R_7] FOREIGN KEY ([SeverityName]) REFERENCES [SEVERITY_CONFIGURATION]([SeverityName])
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+ALTER TABLE [ALARM_DATA]
+	ADD CONSTRAINT [R_3] FOREIGN KEY ([AlarmId]) REFERENCES [ALARM_CONFIGURATION]([AlarmId])
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+ALTER TABLE [TAG_DATA]
+	ADD CONSTRAINT [R_1] FOREIGN KEY ([TagId]) REFERENCES [TAG_CONFIGURATION]([TagId])
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+CREATE TRIGGER tD_ALARM_CONFIGURATION ON ALARM_CONFIGURATION FOR DELETE AS
+/* erwin Builtin Trigger */
+/* DELETE trigger on ALARM_CONFIGURATION */
+BEGIN
+  DECLARE  @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+    /* erwin Builtin Trigger */
+    /* ALARM_CONFIGURATION  ALARM_DATA on parent delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00041790", PARENT_OWNER="", PARENT_TABLE="ALARM_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_3", FK_COLUMNS="AlarmId" */
+    IF EXISTS (
+      SELECT * FROM deleted,ALARM_DATA
+      WHERE
+        /*  %JoinFKPK(ALARM_DATA,deleted," = "," AND") */
+        ALARM_DATA.AlarmId = deleted.AlarmId
+    )
+    BEGIN
+      SELECT @errno  = 30001,
+             @errmsg = 'Cannot delete ALARM_CONFIGURATION because ALARM_DATA exists.'
+      GOTO error
+    END
+
+    /* erwin Builtin Trigger */
+    /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on child delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00000000", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_7", FK_COLUMNS="SeverityName" */
+    IF EXISTS (SELECT * FROM deleted,SEVERITY_CONFIGURATION
+      WHERE
+        /* %JoinFKPK(deleted,SEVERITY_CONFIGURATION," = "," AND") */
+        deleted.SeverityName = SEVERITY_CONFIGURATION.SeverityName AND
+        NOT EXISTS (
+          SELECT * FROM ALARM_CONFIGURATION
+          WHERE
+            /* %JoinFKPK(ALARM_CONFIGURATION,SEVERITY_CONFIGURATION," = "," AND") */
+            ALARM_CONFIGURATION.SeverityName = SEVERITY_CONFIGURATION.SeverityName
+        )
+    )
+    BEGIN
+      SELECT @errno  = 30010,
+             @errmsg = 'Cannot delete last ALARM_CONFIGURATION because SEVERITY_CONFIGURATION exists.'
+      GOTO error
+    END
+
+    /* erwin Builtin Trigger */
+    /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on child delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00000000", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_4", FK_COLUMNS="SeverityName" */
+    IF EXISTS (SELECT * FROM deleted,SEVERITY_CONFIGURATION
+      WHERE
+        /* %JoinFKPK(deleted,SEVERITY_CONFIGURATION," = "," AND") */
+        deleted.SeverityName = SEVERITY_CONFIGURATION.SeverityName AND
+        NOT EXISTS (
+          SELECT * FROM ALARM_CONFIGURATION
+          WHERE
+            /* %JoinFKPK(ALARM_CONFIGURATION,SEVERITY_CONFIGURATION," = "," AND") */
+            ALARM_CONFIGURATION.SeverityName = SEVERITY_CONFIGURATION.SeverityName
+        )
+    )
+    BEGIN
+      SELECT @errno  = 30010,
+             @errmsg = 'Cannot delete last ALARM_CONFIGURATION because SEVERITY_CONFIGURATION exists.'
+      GOTO error
+    END
+
+
+    /* erwin Builtin Trigger */
+    RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+CREATE TRIGGER tU_ALARM_CONFIGURATION ON ALARM_CONFIGURATION FOR UPDATE AS
+/* erwin Builtin Trigger */
+/* UPDATE trigger on ALARM_CONFIGURATION */
+BEGIN
+  DECLARE  @numrows int,
+           @nullcnt int,
+           @validcnt int,
+           @insAlarmId char(18),
+           @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+
+  SELECT @numrows = @@rowcount
+  /* erwin Builtin Trigger */
+  /* ALARM_CONFIGURATION  ALARM_DATA on parent update no action */
+  /* ERWIN_RELATION:CHECKSUM="00044df6", PARENT_OWNER="", PARENT_TABLE="ALARM_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_3", FK_COLUMNS="AlarmId" */
+  IF
+    /* %ParentPK(" OR",UPDATE) */
+    UPDATE(AlarmId)
+  BEGIN
+    IF EXISTS (
+      SELECT * FROM deleted,ALARM_DATA
+      WHERE
+        /*  %JoinFKPK(ALARM_DATA,deleted," = "," AND") */
+        ALARM_DATA.AlarmId = deleted.AlarmId
+    )
+    BEGIN
+      SELECT @errno  = 30005,
+             @errmsg = 'Cannot update ALARM_CONFIGURATION because ALARM_DATA exists.'
+      GOTO error
+    END
+  END
+
+  /* erwin Builtin Trigger */
+  /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on child update no action */
+  /* ERWIN_RELATION:CHECKSUM="00000000", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_7", FK_COLUMNS="SeverityName" */
+  IF
+    /* %ChildFK(" OR",UPDATE) */
+    UPDATE(SeverityName)
+  BEGIN
+    SELECT @nullcnt = 0
+    SELECT @validcnt = count(*)
+      FROM inserted,SEVERITY_CONFIGURATION
+        WHERE
+          /* %JoinFKPK(inserted,SEVERITY_CONFIGURATION) */
+          inserted.SeverityName = SEVERITY_CONFIGURATION.SeverityName
+    /* %NotnullFK(inserted," IS NULL","select @nullcnt = count(*) from inserted where"," AND") */
+    select @nullcnt = count(*) from inserted where
+      inserted.SeverityName IS NULL
+    IF @validcnt + @nullcnt != @numrows
+    BEGIN
+      SELECT @errno  = 30007,
+             @errmsg = 'Cannot update ALARM_CONFIGURATION because SEVERITY_CONFIGURATION does not exist.'
+      GOTO error
+    END
+  END
+
+  /* erwin Builtin Trigger */
+  /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on child update no action */
+  /* ERWIN_RELATION:CHECKSUM="00000000", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_4", FK_COLUMNS="SeverityName" */
+  IF
+    /* %ChildFK(" OR",UPDATE) */
+    UPDATE(SeverityName)
+  BEGIN
+    SELECT @nullcnt = 0
+    SELECT @validcnt = count(*)
+      FROM inserted,SEVERITY_CONFIGURATION
+        WHERE
+          /* %JoinFKPK(inserted,SEVERITY_CONFIGURATION) */
+          inserted.SeverityName = SEVERITY_CONFIGURATION.SeverityName
+    /* %NotnullFK(inserted," IS NULL","select @nullcnt = count(*) from inserted where"," AND") */
+    
+    IF @validcnt + @nullcnt != @numrows
+    BEGIN
+      SELECT @errno  = 30007,
+             @errmsg = 'Cannot update ALARM_CONFIGURATION because SEVERITY_CONFIGURATION does not exist.'
+      GOTO error
+    END
+  END
+
+
+  /* erwin Builtin Trigger */
+  RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+
+
+CREATE TRIGGER tD_ALARM_DATA ON ALARM_DATA FOR DELETE AS
+/* erwin Builtin Trigger */
+/* DELETE trigger on ALARM_DATA */
+BEGIN
+  DECLARE  @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+    /* erwin Builtin Trigger */
+    /* ALARM_CONFIGURATION  ALARM_DATA on child delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00016921", PARENT_OWNER="", PARENT_TABLE="ALARM_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_3", FK_COLUMNS="AlarmId" */
+    IF EXISTS (SELECT * FROM deleted,ALARM_CONFIGURATION
+      WHERE
+        /* %JoinFKPK(deleted,ALARM_CONFIGURATION," = "," AND") */
+        deleted.AlarmId = ALARM_CONFIGURATION.AlarmId AND
+        NOT EXISTS (
+          SELECT * FROM ALARM_DATA
+          WHERE
+            /* %JoinFKPK(ALARM_DATA,ALARM_CONFIGURATION," = "," AND") */
+            ALARM_DATA.AlarmId = ALARM_CONFIGURATION.AlarmId
+        )
+    )
+    BEGIN
+      SELECT @errno  = 30010,
+             @errmsg = 'Cannot delete last ALARM_DATA because ALARM_CONFIGURATION exists.'
+      GOTO error
+    END
+
+
+    /* erwin Builtin Trigger */
+    RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+CREATE TRIGGER tU_ALARM_DATA ON ALARM_DATA FOR UPDATE AS
+/* erwin Builtin Trigger */
+/* UPDATE trigger on ALARM_DATA */
+BEGIN
+  DECLARE  @numrows int,
+           @nullcnt int,
+           @validcnt int,
+           @insAlarmId char(18), 
+           @insActicationTime datetime,
+           @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+
+  SELECT @numrows = @@rowcount
+  /* erwin Builtin Trigger */
+  /* ALARM_CONFIGURATION  ALARM_DATA on child update no action */
+  /* ERWIN_RELATION:CHECKSUM="00017fca", PARENT_OWNER="", PARENT_TABLE="ALARM_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_3", FK_COLUMNS="AlarmId" */
+  IF
+    /* %ChildFK(" OR",UPDATE) */
+    UPDATE(AlarmId)
+  BEGIN
+    SELECT @nullcnt = 0
+    SELECT @validcnt = count(*)
+      FROM inserted,ALARM_CONFIGURATION
+        WHERE
+          /* %JoinFKPK(inserted,ALARM_CONFIGURATION) */
+          inserted.AlarmId = ALARM_CONFIGURATION.AlarmId
+    /* %NotnullFK(inserted," IS NULL","select @nullcnt = count(*) from inserted where"," AND") */
+    
+    IF @validcnt + @nullcnt != @numrows
+    BEGIN
+      SELECT @errno  = 30007,
+             @errmsg = 'Cannot update ALARM_DATA because ALARM_CONFIGURATION does not exist.'
+      GOTO error
+    END
+  END
+
+
+  /* erwin Builtin Trigger */
+  RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+
+
+CREATE TRIGGER tD_SEVERITY_CONFIGURATION ON SEVERITY_CONFIGURATION FOR DELETE AS
+/* erwin Builtin Trigger */
+/* DELETE trigger on SEVERITY_CONFIGURATION */
+BEGIN
+  DECLARE  @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+    /* erwin Builtin Trigger */
+    /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on parent delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00026822", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_7", FK_COLUMNS="SeverityName" */
+    IF EXISTS (
+      SELECT * FROM deleted,ALARM_CONFIGURATION
+      WHERE
+        /*  %JoinFKPK(ALARM_CONFIGURATION,deleted," = "," AND") */
+        ALARM_CONFIGURATION.SeverityName = deleted.SeverityName
+    )
+    BEGIN
+      SELECT @errno  = 30001,
+             @errmsg = 'Cannot delete SEVERITY_CONFIGURATION because ALARM_CONFIGURATION exists.'
+      GOTO error
+    END
+
+    /* erwin Builtin Trigger */
+    /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on parent delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00000000", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_4", FK_COLUMNS="SeverityName" */
+    IF EXISTS (
+      SELECT * FROM deleted,ALARM_CONFIGURATION
+      WHERE
+        /*  %JoinFKPK(ALARM_CONFIGURATION,deleted," = "," AND") */
+        ALARM_CONFIGURATION.SeverityName = deleted.SeverityName
+    )
+    BEGIN
+      SELECT @errno  = 30001,
+             @errmsg = 'Cannot delete SEVERITY_CONFIGURATION because ALARM_CONFIGURATION exists.'
+      GOTO error
+    END
+
+
+    /* erwin Builtin Trigger */
+    RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+CREATE TRIGGER tU_SEVERITY_CONFIGURATION ON SEVERITY_CONFIGURATION FOR UPDATE AS
+/* erwin Builtin Trigger */
+/* UPDATE trigger on SEVERITY_CONFIGURATION */
+BEGIN
+  DECLARE  @numrows int,
+           @nullcnt int,
+           @validcnt int,
+           @insSeverityName char(18),
+           @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+
+  SELECT @numrows = @@rowcount
+  /* erwin Builtin Trigger */
+  /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on parent update no action */
+  /* ERWIN_RELATION:CHECKSUM="00028949", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_7", FK_COLUMNS="SeverityName" */
+  IF
+    /* %ParentPK(" OR",UPDATE) */
+    UPDATE(SeverityName)
+  BEGIN
+    IF EXISTS (
+      SELECT * FROM deleted,ALARM_CONFIGURATION
+      WHERE
+        /*  %JoinFKPK(ALARM_CONFIGURATION,deleted," = "," AND") */
+        ALARM_CONFIGURATION.SeverityName = deleted.SeverityName
+    )
+    BEGIN
+      SELECT @errno  = 30005,
+             @errmsg = 'Cannot update SEVERITY_CONFIGURATION because ALARM_CONFIGURATION exists.'
+      GOTO error
+    END
+  END
+
+  /* erwin Builtin Trigger */
+  /* SEVERITY_CONFIGURATION  ALARM_CONFIGURATION on parent update no action */
+  /* ERWIN_RELATION:CHECKSUM="00000000", PARENT_OWNER="", PARENT_TABLE="SEVERITY_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="ALARM_CONFIGURATION"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_4", FK_COLUMNS="SeverityName" */
+  IF
+    /* %ParentPK(" OR",UPDATE) */
+    UPDATE(SeverityName)
+  BEGIN
+    IF EXISTS (
+      SELECT * FROM deleted,ALARM_CONFIGURATION
+      WHERE
+        /*  %JoinFKPK(ALARM_CONFIGURATION,deleted," = "," AND") */
+        ALARM_CONFIGURATION.SeverityName = deleted.SeverityName
+    )
+    BEGIN
+      SELECT @errno  = 30005,
+             @errmsg = 'Cannot update SEVERITY_CONFIGURATION because ALARM_CONFIGURATION exists.'
+      GOTO error
+    END
+  END
+
+
+  /* erwin Builtin Trigger */
+  RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+
+
+CREATE TRIGGER tD_TAG_CONFIGURATION ON TAG_CONFIGURATION FOR DELETE AS
+/* erwin Builtin Trigger */
+/* DELETE trigger on TAG_CONFIGURATION */
+BEGIN
+  DECLARE  @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+    /* erwin Builtin Trigger */
+    /* TAG_CONFIGURATION  TAG_DATA on parent delete no action */
+    /* ERWIN_RELATION:CHECKSUM="00010e78", PARENT_OWNER="", PARENT_TABLE="TAG_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="TAG_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_1", FK_COLUMNS="TagId" */
+    IF EXISTS (
+      SELECT * FROM deleted,TAG_DATA
+      WHERE
+        /*  %JoinFKPK(TAG_DATA,deleted," = "," AND") */
+        TAG_DATA.TagId = deleted.TagId
+    )
+    BEGIN
+      SELECT @errno  = 30001,
+             @errmsg = 'Cannot delete TAG_CONFIGURATION because TAG_DATA exists.'
+      GOTO error
+    END
+
+
+    /* erwin Builtin Trigger */
+    RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+CREATE TRIGGER tU_TAG_CONFIGURATION ON TAG_CONFIGURATION FOR UPDATE AS
+/* erwin Builtin Trigger */
+/* UPDATE trigger on TAG_CONFIGURATION */
+BEGIN
+  DECLARE  @numrows int,
+           @nullcnt int,
+           @validcnt int,
+           @insTagId integer,
+           @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+
+  SELECT @numrows = @@rowcount
+  /* erwin Builtin Trigger */
+  /* TAG_CONFIGURATION  TAG_DATA on parent update no action */
+  /* ERWIN_RELATION:CHECKSUM="000127b4", PARENT_OWNER="", PARENT_TABLE="TAG_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="TAG_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_1", FK_COLUMNS="TagId" */
+  IF
+    /* %ParentPK(" OR",UPDATE) */
+    UPDATE(TagId)
+  BEGIN
+    IF EXISTS (
+      SELECT * FROM deleted,TAG_DATA
+      WHERE
+        /*  %JoinFKPK(TAG_DATA,deleted," = "," AND") */
+        TAG_DATA.TagId = deleted.TagId
+    )
+    BEGIN
+      SELECT @errno  = 30005,
+             @errmsg = 'Cannot update TAG_CONFIGURATION because TAG_DATA exists.'
+      GOTO error
+    END
+  END
+
+
+  /* erwin Builtin Trigger */
+  RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+
+
+CREATE TRIGGER tD_TAG_DATA ON TAG_DATA FOR DELETE AS
+/* erwin Builtin Trigger */
+/* DELETE trigger on TAG_DATA */
+BEGIN
+  DECLARE  @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+    /* erwin Builtin Trigger */
+    /* TAG_CONFIGURATION  TAG_DATA on child delete no action */
+    /* ERWIN_RELATION:CHECKSUM="000159b8", PARENT_OWNER="", PARENT_TABLE="TAG_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="TAG_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_1", FK_COLUMNS="TagId" */
+    IF EXISTS (SELECT * FROM deleted,TAG_CONFIGURATION
+      WHERE
+        /* %JoinFKPK(deleted,TAG_CONFIGURATION," = "," AND") */
+        deleted.TagId = TAG_CONFIGURATION.TagId AND
+        NOT EXISTS (
+          SELECT * FROM TAG_DATA
+          WHERE
+            /* %JoinFKPK(TAG_DATA,TAG_CONFIGURATION," = "," AND") */
+            TAG_DATA.TagId = TAG_CONFIGURATION.TagId
+        )
+    )
+    BEGIN
+      SELECT @errno  = 30010,
+             @errmsg = 'Cannot delete last TAG_DATA because TAG_CONFIGURATION exists.'
+      GOTO error
+    END
+
+
+    /* erwin Builtin Trigger */
+    RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+
+CREATE TRIGGER tU_TAG_DATA ON TAG_DATA FOR UPDATE AS
+/* erwin Builtin Trigger */
+/* UPDATE trigger on TAG_DATA */
+BEGIN
+  DECLARE  @numrows int,
+           @nullcnt int,
+           @validcnt int,
+           @insTimeStamp datetime, 
+           @insTagId integer,
+           @errno   int,
+           @severity int,
+           @state    int,
+           @errmsg  varchar(255)
+
+  SELECT @numrows = @@rowcount
+  /* erwin Builtin Trigger */
+  /* TAG_CONFIGURATION  TAG_DATA on child update no action */
+  /* ERWIN_RELATION:CHECKSUM="00016a8a", PARENT_OWNER="", PARENT_TABLE="TAG_CONFIGURATION"
+    CHILD_OWNER="", CHILD_TABLE="TAG_DATA"
+    P2C_VERB_PHRASE="", C2P_VERB_PHRASE="", 
+    FK_CONSTRAINT="R_1", FK_COLUMNS="TagId" */
+  IF
+    /* %ChildFK(" OR",UPDATE) */
+    UPDATE(TagId)
+  BEGIN
+    SELECT @nullcnt = 0
+    SELECT @validcnt = count(*)
+      FROM inserted,TAG_CONFIGURATION
+        WHERE
+          /* %JoinFKPK(inserted,TAG_CONFIGURATION) */
+          inserted.TagId = TAG_CONFIGURATION.TagId
+    /* %NotnullFK(inserted," IS NULL","select @nullcnt = count(*) from inserted where"," AND") */
+    
+    IF @validcnt + @nullcnt != @numrows
+    BEGIN
+      SELECT @errno  = 30007,
+             @errmsg = 'Cannot update TAG_DATA because TAG_CONFIGURATION does not exist.'
+      GOTO error
+    END
+  END
+
+
+  /* erwin Builtin Trigger */
+  RETURN
+error:
+   RAISERROR (@errmsg, -- Message text.
+              @severity, -- Severity (0~25).
+              @state) -- State (0~255).
+    rollback transaction
+END
+
+go
+
+

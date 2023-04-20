@@ -1,0 +1,6 @@
+NationalInstruments.NetworkVariable.WebForms.NetworkVariableDataSource, NationalInstruments.NetworkVariable, Version=19.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4
+NationalInstruments.NetworkVariable.WindowsForms.NetworkVariableBrowserDialog, NationalInstruments.NetworkVariable, Version=19.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4
+NationalInstruments.NetworkVariable.WindowsForms.NetworkVariableDataSource, NationalInstruments.NetworkVariable, Version=19.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4
+NationalInstruments.UI.WindowsForms.Thermometer, NationalInstruments.UI.WindowsForms, Version=19.0.45.49154, Culture=neutral, PublicKeyToken=4febd62461bf11a4
+NationalInstruments.UI.WindowsForms.Meter, NationalInstruments.UI.WindowsForms, Version=19.0.45.49154, Culture=neutral, PublicKeyToken=4febd62461bf11a4
+NationalInstruments.NetworkVariable.NetworkVariableLicenser, NationalInstruments.NetworkVariable, Version=19.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4
