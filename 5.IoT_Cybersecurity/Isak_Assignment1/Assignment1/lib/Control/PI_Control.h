@@ -1,5 +1,3 @@
-#ifndef CustomControlLib_h
-#define CustomControlLib_h
 
 #include <Arduino.h>
 
@@ -10,7 +8,6 @@ public:
     float error;
     float elapsedTime;
     float CV;
-
 
     Control(float SP, float Kp, float Ki);
     float Control_P(float PV);
@@ -28,6 +25,4 @@ private:
 
     float _iSum;
     
-}
-
-#endif
+};

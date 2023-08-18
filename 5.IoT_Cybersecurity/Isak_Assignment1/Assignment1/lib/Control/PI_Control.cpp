@@ -1,4 +1,5 @@
 #include "PI_Control.h"
+#include <arduino.h>
 
 
 
@@ -17,7 +18,7 @@ float Control::Control_P(float PV)
 
     //CV = constrain(CV, 0, 10000);
     error = _SP - PV; //Should have control based on derv
-    CV    = error*_Ki;
+    CV    = error*_Kp;
     return CV;
 }
 
