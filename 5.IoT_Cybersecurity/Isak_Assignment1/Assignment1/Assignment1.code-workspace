@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Assignment1",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"random": "cpp"
+		}
+	}
+}
