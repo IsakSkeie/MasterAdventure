@@ -1,0 +1,31 @@
+#%%
+import numpy as np
+
+
+#%% Declare Parameters/Variables
+pl  = 1150              #kg/m^3    Drill mud density
+pw  = 1000              #kg/m^3    Water Density
+WC  = 0.1               #          Water cut of the reservoir fluid
+Ad  = 0.0067            #m^2       Cross sectional area of drilling string
+Aa  = 0.278             #m^2       Cross sectional area of annulus
+Dd  = 0.0925            #m         Hydraulic diameter of drill string
+Da  = 0.211             #m         Hydraulic diameter of annulus
+L   = 1600              #m         Vertical depth of the well
+PI  = 1.6667*pow(10, -9)#m^5/Ns    Productivity Index Value          
+Pres = 250*pow(10, 5)   #N/m^2     Reservoir pressure
+Pfrac = 270*pow(10, 5)  #N/m^2     Fracture pressure
+Pcoll = 220*pow(10,5)   #N/m^2     Collapse pressure
+Prefbit = 0             #N/m^2     Reference pressure
+P0  =  4*pow(10.5)      #N/m^2     Pressure downstream the choke valve
+eDd = 10**-5            #          Relative roughness of pipe in drill string
+eDa = 10*-4             #          Relative roughness of pipe in the annulus
+ud = 0.015              #kg/ms     Dynamic viscosity of the drill fluid
+bd = 3*10**8            #N/m^2     Bulk modulus in the drill string
+ba = 2.4*10**8          #N/m^2     Bulk modulus in the annulus
+qnom = 1500             #l/min     Nominal flow rate of the drill fluid
+uc = 70                 #%         Nominal choke valve opening
+g = 9.81                #m/s^2     Acceleration due to gravity
+fd = 0.02               #          Friction factor
+
+#%% Declare Process Variables
+
