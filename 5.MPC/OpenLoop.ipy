@@ -28,4 +28,30 @@ g = 9.81                #m/s^2     Acceleration due to gravity
 fd = 0.02               #          Friction factor
 
 #%% Declare Process Variables
+Pp =  0                 #N/m^2      Well head pressure
+dot_Pp = 0              #N/m^2/s    Well head pressure change
+deltaP_df = 0           #N/m^2      Pressure difference due to friction drill string   
+deltaP_af =             #N/m^2      Pressure difference due to friction in annulus
+Pbit = 0                #N/m^2      Bottom hole pressure
+qpump = 0               #m^3/s      Flow rate through mud pump
+qbit = 0                #m^3/s      Flow rate into annulus through drill bit 
+qres = 0                #m^3/s      Flow rate of reservoir fluid
+qback = 0               #m^3/s      Flow rate of Back pressure pump
+qchoke = 0              #m^3/s      Flow rate through choke valve
+dot_qbit = 0            #m^3/s      Flow rate through drill bit
+
+dot_Pc = 0              #N/m^2/s    Change in pressure at annulus head
+Pc = 0                  #N/m^2      Pressure at annulus head   
+pmix = 0                #kg/m^3     density of fluid in annulus                     
+
+#%% Declare functions
+dot_Pp   = (bd/(Ad*L))*(qpump - qbit)                   #Change in Well head pressure
+dot_qbit = (Ad/(pl*L))(Pp + pl*g*L - deltaP_df - Pbit)  #Change in drill bit  flow      !!Add constraint to this
+dot_Pc   = (ba/(Aa*L))*(qbit + qres + qback - qchoke)   #Change in well head pressure at annulus
+Pbit     = Pc + pmix*g*L + deltaP_af                    #Bottom hole pressure
+pmix     = pw*WC + (1 - WC)*pl                          #Density of fluid in annulus     !! qres = 0 then WX = 0
+qres     = 0                                            #Flow rate into Annulus, ???
+qchoke   = 
+
+
 
