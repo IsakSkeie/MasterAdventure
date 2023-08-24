@@ -47,5 +47,5 @@ float Control::LPF(float PV)
     _LPF_lastTime   = currentTime;
     _LPF_PrevOutput = _LPF_Output;
 
-    return _LPF_Output
+    return _LPF_Output;
 }
