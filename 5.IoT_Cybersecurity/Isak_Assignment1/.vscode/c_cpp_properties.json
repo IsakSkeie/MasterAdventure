@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Win32",
-            "compilerPath": "",
+            "compilerPath": "c:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT&Cybersecurity\\Isak_Assignment1\\arduino-cli.exe",
             "compilerArgs": [],
             "intelliSenseMode": "",
             "includePath": [
@@ -13,8 +13,6 @@
                 "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino",
                 "C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard",
                 "C:/Program Files (x86)/Arduino"
-
-
             ],
             "forcedInclude": [],
             "cStandard": "",

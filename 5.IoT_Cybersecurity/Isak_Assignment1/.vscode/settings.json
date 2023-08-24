@@ -1,5 +1,6 @@
 {
     "arduino.additionalUrls": [
         "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
-    ]
+    ],
+    "C_Cpp.default.compilerPath": "C:/Users/isak.skeie/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe"
 }
