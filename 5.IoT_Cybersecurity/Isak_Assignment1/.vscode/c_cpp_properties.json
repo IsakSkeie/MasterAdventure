@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Win32",
-            "compilerPath": "c:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT&Cybersecurity\\Isak_Assignment1\\arduino-cli.exe",
+            "compilerPath": "C:/Users/isak.skeie/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe",
             "compilerArgs": [],
             "intelliSenseMode": "",
             "includePath": [

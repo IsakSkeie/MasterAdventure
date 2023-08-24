@@ -1,5 +1,6 @@
 #include <arduino.h>
 #include <PI_Control.h>
+#include <WiFi.h>
 
 
 
@@ -8,6 +9,11 @@ int SenseValue          = 0;
 int SP                  = 2500; //Needs to have this as input from some source, maybe PotMeter 
 float Kp                = 10;
 const int Ki            = 0.1;
+
+
+//WiFi config
+const char* ssid = "IoT_Dev";
+const char* password = "goodlife";
 
 
 unsigned long lastTime = 0;
@@ -22,8 +28,16 @@ void setup() {
     delay(1000);
     lastTime    = millis();
     
-    
-    
+
+
+    WiFi.begin(ssid, password);
+
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.println("Connecting to WiFi..");
+     }
+ 
+    Serial.println("Connected to the WiFi network");
 }
 
 
@@ -31,7 +45,7 @@ void setup() {
 void loop(){
 
 
-
+  
 
 
     unsigned long currentTime   = millis();
