@@ -1,5 +1,11 @@
+#%% ToDo
+# max and curly braces for q_res and dot_qbit
+# Go through ruled for Pressure
+
 #%%
 import numpy as np
+from math import sqrt
+import math
 
 
 #%% Declare Parameters/Variables
@@ -26,6 +32,7 @@ qnom = 1500             #l/min     Nominal flow rate of the drill fluid
 uc = 70                 #%         Nominal choke valve opening
 g = 9.81                #m/s^2     Acceleration due to gravity
 fd = 0.02               #          Friction factor
+uc =  0                 #Valve opening
 
 #%% Declare Process Variables
 Pp =  0                 #N/m^2      Well head pressure
@@ -42,7 +49,21 @@ dot_qbit = 0            #m^3/s      Flow rate through drill bit
 
 dot_Pc = 0              #N/m^2/s    Change in pressure at annulus head
 Pc = 0                  #N/m^2      Pressure at annulus head   
-pmix = 0                #kg/m^3     density of fluid in annulus                     
+pmix = 0                #kg/m^3     density of fluid in annulus    
+
+N6 = 27.3 / (3600*sqrt(10**5))
+
+if uc < 5 :             #This is should be part of function, what is it?
+    Zc = 0
+elif 5 <= uc < 50:
+    Zc = 0.111*uc - 0.556
+elif uc >= 50:
+    Zn = 0.5*uc - 20
+
+
+
+
+                 
 
 #%% Declare functions
 dot_Pp   = (bd/(Ad*L))*(qpump - qbit)                   #Change in Well head pressure
@@ -50,8 +71,17 @@ dot_qbit = (Ad/(pl*L))(Pp + pl*g*L - deltaP_df - Pbit)  #Change in drill bit  fl
 dot_Pc   = (ba/(Aa*L))*(qbit + qres + qback - qchoke)   #Change in well head pressure at annulus
 Pbit     = Pc + pmix*g*L + deltaP_af                    #Bottom hole pressure
 pmix     = pw*WC + (1 - WC)*pl                          #Density of fluid in annulus     !! qres = 0 then WX = 0
-qres     = 0                                            #Flow rate into Annulus, ???
-qchoke   = 
+qres     = PI(Pres - Pbit)                              #Flow rate into Annulus, ???
+qchoke   = N6*Zc*sqrt((Pc-P0)/pmix)                     #Flow rate through choke valve, Do MAX??
+dot_L    = 0                                            #Rate of penetration for drilling, zero for lab1
+
+
+
+
+vd = qpump/(2*math.pi*Ad)
+va = (qbit+qres)/(2*math.pi*Aa)
+deltaP_df = (fd*L*pl*vd**2)/(2*Dd)
+deltaP_af = (fd*L*pl*va**2)/(2*Da)
 
 
 
