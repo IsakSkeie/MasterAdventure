@@ -1,6 +1,8 @@
 #include <arduino.h>
 #include <PI_Control.h>
 #include <WiFi.h>
+#include <PubSubClient.h>
+
 
 
 
@@ -14,14 +16,70 @@ const int Ki            = 0.1;
 //WiFi config
 const char* ssid = "IoT_Dev";
 const char* password = "goodlife";
-
+const char* mqtt_server = "192.168.8.235";
 
 unsigned long lastTime = 0;
 float iSum        = 0;
+long lastMsg = 0;
+char msg[50];
+int value = 0;
 
-
+WiFiClient espClient;
+PubSubClient client(espClient);
 Control NewControl(SP, Kp, Ki);
 
+
+
+
+void callback(char* topic, byte* message, unsigned int length) {
+  Serial.print("Message arrived on topic: ");
+  Serial.print(topic);
+  Serial.print(". Message: ");
+  String messageTemp;
+  
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)message[i]);
+    messageTemp += (char)message[i];
+  }
+  Serial.println();
+
+  // Feel free to add more if statements to control more GPIOs with MQTT
+
+  // If a message is received on the topic esp32/output, you check if the message is either "on" or "off". 
+  // Changes the output state according to the message
+//   if (String(topic) == "esp32/output") {
+//     Serial.print("Changing output to ");
+//     if(messageTemp == "on"){
+//       Serial.println("on");
+//       digitalWrite(ledPin, HIGH);
+//     }
+//     else if(messageTemp == "off"){
+//       Serial.println("off");
+//       digitalWrite(ledPin, LOW);
+//     }
+//   }
+}
+
+
+void setup_wifi() {
+  delay(10);
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
 
 void setup() {
     Serial.begin(115200);
@@ -30,40 +88,51 @@ void setup() {
     
 
 
-    WiFi.begin(ssid, password);
+    setup_wifi();
+    client.setServer(mqtt_server, 1883);
+    client.setCallback(callback);
+}
 
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.println("Connecting to WiFi..");
-     }
- 
-    Serial.println("Connected to the WiFi network");
+
+
+
+
+
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Attempt to connect
+    if (client.connect("ESP8266Client")) {
+      Serial.println("connected");
+      // Subscribe
+      client.subscribe("esp32/output");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
+  }
 }
 
 
 
 void loop(){
 
-
   
 
 
-    unsigned long currentTime   = millis();
-    float elapsedTime = (currentTime - lastTime)/1000.0;
+
     SenseValue = analogRead(lightSensePin);
     
 
-    float error = SP - SenseValue;
+      if (!client.connected()) {
+    reconnect();
+        }
+    client.loop();
 
-    iSum = iSum + error;
-
-
-    float CV = Kp*error + Ki*iSum;
-
-    CV = constrain(CV, 0, 10000);
-
-
-    CV = NewControl.Control_P(SenseValue);
 
 
     Serial.println("Current Value");
@@ -71,14 +140,10 @@ void loop(){
     //Serial.println("Proportional");
     //Serial.println(CV);
     
-    lastTime = currentTime;
+   
     delay(2000);
 
 }
-
-
-
-
 
 
 
