@@ -47,7 +47,7 @@ class OilWell:
         self.SimDur = simDur
 
         #Declare Process Variables
-        self.Pp =  0                 #N/m^2      Well head pressure
+        self.Pp =  self.P0                 #N/m^2      Well head pressure
         self.dot_Pp = 0              #N/m^2/s    Well head pressure change
         self.deltaP_df = 0           #N/m^2      Pressure difference due to friction drill string   
         self.deltaP_af = 0           #N/m^2      Pressure difference due to friction in annulus
@@ -70,9 +70,11 @@ class OilWell:
         #Declare functions
         self.dot_Pp   = (self.bd/(self.Ad*self.L))*(self.qpump - self.qbit)                   #Change in Well head pressure
         self.dot_qbit = (self.Ad/(self.pl*self.L))*(self.Pp + self.pl*self.g*self.L - self.deltaP_df - self.Pbit)  #Change in drill bit  flow, can not be negative
+       
         if self.dot_qbit < 0:
             self.dot_qbit = 0
         self.dot_Pc   = (self.ba/(self.Aa*self.L))*(self.qbit + self.qres + self.qback - self.qchoke)   #Change in well head pressure at annulus
+        print(self.qchoke)
         self.Pbit     = self.Pc + self.pmix*self.g*self.L + self.deltaP_af                    #Bottom hole pressure
         self.pmix     = self.pw*self.WC + (1 - self.WC)*self.pl                          #Density of fluid in annulus     !! qres = 0 then WX = 0
         if self.qres == 0:
@@ -80,16 +82,16 @@ class OilWell:
         self.qres     = self.PI*(self.Pres - self.Pbit)                              #Flow rate into Annulus
         if self.qres < 0:
             self.qres = 0
-        print(self.Pc)
-        print(self.P0)
-        self.qchoke   = self.N6*self.Zc*sqrt((self.Pc-self.P0)/self.pmix)                     #Flow rate through choke valve, Do MAX??
+        if self.Pc < self.P0:
+           self.qchoke = 0
+        else: 
+            self.qchoke   = self.N6*self.Zc*sqrt((self.Pc-self.P0)/self.pmix)                     #Flow rate through choke valve, Do MAX??
         self.dot_L    = 0  
-        
         self.vd = self.qpump/(2*math.pi*self.Ad)                               #Drill string velocity
         self.va = (self.qbit+self.qres)/(2*math.pi*self.Aa)                         #Annulus velocity
         self.deltaP_df = (self.fd*self.L*self.pl*self.vd**2)/(2*self.Dd)                      #Pressure difference due to friction drill string 
         self.deltaP_af = (self.fd*self.L*self.pl*self.va**2)/(2*self.Da) 
-        return self.dot_qbit, 
+         
         
     def integration(self, dot_x, x):
         y = self.dt*dot_x + x
@@ -102,9 +104,6 @@ class OilWell:
             self.Zc = 0.111*self.uc - 0.556
         elif self.uc >= 50:
             self.Zc = 0.5*self.uc - 20
-        
-        
-
 
 
     def StateUpdate(self):
@@ -127,7 +126,7 @@ if __name__ == "__main__":
     
     
     dt = 0.1            #sek
-    simTime = 80*60     #sek
+    simTime = 800*60     #sek
     N = math.ceil(simTime/dt)      # Number of sim points
                         # 𝑞𝑝𝑢𝑚𝑝,𝑃𝑏𝑖𝑡,𝑞𝑜,𝑢𝑐 
                         
@@ -169,13 +168,37 @@ if __name__ == "__main__":
     plt.plot(x, MudPump_PV)
     plt.show()
     
-    for n in range(N):
+    #%%
+    Pbit = [OilWellOpenLoop.Pbit]
+    Pc   = [OilWellOpenLoop.Pc]
+    dot_Pc = [OilWellOpenLoop.dot_Pc]
+    dot_Pp = [OilWellOpenLoop.dot_Pp]
+    qbit = [OilWellOpenLoop.qbit]
+    dot_qbit = [OilWellOpenLoop.dot_qbit]
+    
+    for n in range(1,N):
         OilWellOpenLoop.StateUpdate()
+        OilWellOpenLoop.qpump = (1500/1000.0)*dt
+        Pbit.append(OilWellOpenLoop.Pbit)
+        Pc.append(OilWellOpenLoop.Pc)
+        dot_Pc.append(OilWellOpenLoop.dot_Pc)
+        dot_Pp.append(OilWellOpenLoop.dot_Pp)
+        qbit.append(OilWellOpenLoop.qbit)
+        dot_qbit.append(OilWellOpenLoop.dot_qbit)
+    
+    plt.grid()
+    plt.plot(x, Pc)
+    #plt.plot(x, dot_Pc)
+    #plt.plot(x, dot_Pp)
+    #plt.plot(qbit)
+    #plt.plot(dot_qbit)
         
             
                       
     
     
+
+
 
 
 
