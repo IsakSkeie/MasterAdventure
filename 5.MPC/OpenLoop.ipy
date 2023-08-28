@@ -47,7 +47,7 @@ class OilWell:
         self.SimDur = simDur
 
         #Declare Process Variables
-        self.Pp =  self.P0                 #N/m^2      Well head pressure
+        self.Pp =  0                 #N/m^2      Well head pressure
         self.dot_Pp = 0              #N/m^2/s    Well head pressure change
         self.deltaP_df = 0           #N/m^2      Pressure difference due to friction drill string   
         self.deltaP_af = 0           #N/m^2      Pressure difference due to friction in annulus
@@ -66,16 +66,24 @@ class OilWell:
         self.Zc = 0                 #Valve characteristics as function of opening
 
 
+    
+
     def functions(self):
         #Declare functions
+        
+        
+        
         self.dot_Pp   = (self.bd/(self.Ad*self.L))*(self.qpump - self.qbit)                   #Change in Well head pressure
         self.dot_qbit = (self.Ad/(self.pl*self.L))*(self.Pp + self.pl*self.g*self.L - self.deltaP_df - self.Pbit)  #Change in drill bit  flow, can not be negative
        
         if self.dot_qbit < 0:
             self.dot_qbit = 0
         self.dot_Pc   = (self.ba/(self.Aa*self.L))*(self.qbit + self.qres + self.qback - self.qchoke)   #Change in well head pressure at annulus
-        print(self.qchoke)
+    
+    
+        
         self.Pbit     = self.Pc + self.pmix*self.g*self.L + self.deltaP_af                    #Bottom hole pressure
+        
         self.pmix     = self.pw*self.WC + (1 - self.WC)*self.pl                          #Density of fluid in annulus     !! qres = 0 then WX = 0
         if self.qres == 0:
             self.WX = 0 
@@ -107,18 +115,17 @@ class OilWell:
 
 
     def StateUpdate(self):
-        self.Pp     = self.integration(self.dot_Pp, self.Pp)
-        self.qbit   = self.integration(self.dot_qbit, self.qbit)
-        self.Pc     = self.integration(self.dot_Pc, self.Pc)
+        
         
         self.Zc_f()
         self.functions()
         
-                 
+        self.Pp     = self.integration(self.dot_Pp, self.Pp)
+        self.qbit   = self.integration(self.dot_qbit, self.qbit)
+        self.Pc     = self.integration(self.dot_Pc, self.Pc)      
 
                                           
-
-        
+   
 
 
 #%%
@@ -126,11 +133,12 @@ if __name__ == "__main__":
     
     
     dt = 0.1            #sek
-    simTime = 800*60     #sek
+    simTime = 80*60     #sek
     N = math.ceil(simTime/dt)      # Number of sim points
                         # 𝑞𝑝𝑢𝑚𝑝,𝑃𝑏𝑖𝑡,𝑞𝑜,𝑢𝑐 
                         
     OilWellOpenLoop = OilWell(dt, simTime)
+    
     
     #Pump characteristics
     MudPump_ramp_rate = 1500/(5*60)  #Rate of change for Flow rate
@@ -169,34 +177,48 @@ if __name__ == "__main__":
     plt.show()
     
     #%%
+
     Pbit = [OilWellOpenLoop.Pbit]
     Pc   = [OilWellOpenLoop.Pc]
     dot_Pc = [OilWellOpenLoop.dot_Pc]
     dot_Pp = [OilWellOpenLoop.dot_Pp]
     qbit = [OilWellOpenLoop.qbit]
+    Pp = [OilWellOpenLoop.Pp]
+    
     dot_qbit = [OilWellOpenLoop.dot_qbit]
     
     for n in range(1,N):
+        
         OilWellOpenLoop.StateUpdate()
-        OilWellOpenLoop.qpump = (1500/1000.0)*dt
+        OilWellOpenLoop.qpump = (1500/1000.0)*60
         Pbit.append(OilWellOpenLoop.Pbit)
         Pc.append(OilWellOpenLoop.Pc)
         dot_Pc.append(OilWellOpenLoop.dot_Pc)
         dot_Pp.append(OilWellOpenLoop.dot_Pp)
         qbit.append(OilWellOpenLoop.qbit)
         dot_qbit.append(OilWellOpenLoop.dot_qbit)
+        Pp.append(OilWellOpenLoop.Pp)
+        
+    
+    
     
     plt.grid()
-    plt.plot(x, Pc)
+    #plt.plot(x, Pc)
     #plt.plot(x, dot_Pc)
     #plt.plot(x, dot_Pp)
-    #plt.plot(qbit)
+    plt.plot(qbit)
+    plt.show()
     #plt.plot(dot_qbit)
+    #plt.plot(dot_Pp)
+    #plt.show()
+
         
             
                       
     
     
+
+
 
 
 
