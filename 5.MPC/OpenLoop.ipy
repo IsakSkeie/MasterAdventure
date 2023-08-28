@@ -6,82 +6,178 @@
 import numpy as np
 from math import sqrt
 import math
-
-
-#%% Declare Parameters/Variables
-pl  = 1150              #kg/m^3    Drill mud density
-pw  = 1000              #kg/m^3    Water Density
-WC  = 0.1               #          Water cut of the reservoir fluid
-Ad  = 0.0067            #m^2       Cross sectional area of drilling string
-Aa  = 0.278             #m^2       Cross sectional area of annulus
-Dd  = 0.0925            #m         Hydraulic diameter of drill string
-Da  = 0.211             #m         Hydraulic diameter of annulus
-L   = 1600              #m         Vertical depth of the well
-PI  = 1.6667*pow(10, -9)#m^5/Ns    Productivity Index Value          
-Pres = 250*pow(10, 5)   #N/m^2     Reservoir pressure
-Pfrac = 270*pow(10, 5)  #N/m^2     Fracture pressure
-Pcoll = 220*pow(10,5)   #N/m^2     Collapse pressure
-Prefbit = 0             #N/m^2     Reference pressure
-P0  =  4*pow(10.5)      #N/m^2     Pressure downstream the choke valve
-eDd = 10**-5            #          Relative roughness of pipe in drill string
-eDa = 10*-4             #          Relative roughness of pipe in the annulus
-ud = 0.015              #kg/ms     Dynamic viscosity of the drill fluid
-bd = 3*10**8            #N/m^2     Bulk modulus in the drill string
-ba = 2.4*10**8          #N/m^2     Bulk modulus in the annulus
-qnom = 1500             #l/min     Nominal flow rate of the drill fluid
-uc = 70                 #%         Nominal choke valve opening
-g = 9.81                #m/s^2     Acceleration due to gravity
-fd = 0.02               #          Friction factor
-uc =  0                 #Valve opening
-
-#%% Declare Process Variables
-Pp =  0                 #N/m^2      Well head pressure
-dot_Pp = 0              #N/m^2/s    Well head pressure change
-deltaP_df = 0           #N/m^2      Pressure difference due to friction drill string   
-deltaP_af =             #N/m^2      Pressure difference due to friction in annulus
-Pbit = 0                #N/m^2      Bottom hole pressure
-qpump = 0               #m^3/s      Flow rate through mud pump
-qbit = 0                #m^3/s      Flow rate into annulus through drill bit 
-qres = 0                #m^3/s      Flow rate of reservoir fluid
-qback = 0               #m^3/s      Flow rate of Back pressure pump
-qchoke = 0              #m^3/s      Flow rate through choke valve
-dot_qbit = 0            #m^3/s      Flow rate through drill bit
-
-dot_Pc = 0              #N/m^2/s    Change in pressure at annulus head
-Pc = 0                  #N/m^2      Pressure at annulus head   
-pmix = 0                #kg/m^3     density of fluid in annulus    
-
-N6 = 27.3 / (3600*sqrt(10**5))
-
-if uc < 5 :             #This is should be part of function, what is it?
-    Zc = 0
-elif 5 <= uc < 50:
-    Zc = 0.111*uc - 0.556
-elif uc >= 50:
-    Zn = 0.5*uc - 20
+import matplotlib.pyplot as plt
 
 
 
 
+
+
+
+#%%
+class OilWell:
+    
+    def __init__(self, dt, simDur):
+        #Declare Parameters/Variables
+        self.pl  = 1150              #kg/m^3    Drill mud density
+        self.pw  = 1000              #kg/m^3    Water Density
+        self.WC  = 0.1               #          Water cut of the reservoir fluid
+        self.Ad  = 0.0067            #m^2       Cross sectional area of drilling string
+        self.Aa  = 0.278             #m^2       Cross sectional area of annulus
+        self.Dd  = 0.0925            #m         Hydraulic diameter of drill string
+        self.Da  = 0.211             #m         Hydraulic diameter of annulus
+        self.L   = 1600.0            #m         Vertical depth of the well
+        self.PI  = 1.6667*pow(10, -9)#m^5/Ns    Productivity Index Value          
+        self.Pres = 250*pow(10, 5)   #N/m^2     Reservoir pressure
+        self.Pfrac = 270*pow(10, 5)  #N/m^2     Fracture pressure
+        self.Pcoll = 220*pow(10,5)   #N/m^2     Collapse pressure
+        self.Prefbit = 0             #N/m^2     Reference pressure
+        self.P0  =  4*pow(10,5)      #N/m^2     Pressure downstream the choke valve
+        self.eDd = 10**-5            #          Relative roughness of pipe in drill string
+        self.eDa = 10*-4             #          Relative roughness of pipe in the annulus
+        self.ud = 0.015              #kg/ms     Dynamic viscosity of the drill fluid
+        self.bd = 3*10**8            #N/m^2     Bulk modulus in the drill string
+        self.ba = 2.4*10**8          #N/m^2     Bulk modulus in the annulus
+        self.qnom = 1500             #l/min     Nominal flow rate of the drill fluid
+        self.uc = 70                 #%         Nominal choke valve opening
+        self.g = 9.81                #m/s^2     Acceleration due to gravity
+        self.fd = 0.02               #          Friction factor
+        
+        self.dt = dt
+        self.SimDur = simDur
+
+        #Declare Process Variables
+        self.Pp =  0                 #N/m^2      Well head pressure
+        self.dot_Pp = 0              #N/m^2/s    Well head pressure change
+        self.deltaP_df = 0           #N/m^2      Pressure difference due to friction drill string   
+        self.deltaP_af = 0           #N/m^2      Pressure difference due to friction in annulus
+        self.Pbit = 0                #N/m^2      Bottom hole pressure
+        self.qpump = 0               #m^3/s      Flow rate through mud pump
+        self.qbit = 0                #m^3/s      Flow rate into annulus through drill bit 
+        self.qres = 0                #m^3/s      Flow rate of reservoir fluid
+        self.qback = 0               #m^3/s      Flow rate of Back pressure pump
+        self.qchoke = 0              #m^3/s      Flow rate through choke valve
+        self.dot_qbit = 0            #m^3/s      Flow rate through drill bit
+
+        self.dot_Pc = 0              #N/m^2/s    Change in pressure at annulus head
+        self.Pc = 0                  #N/m^2      Pressure at annulus head   
+        self.pmix = 0                #kg/m^3     density of fluid in annulus    
+        self.N6 = 27.3 / (3600*sqrt(10**5))
+        self.Zc = 0                 #Valve characteristics as function of opening
+
+
+    def functions(self):
+        #Declare functions
+        self.dot_Pp   = (self.bd/(self.Ad*self.L))*(self.qpump - self.qbit)                   #Change in Well head pressure
+        self.dot_qbit = (self.Ad/(self.pl*self.L))*(self.Pp + self.pl*self.g*self.L - self.deltaP_df - self.Pbit)  #Change in drill bit  flow, can not be negative
+        if self.dot_qbit < 0:
+            self.dot_qbit = 0
+        self.dot_Pc   = (self.ba/(self.Aa*self.L))*(self.qbit + self.qres + self.qback - self.qchoke)   #Change in well head pressure at annulus
+        self.Pbit     = self.Pc + self.pmix*self.g*self.L + self.deltaP_af                    #Bottom hole pressure
+        self.pmix     = self.pw*self.WC + (1 - self.WC)*self.pl                          #Density of fluid in annulus     !! qres = 0 then WX = 0
+        if self.qres == 0:
+            self.WX = 0 
+        self.qres     = self.PI*(self.Pres - self.Pbit)                              #Flow rate into Annulus
+        if self.qres < 0:
+            self.qres = 0
+        print(self.Pc)
+        print(self.P0)
+        self.qchoke   = self.N6*self.Zc*sqrt((self.Pc-self.P0)/self.pmix)                     #Flow rate through choke valve, Do MAX??
+        self.dot_L    = 0  
+        
+        self.vd = self.qpump/(2*math.pi*self.Ad)                               #Drill string velocity
+        self.va = (self.qbit+self.qres)/(2*math.pi*self.Aa)                         #Annulus velocity
+        self.deltaP_df = (self.fd*self.L*self.pl*self.vd**2)/(2*self.Dd)                      #Pressure difference due to friction drill string 
+        self.deltaP_af = (self.fd*self.L*self.pl*self.va**2)/(2*self.Da) 
+        return self.dot_qbit, 
+        
+    def integration(self, dot_x, x):
+        y = self.dt*dot_x + x
+        return y
+                
+    def Zc_f(self):     #Valve characteristics as function of opening
+        if self.uc < 5 :             
+            self.Zc = 0
+        elif 5 <= self.uc < 50:
+            self.Zc = 0.111*self.uc - 0.556
+        elif self.uc >= 50:
+            self.Zc = 0.5*self.uc - 20
+        
+        
+
+
+
+    def StateUpdate(self):
+        self.Pp     = self.integration(self.dot_Pp, self.Pp)
+        self.qbit   = self.integration(self.dot_qbit, self.qbit)
+        self.Pc     = self.integration(self.dot_Pc, self.Pc)
+        
+        self.Zc_f()
+        self.functions()
+        
                  
 
-#%% Declare functions
-dot_Pp   = (bd/(Ad*L))*(qpump - qbit)                   #Change in Well head pressure
-dot_qbit = (Ad/(pl*L))(Pp + pl*g*L - deltaP_df - Pbit)  #Change in drill bit  flow      !!Add constraint to this
-dot_Pc   = (ba/(Aa*L))*(qbit + qres + qback - qchoke)   #Change in well head pressure at annulus
-Pbit     = Pc + pmix*g*L + deltaP_af                    #Bottom hole pressure
-pmix     = pw*WC + (1 - WC)*pl                          #Density of fluid in annulus     !! qres = 0 then WX = 0
-qres     = PI(Pres - Pbit)                              #Flow rate into Annulus, ???
-qchoke   = N6*Zc*sqrt((Pc-P0)/pmix)                     #Flow rate through choke valve, Do MAX??
-dot_L    = 0                                            #Rate of penetration for drilling, zero for lab1
+                                          
+
+        
+
+
+#%%
+if __name__ == "__main__":
+    
+    
+    dt = 0.1            #sek
+    simTime = 80*60     #sek
+    N = math.ceil(simTime/dt)      # Number of sim points
+                        # 𝑞𝑝𝑢𝑚𝑝,𝑃𝑏𝑖𝑡,𝑞𝑜,𝑢𝑐 
+                        
+    OilWellOpenLoop = OilWell(dt, simTime)
+    
+    #Pump characteristics
+    MudPump_ramp_rate = 1500/(5*60)  #Rate of change for Flow rate
+    MudPump_start_PV  = 1500.0    #l/min Start value of flow rate
+    MudPump_PipeConnection_Start = [10*60, 45*60, 0]
+    MudPump_PipeConncetion_Finish  = [25*60, 60*60, 0]
+    
+    MudPump_PV = [MudPump_start_PV]
+    n_start = 0
+    n_finish = 0
+    
+    for n in range(1,N):
+        if n*dt >= MudPump_PipeConnection_Start[n_start] and MudPump_PV[n-1] > 0 and MudPump_PipeConnection_Start[n_start] != 0:
+            pv = MudPump_PV[n-1]-MudPump_ramp_rate*dt
+                
+        elif n*dt >= MudPump_PipeConncetion_Finish[n_finish] and MudPump_PV[n-1] < MudPump_start_PV and MudPump_PipeConncetion_Finish[n_finish] != 0:
+            pv = MudPump_PV[n-1]+MudPump_ramp_rate*dt
+             
+        else: 
+            pv = MudPump_PV[n-1]
+            
+        
+        MudPump_PV.append(pv)
+        
+        
+        if n*dt >= MudPump_PipeConnection_Start[n_start] and MudPump_PV[n-1] <= 0 and n_start + 1 < len(MudPump_PipeConnection_Start):
+            n_start = n_start + 1
+            
+        if n*dt >= MudPump_PipeConncetion_Finish[n_finish] and MudPump_PV[n-1] >= MudPump_start_PV and n_finish + 1 < len(MudPump_PipeConncetion_Finish):
+            n_finish = n_finish + 1
+        
+
+    x = np.linspace(0, int(simTime/60), N)    
+    plt.grid()
+    plt.plot(x, MudPump_PV)
+    plt.show()
+    
+    for n in range(N):
+        OilWellOpenLoop.StateUpdate()
+        
+            
+                      
+    
+    
 
 
 
 
-vd = qpump/(2*math.pi*Ad)
-va = (qbit+qres)/(2*math.pi*Aa)
-deltaP_df = (fd*L*pl*vd**2)/(2*Dd)
-deltaP_af = (fd*L*pl*va**2)/(2*Da)
-
-
-
+# %%
