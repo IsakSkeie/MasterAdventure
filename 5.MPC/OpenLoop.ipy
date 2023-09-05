@@ -34,7 +34,7 @@ class OilWell:
         self.Prefbit = 0             #N/m^2     Reference pressure
         self.P0  =  4*pow(10,5)      #N/m^2     Pressure downstream the choke valve
         self.eDd = 10**-5            #          Relative roughness of pipe in drill string
-        self.eDa = 10*-4             #          Relative roughness of pipe in the annulus
+        self.eDa = 10**-4             #          Relative roughness of pipe in the annulus
         self.ud = 0.015              #kg/ms     Dynamic viscosity of the drill fluid
         self.bd = 3*10**8            #N/m^2     Bulk modulus in the drill string
         self.ba = 2.4*10**8          #N/m^2     Bulk modulus in the annulus
@@ -95,8 +95,10 @@ class OilWell:
         else: 
             self.qchoke   = self.N6*self.Zc*sqrt((self.Pc-self.P0)/self.pmix)                     #Flow rate through choke valve, Do MAX??
         self.dot_L    = 0  
-        self.vd = self.qpump/(2*math.pi*self.Ad)                               #Drill string velocity
-        self.va = (self.qbit+self.qres)/(2*math.pi*self.Aa)                         #Annulus velocity
+        self.vd = self.qpump/(self.Ad)                               #Drill string velocity
+        self.va = (self.qbit+self.qres)/(self.Aa)                         #Annulus velocity
+        
+        
         self.deltaP_df = (self.fd*self.L*self.pl*self.vd**2)/(2*self.Dd)                      #Pressure difference due to friction drill string 
         self.deltaP_af = (self.fd*self.L*self.pl*self.va**2)/(2*self.Da) 
          

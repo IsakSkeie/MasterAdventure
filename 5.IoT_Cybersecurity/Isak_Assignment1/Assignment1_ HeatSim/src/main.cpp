@@ -3,6 +3,14 @@
 // // put function declarations here:
  float HeaterSim(float);
 
+
+// put function definitions here:
+ float HeaterSim(float sp) {
+
+ float placeholder;
+   return placeholder;
+ }
+ 
  void setup() {
    // put your setup code here, to run once:
    float result = HeaterSim(3);
@@ -16,12 +24,7 @@
 
  }
 
- // put function definitions here:
- float HeaterSim(float sp) {
-
- float placeholder;
-   return placeholder;
- }
+ 
 
 
 
