@@ -13,11 +13,21 @@ int PV_Temp2   = 0;
 int SP                  = 2500; //Needs to have this as input from some source, maybe PotMeter 
 float Kp                = 10;
 const int Ki            = 0.1;
+float pv;   
+
+unsigned long startTime;
+unsigned long elapsedTime;
+unsigned long currentTime;
+
+Control control;
+
 
 void setup() {
     Serial.begin(115200);
     delay(1000);
-    Serial.println("Temp, FilteredTemp");
+    Serial.println("Temp_WithLPF");
+    startTime = millis();
+    control.CutOff = 500; //Declare cutoff freq
     
 }
 
@@ -32,20 +42,24 @@ void setup() {
 
 void loop(){
 
-  
 
+    
+    currentTime = millis();
+    elapsedTime = currentTime - startTime;
 
+    if (elapsedTime < 2500){
 
-    PV_Temp1 = analogRead(AI_1);
-    PV_Temp2 = analogRead(AI_2);
-  
-    Serial.print(PV_Temp1);
-    Serial.print(", ");
-    Serial.println(PV_Temp2);
+    pv = analogRead(AI_1);
+
+    PV_Temp1 = control.LPF(pv);
+    Serial.println(PV_Temp1);
+    }
+
+ 
    
     
    
-    delay(2000);
+
 
 }
 

@@ -9,7 +9,7 @@ directory_path = os.getcwd()
 
 most_recent_file = None
 most_recent_mtime = 0
-
+target_character = "@"
 
 
 for filename in os.listdir(directory_path):
@@ -21,15 +21,20 @@ for filename in os.listdir(directory_path):
                 most_recent_file = file_path
 
 if most_recent_file:
-    print("Most recent text file: ", most_recent_file)
-    delimeter = ","
     
+    
+    
+    print("Most recent text file: ", most_recent_file)
+    
+    
+    delimeter = ","
     df = pd.read_csv(most_recent_file, delimiter=delimeter)
     #print(df)
     
     df.plot()
     plt.legend(loc="upper right")
-    plt.gca().set_ylim(0, 300)
+    plt.grid()
+    plt.gca().set_ylim(3600, 3900)
     
     
     
