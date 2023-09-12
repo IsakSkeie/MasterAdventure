@@ -34,7 +34,7 @@ if most_recent_file:
     df.plot()
     plt.legend(loc="upper right")
     plt.grid()
-    plt.gca().set_ylim(3600, 3900)
+    #plt.gca().set_ylim(3600, 3900)
     
     
     
