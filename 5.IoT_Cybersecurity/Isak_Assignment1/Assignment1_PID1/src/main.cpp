@@ -19,15 +19,17 @@ unsigned long startTime;
 unsigned long elapsedTime;
 unsigned long currentTime;
 
-Control control;
+Control control(0, 1, 0);
 
 
 void setup() {
+    
+
     Serial.begin(115200);
     delay(1000);
-    Serial.println("Temp_WithLPF");
+    Serial.println("Temp");
     startTime = millis();
-    control.CutOff = 500; //Declare cutoff freq
+    
     
 }
 
@@ -42,7 +44,7 @@ void setup() {
 
 void loop(){
 
-
+    control.CutOff = 500; //Declare cutoff freq
     
     currentTime = millis();
     elapsedTime = currentTime - startTime;
@@ -52,6 +54,7 @@ void loop(){
     pv = analogRead(AI_1);
 
     PV_Temp1 = control.LPF(pv);
+    PV_Temp1 = pv;
     Serial.println(PV_Temp1);
     }
 

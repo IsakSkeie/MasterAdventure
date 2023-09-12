@@ -9,8 +9,12 @@ public:
     float elapsedTime;
     float CV;
     float alpha; //Filter coefficient
-    float CutOff = 1000; //Cut off frequency for LPF
+    float CutOff; //Cut off frequency for LPF
     
+    //float SP = 0;
+    //float Kp = 1;
+    //float Ki = 0;
+
 
     Control(float SP, float Kp, float Ki);
     float Control_P(float PV);

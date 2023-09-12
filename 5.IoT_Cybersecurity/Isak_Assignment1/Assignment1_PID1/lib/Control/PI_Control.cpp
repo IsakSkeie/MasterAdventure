@@ -3,7 +3,7 @@
 
 
 
-Control::Control(float SP, float Kp, float Ki) 
+Control::Control(float SP, float Kp, float Ki)
 {
 
     _SP         = SP;
@@ -11,6 +11,9 @@ Control::Control(float SP, float Kp, float Ki)
     _Ki         = Ki;
     _PI_lastTime   = millis();
     _PI_iSum       = 0;
+    
+    CutOff = 1000;
+
 }
 
 float Control::Control_P(float PV) 
