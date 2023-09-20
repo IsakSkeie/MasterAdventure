@@ -33,7 +33,15 @@ float Control::Control_PI(float PV)
 
     _PI_iSum = _PI_iSum + error;
 
-    CV = _Kp*error + _Ki*_PI_iSum;
+    if (error > 0){
+        CV = _Kp*error + _Ki*_PI_iSum;
+    }
+    else if (error < 0)
+    {
+        CV = Ki*_PI_iSum;
+    }
+    
+    
     //CV = constrain(CV, 0, 10000);
     _PI_lastTime = currentTime;
     return CV;

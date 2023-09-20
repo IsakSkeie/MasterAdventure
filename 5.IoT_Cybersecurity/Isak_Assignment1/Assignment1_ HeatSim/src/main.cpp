@@ -1,11 +1,12 @@
 #include <Arduino.h>
 
+#define DAC1 25
 
 
-const int AI_1 = 15;
-
+const int AI_1 = 34;
 
 const float theta_t = 22;
+const float T_Max = 35;
 const float theta_d = 2;
 const float Kh = 3.5;
 unsigned long CurrentTime;
@@ -15,6 +16,14 @@ double SamplingTime;
 float Tenv = 21.5;
 float dot_Tout;
 float Tout;
+
+
+
+//PWM output
+const int PWMfreq = 5000;
+const int PWMChannel = 0;
+const int PWMres = 10;
+const int MAX_DUTY_CYCLE = (int)(pow(2, PWMres) - 1);
 
 //function declarations
 float dot_HeaterSim(float);
@@ -44,8 +53,6 @@ void setup() {
   Serial.println("Control Voltage, Output Temp");
   Tout = Tenv;
   CurrentTime = millis();
-  float result = dot_HeaterSim(3);
-
   
  }
 
@@ -53,20 +60,22 @@ void setup() {
    
 
   float cv =  analogRead(AI_1);
-
-  cv = (5-0)*(cv - 200)/(4200-200) + 0;
-
-
+  cv = 3.3 * (cv/4050);
+  
   
     
-    dot_Tout = dot_HeaterSim(cv);
-    Tout = FE(dot_Tout, Tout);
-  if (millis() < 20000){
-    Serial.print(cv);
-    Serial.print(", ");
-    Serial.println(Tout);
-  }
-  delay(10);
+  dot_Tout = dot_HeaterSim(cv);
+  Tout = FE(dot_Tout, Tout);
+
+  Serial.print(cv);
+  Serial.print(", ");
+  Serial.println(Tout);
+  
+
+  float pv = (255) * Tout/T_Max; 
+
+  dacWrite(DAC1, pv);
+  delay(100);
   
  }
 

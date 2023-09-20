@@ -18,11 +18,14 @@ const char * myWriteAPIKey = "UHKJXHGQMJNDV9HD";
 
 int number = 0;
 
-const int AI_1 = 15;
+const int AI_1 = 34;
 const int AI_2 = 2;
+const float T_Max = 35;
+#define DAC1 25
+
 int PV_Temp1   = 0;
 int PV_Temp2   = 0;
-int SP                  = 2500; //Needs to have this as input from some source, maybe PotMeter 
+int SP                  = 30; //Needs to have this as input from some source, maybe PotMeter 
 float Kp                = 10;
 const int Ki            = 0.1;
 float pv;   
@@ -39,7 +42,7 @@ const int PWMres = 10;
 const int MAX_DUTY_CYCLE = (int)(pow(2, PWMres) - 1);
 
 
-Control control(0, 1, 0);
+Control control(SP, 0.25, 0.05);
 Adafruit_MCP4725 MCP4725;
 
 
@@ -51,8 +54,7 @@ void setup() {
     Serial.println("Temp");
     startTime = millis();
     
-    //ledcSetup(PWMChannel, PWMfreq, PWMres);
-    //ledcAttachPin(16, PWMChannel);
+    
 
     WiFi.mode(WIFI_STA); 
     WiFi.disconnect();  
@@ -130,15 +132,15 @@ void ThingSpeakWrite(float x){
 
 
 
-void DAC(float pv){
+void DAC(float cv){
   uint32_t MCP4725_value;
   int adcInput = 0;
   float voltageIn = 0; 
   float MCP4725_reading;
  
  
-  MCP4725_reading = (3.3/4096.0) * pv; //3.3 is your supply voltage
-  MCP4725.setVoltage(pv, false);
+  MCP4725_reading = (3.3/4096.0) * cv; //3.3 is your supply voltage
+  MCP4725.setVoltage(cv, false);
   delay(250);
   adcInput = analogRead(33); //module output connect to A0
   voltageIn = (adcInput  )/ 1024.0; 
@@ -163,21 +165,32 @@ void loop(){
 
     
     control.CutOff = 500; //Declare cutoff freq
-    
+    float cv = 0;
+
     currentTime = millis();
     elapsedTime = currentTime - startTime;
     //ledcWrite(PWMChannel, 500);
-    DAC();
+    
 
 
-    //pv = analogRead(AI_1);
-    pv = 10;
+    pv = analogRead(AI_1);
+
     PV_Temp1 = control.LPF(pv);
-    PV_Temp1 = 10;
+    
+
+    pv = T_Max*(pv/4050.0);
+
+    //Input calculation
+    cv = control.Control_PI(pv);
+    Serial.println(cv);
+    cv = 255*(cv/3.3);
+    dacWrite(DAC1, cv);
+
 
     if (elapsedTime < 2500){ //Log data for a few seconds on startup
 
-    Serial.println(PV_Temp1);
+   
+    //Serial.println(pv);
 
     }
     else if (false)
@@ -185,31 +198,19 @@ void loop(){
 
         //Publish data
         // Write to ThingSpeak. There are up to 8 fields in a channel, allowing you to store up to 8 different
-        // pieces of information in a channel.  Here, we write to field 1.
         int x = ThingSpeak.writeField(myChannelNumber, 1, number, myWriteAPIKey);
         if(x == 200){
-    Serial.println("Channel update successful.");
-  }
-  else{
-    Serial.println("Problem updating channel. HTTP error code " + String(x));
-  }
+          Serial.println("Channel update successful.");
+        }
+    else{
+      Serial.println("Problem updating channel. HTTP error code " + String(x));
+        }
   
-  // change the value
-  number++;
-  if(number > 99){
-    number = 0;
-  }
-  
-  delay(20000); // Wait 20 seconds to update the channel again
+      delay(10000); // Wait 20 seconds to update the channel again
 
     }
 
-    
-   
-    
-   
-
-
+  delay(2000);
 }
 
 
