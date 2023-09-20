@@ -32,9 +32,10 @@ if most_recent_file:
     #print(df)
     
     df.plot()
+ 
     plt.legend(loc="upper right")
     plt.grid()
-    #plt.gca().set_ylim(3600, 3900)
+    plt.gca().set_ylim(0, 35)
     
     
     

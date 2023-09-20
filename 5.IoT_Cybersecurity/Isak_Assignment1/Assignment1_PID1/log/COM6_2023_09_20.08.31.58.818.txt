@@ -1,0 +1,500 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13192
+load:0x40080400,len:3028
+entry 0x400805e4
+Temp
+[  1399][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[  1669][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[  1940][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[  2211][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[  2482][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[  2753][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[  3024][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[  3295][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[  3566][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[  3837][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[  4108][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[  4379][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[  4650][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[  4921][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[  5192][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[  5463][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[  5734][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[  6005][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[  6276][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[  6547][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[  6818][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[  7089][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[  7360][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[  7631][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[  7902][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[  8173][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[  8444][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[  8715][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[  8986][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[  9257][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[  9528][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[  9799][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+10
+[ 10070][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 10341][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 10612][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 10883][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 11154][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 11425][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 11696][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 11967][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 12238][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 12509][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 12780][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 13051][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 13322][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 13593][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 13864][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 14135][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 14406][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 14677][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 14948][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 15219][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[ 15490][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[ 15761][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[ 16032][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[ 16303][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[ 16574][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[ 16845][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[ 17116][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[ 17387][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[ 17658][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[ 17929][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[ 18200][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[ 18471][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+[ 18742][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 19013][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 19284][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 19555][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 19826][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 20097][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 20368][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 20639][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 20910][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 21181][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 21452][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 21723][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 21994][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 22265][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 22536][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 22807][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 23078][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 23349][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 23620][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 23891][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[ 24162][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[ 24433][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[ 24704][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[ 24975][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[ 25246][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[ 25517][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[ 25788][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[ 26059][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[ 26330][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[ 26601][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[ 26872][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[ 27143][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+[ 27414][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 27685][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 27956][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 28227][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 28498][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 28769][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 29040][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 29311][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 29582][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 29853][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 30124][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 30395][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 30666][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 30937][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 31208][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 31479][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 31750][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 32021][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 32292][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 32563][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[ 32834][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[ 33105][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[ 33376][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[ 33647][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[ 33918][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[ 34189][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[ 34460][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[ 34731][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[ 35002][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[ 35273][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[ 35544][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[ 35815][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+[ 36086][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 36357][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 36628][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 36899][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 37170][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 37441][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 37712][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 37983][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 38254][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 38525][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 38796][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 39067][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 39338][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 39609][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 39880][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 40151][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 40422][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 40693][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 40964][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 41235][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[ 41506][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[ 41777][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[ 42048][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[ 42319][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[ 42590][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[ 42861][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[ 43132][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[ 43403][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[ 43674][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[ 43945][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[ 44216][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[ 44487][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+[ 44758][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 45029][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 45300][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 45571][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 45842][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 46113][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 46384][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 46655][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 46926][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 47197][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 47468][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 47739][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 48010][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 48281][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 48552][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 48823][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 49094][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 49365][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 49636][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 49907][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[ 50178][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[ 50449][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[ 50720][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[ 50991][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[ 51262][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[ 51533][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[ 51804][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[ 52075][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[ 52346][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[ 52617][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[ 52888][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[ 53159][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+[ 53430][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 53701][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 53972][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 54243][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 54514][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 54785][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 55056][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 55327][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 55598][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 55869][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 56140][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 56411][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 56682][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 56953][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 57224][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 57495][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 57766][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 58037][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 58308][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 58579][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+[ 58850][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.063	Arduino Voltage: 0.000
+[ 59121][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+[ 59392][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.269	Arduino Voltage: 0.000
+[ 59663][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.372	Arduino Voltage: 0.000
+[ 59934][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.475	Arduino Voltage: 0.000
+[ 60205][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.578	Arduino Voltage: 0.000
+[ 60476][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+[ 60747][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.784	Arduino Voltage: 0.000
+[ 61018][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+[ 61289][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 2.991	Arduino Voltage: 0.000
+[ 61560][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+[ 61831][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 3.197	Arduino Voltage: 0.000
+[ 62102][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+[ 62373][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.103	Arduino Voltage: 0.000
+[ 62644][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+[ 62915][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.309	Arduino Voltage: 0.000
+[ 63186][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+[ 63457][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.516	Arduino Voltage: 0.000
+[ 63728][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+[ 63999][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+[ 64270][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+[ 64541][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+[ 64812][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.031	Arduino Voltage: 0.000
+[ 65083][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+[ 65354][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.237	Arduino Voltage: 0.000
+[ 65625][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+[ 65896][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.444	Arduino Voltage: 0.000
+[ 66167][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+[ 66438][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.650	Arduino Voltage: 0.000
+[ 66709][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+[ 66980][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.856	Arduino Voltage: 0.000
+[ 67251][E][esp32-hal-adc.c:170] __analogRead(): GPIO13: ESP_ERR_TIMEOUT: ADC2 is in use by Wi-Fi. Please see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-limitations for more info
+	Expected Voltage: 1.959	Arduino Voltage: 0.000

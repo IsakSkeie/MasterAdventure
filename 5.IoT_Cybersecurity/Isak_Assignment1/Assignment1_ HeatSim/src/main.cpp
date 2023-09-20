@@ -10,9 +10,9 @@ const float theta_d = 2;
 const float Kh = 3.5;
 unsigned long CurrentTime;
 unsigned long PreviousTime = 0;
-float SamplingTime;
+double SamplingTime;
 
-float Tenv = 23;
+float Tenv = 21.5;
 float dot_Tout;
 float Tout;
 
@@ -27,8 +27,12 @@ float dot_HeaterSim(float u) {
  
 float FE(float dot_x, float x_prev){
   CurrentTime = millis();
-  SamplingTime = (CurrentTime - PreviousTime)/10000;
+  SamplingTime = (CurrentTime - PreviousTime)/1000.0;
+  
+
   float x = x_prev + SamplingTime*dot_x;
+  
+  PreviousTime = CurrentTime;
   return x;
 }
 
@@ -37,7 +41,7 @@ float FE(float dot_x, float x_prev){
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Input Voltage, Output Temp");
+  Serial.println("Control Voltage, Output Temp");
   Tout = Tenv;
   CurrentTime = millis();
   float result = dot_HeaterSim(3);
@@ -49,15 +53,21 @@ void setup() {
    
 
   float cv =  analogRead(AI_1);
+
   cv = (5-0)*(cv - 200)/(4200-200) + 0;
 
-  dot_Tout = dot_HeaterSim(cv);
-  Tout = FE(dot_Tout, Tout);
 
-  Serial.print(cv);
-  Serial.print(", ");
-  Serial.println(Tout);
-
+  
+    
+    dot_Tout = dot_HeaterSim(cv);
+    Tout = FE(dot_Tout, Tout);
+  if (millis() < 20000){
+    Serial.print(cv);
+    Serial.print(", ");
+    Serial.println(Tout);
+  }
+  delay(10);
+  
  }
 
  

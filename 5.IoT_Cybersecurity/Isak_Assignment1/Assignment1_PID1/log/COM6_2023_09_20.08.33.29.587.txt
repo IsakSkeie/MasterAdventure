@@ -1,0 +1,60 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13192
+load:0x40080400,len:3028
+entry 0x400805e4
+Temp
+	Expected Voltage: 0.000	Arduino Voltage: 2.182
+	Expected Voltage: 0.103	Arduino Voltage: 0.090
+	Expected Voltage: 0.206	Arduino Voltage: 0.000
+	Expected Voltage: 0.309	Arduino Voltage: 0.635
+	Expected Voltage: 0.412	Arduino Voltage: 0.000
+	Expected Voltage: 0.516	Arduino Voltage: 6.497
+	Expected Voltage: 0.619	Arduino Voltage: 0.000
+	Expected Voltage: 0.722	Arduino Voltage: 3.864
+	Expected Voltage: 0.825	Arduino Voltage: 0.000
+	Expected Voltage: 0.928	Arduino Voltage: 2.871
+	Expected Voltage: 1.031	Arduino Voltage: 0.155
+	Expected Voltage: 1.134	Arduino Voltage: 1.582
+	Expected Voltage: 1.237	Arduino Voltage: 0.374
+	Expected Voltage: 1.341	Arduino Voltage: 0.338
+	Expected Voltage: 1.444	Arduino Voltage: 1.189
+	Expected Voltage: 1.547	Arduino Voltage: 0.000
+	Expected Voltage: 1.650	Arduino Voltage: 3.458
+	Expected Voltage: 1.753	Arduino Voltage: 0.000
+	Expected Voltage: 1.856	Arduino Voltage: 4.302
+	Expected Voltage: 1.959	Arduino Voltage: 0.000
+	Expected Voltage: 2.063	Arduino Voltage: 3.352
+	Expected Voltage: 2.166	Arduino Voltage: 0.000
+	Expected Voltage: 2.269	Arduino Voltage: 1.856
+	Expected Voltage: 2.372	Arduino Voltage: 0.209
+	Expected Voltage: 2.475	Arduino Voltage: 0.754
+	Expected Voltage: 2.578	Arduino Voltage: 0.567
+	Expected Voltage: 2.681	Arduino Voltage: 0.000
+	Expected Voltage: 2.784	Arduino Voltage: 2.688
+	Expected Voltage: 2.888	Arduino Voltage: 0.000
+	Expected Voltage: 2.991	Arduino Voltage: 4.328
+	Expected Voltage: 3.094	Arduino Voltage: 0.000
+	Expected Voltage: 3.197	Arduino Voltage: 3.883
+10
+	Expected Voltage: 0.000	Arduino Voltage: 0.000
+	Expected Voltage: 0.103	Arduino Voltage: 2.636
+	Expected Voltage: 0.206	Arduino Voltage: 0.113
+	Expected Voltage: 0.309	Arduino Voltage: 1.296
+	Expected Voltage: 0.412	Arduino Voltage: 0.313
+	Expected Voltage: 0.516	Arduino Voltage: 0.158
+	Expected Voltage: 0.619	Arduino Voltage: 1.076
+	Expected Voltage: 0.722	Arduino Voltage: 0.000
+	Expected Voltage: 0.825	Arduino Voltage: 3.258
+	Expected Voltage: 0.928	Arduino Voltage: 0.000
+	Expected Voltage: 1.031	Arduino Voltage: 4.331
+	Expected Voltage: 1.134	Arduino Voltage: 0.000
+	Expected Voltage: 1.237	Arduino Voltage: 3.390
+	Expected Voltage: 1.341	Arduino Voltage: 0.000
+	Expected Voltage: 1.444	Arduino Voltage: 1.908
+	Expected Voltage: 1.547	Arduino Voltage: 0.193
