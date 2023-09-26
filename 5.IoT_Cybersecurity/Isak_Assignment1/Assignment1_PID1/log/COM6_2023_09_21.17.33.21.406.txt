@@ -1,0 +1,42 @@
+SP: 30.00, PV: 25.71,  Error: 4.296.81
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 28.21,  Error: 1.795.85
+Channel update successful.
+SP: 30.00, PV: 29.73,  Error: 0.275.24
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 30.64,  Error: -0.644.86
+Channel update successful.
+SP: 30.00, PV: 31.28,  Error: -1.284.59
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 31.66,  Error: -1.664.40
+Channel update successful.
+SP: 30.00, PV: 31.66,  Error: -1.664.36
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 31.90,  Error: -1.904.23
+Channel update successful.
+SP: 30.00, PV: 31.90,  Error: -1.904.19
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 31.91,  Error: -1.914.15
+Channel update successful.
+SP: 30.00, PV: 31.94,  Error: -1.944.10
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 32.06,  Error: -2.064.01
+Channel update successful.
+SP: 30.00, PV: 32.10,  Error: -2.103.95
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 32.08,  Error: -2.083.92
+Channel update successful.
+SP: 30.00, PV: 32.10,  Error: -2.103.87
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 32.10,  Error: -2.103.83
+Channel update successful.
+SP: 30.00, PV: 32.17,  Error: -2.173.75
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 32.08,  Error: -2.083.75
+Channel update successful.
+SP: 30.00, PV: 32.07,  Error: -2.073.71
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 32.08,  Error: -2.083.67
+Channel update successful.
+SP: 30.00, PV: 32.05,  Error: -2.053.64
+Problem updating channel. HTTP error code -401

@@ -3,10 +3,10 @@
 
 
 
-Control::Control(float SP, float Kp, float Ki)
+Control::Control(float iSP, float Kp, float Ki)
 {
 
-    _SP         = SP;
+    SP         = SP;
     _Kp         = Kp;
     _Ki         = Ki;
     _PI_lastTime   = millis();
@@ -20,30 +20,36 @@ float Control::Control_P(float PV)
 {
 
     //CV = constrain(CV, 0, 10000);
-    error = _SP - PV; //Should have control based on derv
+    error = SP - PV; //Should have control based on derv
     CV    = error*_Kp;
     return CV;
 }
 
 float Control::Control_PI(float PV)
 {
+
     unsigned long currentTime   = millis();
     float elapsedTime = (currentTime - _PI_lastTime)/1000.0;
-    error = _SP - PV;
+    error = SP - PV;
 
     _PI_iSum = _PI_iSum + error;
-
-    if (error > 0){
-        CV = _Kp*error + _Ki*_PI_iSum;
-    }
-    else if (error < 0)
-    {
-        CV = Ki*_PI_iSum;
-    }
+  
+  
+    CV = _Kp*error + _Ki*_PI_iSum;
+   
+  
     
     
     //CV = constrain(CV, 0, 10000);
     _PI_lastTime = currentTime;
+
+      Serial.print("SP: ");
+    Serial.print(SP);
+    Serial.print(", PV: ");
+    Serial.print(PV);
+    Serial.print(",  Error: " );
+    Serial.print(CV);
+
     return CV;
 }
 

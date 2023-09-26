@@ -28,11 +28,18 @@ int PV_Temp2   = 0;
 int SP                  = 30; //Needs to have this as input from some source, maybe PotMeter 
 float Kp                = 10;
 const int Ki            = 0.1;
-float pv;   
+float pv; 
+
+
 
 unsigned long startTime;
 unsigned long elapsedTime;
 unsigned long currentTime;
+
+//SP step timer
+unsigned long SP_CurrentTime;
+unsigned long SP_Elapsedtime = 300000;
+bool SP_Toggle = true;
 
 
 //PWM output
@@ -42,7 +49,7 @@ const int PWMres = 10;
 const int MAX_DUTY_CYCLE = (int)(pow(2, PWMres) - 1);
 
 
-Control control(SP, 0.25, 0.05);
+Control control(SP, 0.4, 0.2);
 Adafruit_MCP4725 MCP4725;
 
 
@@ -53,7 +60,7 @@ void setup() {
     delay(1000);
     Serial.println("Temp");
     startTime = millis();
-    
+    SP_CurrentTime = millis();
     
 
     WiFi.mode(WIFI_STA); 
@@ -144,12 +151,7 @@ void DAC(float cv){
   delay(250);
   adcInput = analogRead(33); //module output connect to A0
   voltageIn = (adcInput  )/ 1024.0; 
- 
-  //Serial.print("\tExpected Voltage: ");
-  //Serial.print(MCP4725_reading,3);
- 
-  //Serial.print("\tArduino Voltage: "); 
-  //Serial.println(voltageIn,3); 
+
 
       
 }
@@ -159,9 +161,9 @@ void loop(){
 
     //WiFiScan();
 
-    //if (WiFi.status() != WL_CONNECTED){
-    //    WifiConnect();
-    //}
+    if (WiFi.status() != WL_CONNECTED){
+        WifiConnect();
+    }
 
     
     control.CutOff = 500; //Declare cutoff freq
@@ -184,6 +186,10 @@ void loop(){
     cv = control.Control_PI(pv);
     Serial.println(cv);
     cv = 255*(cv/3.3);
+    if (cv > 254){
+      cv = 255;
+    }
+
     dacWrite(DAC1, cv);
 
 
@@ -193,12 +199,18 @@ void loop(){
     //Serial.println(pv);
 
     }
-    else if (false)
+    else if (true)
     {
 
         //Publish data
         // Write to ThingSpeak. There are up to 8 fields in a channel, allowing you to store up to 8 different
-        int x = ThingSpeak.writeField(myChannelNumber, 1, number, myWriteAPIKey);
+        //int x = ThingSpeak.writeField(myChannelNumber, 1, number, myWriteAPIKey);
+        ThingSpeak.setField(1, SP);
+        ThingSpeak.setField(2, pv);
+        ThingSpeak.setField(3, cv);
+
+        int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+
         if(x == 200){
           Serial.println("Channel update successful.");
         }
@@ -211,6 +223,28 @@ void loop(){
     }
 
   delay(2000);
+
+
+
+
+  SP_CurrentTime = millis();
+
+  if (millis() > SP_Elapsedtime){
+    SP_Elapsedtime = SP_Elapsedtime + millis();
+    SP_Toggle = not SP_Toggle;
+  }
+
+  if (millis() > 180000){
+    SP = 25;
+  }
+  else{
+    SP = 30;
+  }
+
+  control.SP = SP;
+
+
+  
 }
 
 

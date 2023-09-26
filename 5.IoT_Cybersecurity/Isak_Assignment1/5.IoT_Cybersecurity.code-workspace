@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "test8266",
+			"path": "../../../PlatformIO/Projects/test8266"
+		},
+		{
+			"name": "Assignment1_PID1",
+			"path": "Assignment1_PID1"
+		}
+	],
+	"settings": {}
+}

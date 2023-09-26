@@ -10,13 +10,13 @@ public:
     float CV;
     float alpha; //Filter coefficient
     float CutOff; //Cut off frequency for LPF
-    
+    float SP;
     //float SP = 0;
     //float Kp = 1;
     //float Ki = 0;
 
 
-    Control(float SP, float Kp, float Ki);
+    Control(float iSP, float Kp, float Ki);
     float Control_P(float PV);
     float Control_PI(float PV);
     float LPF(float PV);
@@ -24,7 +24,7 @@ public:
 private:
 //Declares var for inputs
 
-    float _SP;
+    //float _SP;
     float _Kp;
     float _Ki;
 //Declares variables for scantime based derivative    

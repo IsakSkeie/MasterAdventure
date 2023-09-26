@@ -1,0 +1,74 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13192
+load:0x40080400,len:3028
+entry 0x400805e4
+Temp
+SP: 30.00, PV: 22.85,  Error: 7.153.00
+SP: 30.00, PV: 23.34,  Error: 6.662.94
+SP: 30.00, PV: 23.79,  Error: 6.212.88
+SP: 30.00, PV: 24.21,  Error: 5.792.83
+SP: 30.00, PV: 24.47,  Error: 5.532.84
+SP: 30.00, PV: 24.89,  Error: 5.112.77
+SP: 30.00, PV: 25.18,  Error: 4.822.75
+SP: 30.00, PV: 25.42,  Error: 4.582.75
+SP: 30.00, PV: 25.55,  Error: 4.452.79
+SP: 30.00, PV: 25.86,  Error: 4.142.75
+SP: 30.00, PV: 26.09,  Error: 3.912.73
+SP: 30.00, PV: 26.12,  Error: 3.882.79
+SP: 30.00, PV: 26.50,  Error: 3.502.72
+SP: 30.00, PV: 26.63,  Error: 3.372.73
+SP: 30.00, PV: 26.57,  Error: 3.432.82
+SP: 30.00, PV: 26.61,  Error: 3.392.87
+SP: 30.00, PV: 26.99,  Error: 3.012.78
+SP: 30.00, PV: 26.82,  Error: 3.182.92
+SP: 30.00, PV: 27.22,  Error: 2.782.81
+SP: 30.00, PV: 27.35,  Error: 2.652.81
+SP: 30.00, PV: 27.56,  Error: 2.442.78
+SP: 30.00, PV: 27.46,  Error: 2.542.86
+SP: 30.00, PV: 27.71,  Error: 2.292.81
+SP: 30.00, PV: 27.68,  Error: 2.322.87
+SP: 30.00, PV: 27.84,  Error: 2.162.85
+SP: 30.00, PV: 27.84,  Error: 2.162.89
+SP: 30.00, PV: 27.93,  Error: 2.072.90
+SP: 30.00, PV: 27.93,  Error: 2.072.94
+SP: 30.00, PV: 28.08,  Error: 1.922.92
+SP: 30.00, PV: 28.13,  Error: 1.872.94
+SP: 30.00, PV: 28.35,  Error: 1.652.88
+SP: 30.00, PV: 28.25,  Error: 1.752.96
+SP: 30.00, PV: 28.44,  Error: 1.562.91
+SP: 30.00, PV: 28.48,  Error: 1.522.93
+SP: 30.00, PV: 28.48,  Error: 1.522.95
+SP: 30.00, PV: 28.71,  Error: 1.292.89
+SP: 30.00, PV: 28.62,  Error: 1.382.95
+SP: 30.00, PV: 28.79,  Error: 1.212.91
+SP: 30.00, PV: 28.72,  Error: 1.282.96
+SP: 30.00, PV: 28.88,  Error: 1.122.92
+SP: 30.00, PV: 28.73,  Error: 1.273.00
+SP: 30.00, PV: 28.86,  Error: 1.142.98
+SP: 30.00, PV: 28.79,  Error: 1.213.03
+SP: 30.00, PV: 29.05,  Error: 0.952.95
+SP: 30.00, PV: 29.06,  Error: 0.942.96
+SP: 30.00, PV: 29.01,  Error: 0.993.00
+SP: 30.00, PV: 28.85,  Error: 1.153.09
+SP: 30.00, PV: 28.92,  Error: 1.083.08
+SP: 30.00, PV: 29.18,  Error: 0.822.99
+SP: 30.00, PV: 29.19,  Error: 0.813.00
+SP: 30.00, PV: 28.99,  Error: 1.013.11
+SP: 30.00, PV: 29.32,  Error: 0.682.99
+SP: 30.00, PV: 29.28,  Error: 0.723.02
+SP: 30.00, PV: 29.33,  Error: 0.673.01
+SP: 30.00, PV: 29.18,  Error: 0.823.09
+SP: 30.00, PV: 29.55,  Error: 0.452.95
+SP: 30.00, PV: 29.87,  Error: 0.132.82
+SP: 30.00, PV: 29.42,  Error: 0.583.02
+SP: 30.00, PV: 29.40,  Error: 0.603.03
+SP: 30.00, PV: 29.27,  Error: 0.733.10
+SP: 30.00, PV: 29.56,  Error: 0.442.99
+SP: 30.00, PV: 29.45,  Error: 0.553.05
+SP: 30.00, PV: 29.50,  Error: 0.503.04
