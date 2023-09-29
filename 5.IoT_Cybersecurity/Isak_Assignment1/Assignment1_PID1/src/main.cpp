@@ -8,9 +8,11 @@
 
 
 //WiFi Setup
-char ssid[] = "Isak sin iPhone";
-char pass[] = "244466666";
+char ssid[] = "IoT_Dev";
+char pass[] = "goodlife";
 WiFiClient client;
+
+
 
 //ThingSpeak Setup
 unsigned long myChannelNumber = 1;
