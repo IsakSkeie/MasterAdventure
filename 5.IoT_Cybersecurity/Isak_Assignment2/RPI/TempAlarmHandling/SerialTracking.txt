@@ -1,0 +1,23 @@
+import serial
+import time
+import struct
+
+
+serial1 = serial.Serial('/dev/ttyUSB0', baudrate=115200,)
+# ser = serial.Serial(
+#     port='/dev/ttyUSB0',
+#     baudrate=115200,
+#     parity=serial.PARITY_EVEN,
+#     stopbits=serial.STOPBITS_ONE,
+#     bytesize=serial.EIGHTBITS,
+#     timeout=2
+# )
+
+
+
+while True:
+    result = serial1.read(5)
+    temp_mem = result.decode()
+    Temp = float(temp_mem)
+    print(Temp)
+    time.sleep(1)
