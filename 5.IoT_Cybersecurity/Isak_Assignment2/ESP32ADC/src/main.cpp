@@ -47,7 +47,7 @@ void loop() {
   
   if (millis() > ElapsedTime)
   {
-    Serial.println(T);
+    Serial.print(T);
     ElapsedTime = ElapsedTime + 1000;
   }
   
