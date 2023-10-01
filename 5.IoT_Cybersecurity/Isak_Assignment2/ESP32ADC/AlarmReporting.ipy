@@ -58,22 +58,28 @@ if __name__ == "__main__":
     
     summary_stats = df.describe()
     
+    
+    
+    fig, axes = plt.subplots(nrows=2, ncols=1, figsize = (15,10))
+    
     df_plot = df[:n_plot]
-    
-    df_plot["PV"].plot()
-    
     plt.grid()
+    df_plot["PV"].plot(ax = axes[0], kind ='line', title='Temp PV', grid=True)
+    
+ 
+    count = summary_stats.iloc[0, 0]
+    summary_stats = summary_stats.iloc[1:, :]
+    
+    summary_stats["PV"].plot(ax = axes[1], kind='bar', title=f'Stats, Count = {count}', grid=True)
+
+   
+
+
     
     
     
     
     
-    summary_stats["PV"].plot(kind='bar', figsize=(8, 6))
-    plt.title('Summary Statistics')
-    plt.xlabel('Statistic')
-    plt.ylabel('Value')
-    plt.xticks(rotation=0)  # Rotate x-axis labels if needed
-    plt.grid()
 
     
     
