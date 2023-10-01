@@ -7,9 +7,13 @@ import os
 import glob
 from gpiozero import PWMLED
 from gpiozero import Button
-import asyncio
+
 import psycopg2
-import requests_async as requests
+
+
+import paho.mqtt.client as mqtt
+
+
 
 
     
@@ -23,7 +27,6 @@ frequency = 1000
 
 GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
-serial1 = serial.Serial('/dev/ttyUSB0', baudrate=115200,)
 
 global alarm_active
 global alarm_ack
@@ -43,11 +46,9 @@ querystring = """ INSERT INTO public."TermperatureReadings"(
 	"TimeStamp", "SensorId", "PV", "AlarmHighLim", "AlarmActive", "AlarmAcked")
 	VALUES (%s,%s,%s,%s,%s,%s); """
     
-async def DB_Query():
+def DB_Query():
     while True:
-        result = serial1.read(5)
-        temp_mem = result.decode()
-        Temp = float(temp_mem)
+        Temp = 10
         field = 1
         
         
@@ -80,36 +81,30 @@ async def DB_Query():
             cursor.close()
             connection.close()
 
-            #Thingspeak reporting
-            ThingString = f"https://api.thingspeak.com/update?api_key=UHKJXHGQMJNDV9HD&field{field}={Temp}"
-            response = await requests.get(ThingString)
             
         except psycopg2.Error as error:
             print("Error connecting to the PostgreSQL database:", error)
         
     
       
-        await asyncio.sleep(10)
-    
-def ThinSpeakGET(field, pv):
-    
-    ThingString = f"https://api.thingspeak.com/update?api_key=UHKJXHGQMJNDV9HD&field{field}={pv}"
-    response = requests.get(ThingString)
+def on_message(client, userdata, message):
+    print(f"Received message on topic '{message.topic}': {message.payload.decode()}")
+
+
+
     
 
-async def main():
+
+def main():
     alarm_ack1 = 0
     Temp = 0
-    periodic_task = asyncio.create_task(DB_Query())
+    
 
     while True:
         
         
-        result = serial1.read(5)
-        temp_mem = result.decode()
-        Temp = float(temp_mem)
-        print(Temp)
-        #time.sleep(0.5)
+        Temp = 10
+    
     
     
         if button.is_pressed:
@@ -129,13 +124,33 @@ async def main():
             led.value = 0.05
         elif Temp < tempLimit and not alarm_ack:
             led.value = 0
-        await asyncio.sleep(2)    
+ 
             
 if __name__ == "__main__":
+    
+    broker_adress = "192.168.8.107"
+    broker_port = 1883
+    topic = "pv"
     
     #Init variables
     alarm_active = False
     alarm_ack = False
     Temp      = 0
     
-    asyncio.run(main())
+    client = mqtt.Client()
+
+    # Set the callback function for when a message is received
+    client.on_message = on_message
+
+    # Connect to the MQTT broker
+    client.connect(broker_adress, broker_port)
+
+    # Subscribe to the topic
+    client.subscribe(topic)
+
+    # Start the MQTT loop to listen for incoming messages
+    #client.loop_forever() 
+    client.loop()  
+    
+    main()
+    

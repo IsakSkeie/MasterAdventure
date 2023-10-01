@@ -1,0 +1,16 @@
+import sys
+import RPi.GPIO as GPIO
+from time import sleep
+import requests
+
+
+field = 1
+temp = 22
+ThingString = f"https://api.thingspeak.com/update?api_key=UHKJXHGQMJNDV9HD&field{field}={temp}"
+
+
+response = requests.get(ThingString)
+
+
+
+
