@@ -18,13 +18,14 @@ const char topic[3]     = "PV"; //topic for MQTT broker
 
 //WiFi config
 const char* ssid = "IoT_Dev";
-const char* password = "goodlife";
-const char* mqtt_server = "7e62ff77398c4f969b8ec2a58b7073e5.s2.eu.hivemq.cloud";
-const int mqtt_port = 8883;
+const char* pass = "goodlife";
+//const char* mqtt_server = "ssl://7e62ff77398c4f969b8ec2a58b7073e5.s2.eu.hivemq.cloud";
+const char* mqtt_server = "192.168.8.107";
+const int mqtt_port = 1885;
 
 
-const char* mqtt_user = "Isak_IoT";
-const char* mqtt_pswd = "Halvorsen";
+const char* mqtt_user = "ESP32_Isak";
+const char* mqtt_pswd = "ESP32_Isak";
 
 
 unsigned long lastTime = 0;
@@ -70,35 +71,26 @@ void callback(char* topic, byte* message, unsigned int length) {
 }
 
 
-void setup_wifi() {
-  delay(10);
-  // We start by connecting to a WiFi network
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+void WifiConnect(){
 
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
-}
+     // Connect or reconnect to WiFi
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    while(WiFi.status() != WL_CONNECTED){
+      WiFi.begin(ssid, pass); // Connect to WPA/WPA2 network. Change this line if using open or WEP network
+      Serial.print(".");
+      delay(5000);     
+    } 
+    Serial.println("\nConnected.");
+  
+} 
 
 void setup() {
     Serial.begin(115200);
     delay(1000);
     lastTime    = millis();
     
-
-
-    setup_wifi();
-    client.setServer(mqtt_server, 1883);
+    client.setServer(mqtt_server, mqtt_port);
     
   
     client.setCallback(callback);
@@ -114,7 +106,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect("ESP32Client", mqtt_user, mqtt_user)) {
+    if (client.connect("ESP32Client")) {
       Serial.println("connected");
       // Subscribe
       client.subscribe("esp32/output");
@@ -133,7 +125,9 @@ void reconnect() {
 void loop(){
 
   
-    if 
+    if (WiFi.status() != WL_CONNECTED){
+        WifiConnect();
+    }
 
       if (!client.connected()) {
     reconnect();
@@ -143,11 +137,11 @@ void loop(){
 
 
     
-    const char payload = pv;
-    boolean pubResult = client.publish("test", "TestMessage");
+    char* payload = "10";
+    boolean pubResult = client.publish("pv", "TestMessage");
 
     if (pubResult == true) {
-        Serial.println("Publich successfull!");
+        Serial.println("Publish successfull!");
     };
     //Serial.println("Proportional");
     //Serial.println(CV);
