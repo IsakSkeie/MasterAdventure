@@ -1,0 +1,39 @@
+#%%
+import psycopg2
+
+# Database connection parameters
+db_params = {
+    "host": "localhost",
+    "database": "IoT_Data",
+    "user": "isak",
+    "password": "Halvorsen",
+}
+
+
+try:
+    # Establish a connection to the PostgreSQL database
+    connection = psycopg2.connect(**db_params)
+
+    # Create a cursor object
+    cursor = connection.cursor()
+
+    # SQL query
+    sql_query = 	"""SELECT * FROM public."TermperatureReadings" """
+
+    # Execute the query
+    cursor.execute(sql_query)
+    connection.commit()
+
+    # Fetch the results (assuming you're expecting multiple rows)
+    rows = cursor.fetchall()
+
+    # Process and print the results
+    for row in rows:
+        print(row)
+
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+
+except psycopg2.Error as error:
+    print("Error connecting to the PostgreSQL database:", error)
