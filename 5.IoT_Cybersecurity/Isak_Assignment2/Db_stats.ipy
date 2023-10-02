@@ -1,0 +1,68 @@
+#%%
+import psycopg2
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+
+
+# Database connection parameters
+db_params = {
+    "host": "192.168.8.107",
+    "database": "IoT_Data",
+    "user": "isak",
+    "password": "Halvorsen",
+}
+
+columns = ('TimeStamp','ID', 'PV', 'AlarmHighLim', 'AlarmActive', 'AlarmAcked')
+
+
+try:
+    # Establish a connection to the PostgreSQL database
+    connection = psycopg2.connect(**db_params)
+
+    # Create a cursor object
+    cursor = connection.cursor()
+
+    # SQL query
+    sql_query = 	"""SELECT * FROM public."TermperatureReadings" """
+
+    # Execute the query
+    cursor.execute(sql_query)
+    connection.commit()
+
+    # Fetch the results (assuming you're expecting multiple rows)
+    rows = cursor.fetchall()
+
+    # Process and print the results
+    #for row in rows:
+    #    print(row)
+
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+
+except psycopg2.Error as error:
+    print("Error connecting to the PostgreSQL database:", error)
+    
+    
+
+#printing
+df = pd.DataFrame(rows, columns=columns)
+df_summary = df.describe()
+df_summary = df_summary.iloc[1:]
+
+fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(15, 8))
+
+
+
+df['PV'].plot(ax=axes[0], kind='line')
+plt.grid()
+
+
+
+df_summary['PV'].plot(ax=axes[1], kind='bar')
+plt.grid()
+plt.show()
+
+

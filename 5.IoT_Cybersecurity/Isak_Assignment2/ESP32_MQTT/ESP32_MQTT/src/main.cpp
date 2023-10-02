@@ -152,10 +152,11 @@ void loop(){
     boolean pubResult = client.publish("pv", payload);
 
     if (pubResult == true) {
-        Serial.print(T_filter);
         //Serial.println(" Publish successfull!");
         
     };
+
+    Serial.print(T_filter);
     //Serial.println("Proportional");
     //Serial.println(CV);
     
