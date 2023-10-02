@@ -6,6 +6,7 @@
 
 
 
+
 const int AI_1 = 15;
 const int AI_2 = 18;
 int PV_Temp1   = 0;
@@ -24,8 +25,13 @@ const char* mqtt_server = "192.168.8.107";
 const int mqtt_port = 1885;
 
 
-const char* mqtt_user = "ESP32_Isak";
-const char* mqtt_pswd = "ESP32_Isak";
+
+int ThermistorPin = 34;
+int Vo;
+float R1 = 10000;
+float logR2, R2, T;
+float c1 = 1.009249522e-03, c2 = 2.378405444e-04, c3 = 2.019202697e-07;
+unsigned long ElapsedTime = 0;
 
 
 unsigned long lastTime = 0;
@@ -53,21 +59,6 @@ void callback(char* topic, byte* message, unsigned int length) {
   }
   Serial.println();
 
-  // Feel free to add more if statements to control more GPIOs with MQTT
-
-  // If a message is received on the topic esp32/output, you check if the message is either "on" or "off". 
-  // Changes the output state according to the message
-//   if (String(topic) == "esp32/output") {
-//     Serial.print("Changing output to ");
-//     if(messageTemp == "on"){
-//       Serial.println("on");
-//       digitalWrite(ledPin, HIGH);
-//     }
-//     else if(messageTemp == "off"){
-//       Serial.println("off");
-//       digitalWrite(ledPin, LOW);
-//     }
-//   }
 }
 
 
@@ -84,6 +75,19 @@ void WifiConnect(){
     Serial.println("\nConnected.");
   
 } 
+
+
+
+float ThermistorRead(float Vo)
+{
+   R2 = R1 * (4050 / (float)Vo - 1.0);
+  logR2 = log(R2);
+  T = (1.0 / (c1 + c2*logR2 + c3*logR2*logR2*logR2));
+  T = T - 273.15;
+  return T;
+}
+
+
 
 void setup() {
     Serial.begin(115200);
@@ -137,11 +141,20 @@ void loop(){
 
 
     
-    char* payload = "10";
-    boolean pubResult = client.publish("pv", "TestMessage");
+    Vo = analogRead(ThermistorPin);
+
+    T = ThermistorRead(Vo);
+    float T_filter = NewControl.LPF(T);
+    char buffer[20];
+    sprintf(buffer, "%.2f", T_filter);
+    const char *payload = buffer;
+
+    boolean pubResult = client.publish("pv", payload);
 
     if (pubResult == true) {
-        Serial.println("Publish successfull!");
+        Serial.print(T_filter);
+        //Serial.println(" Publish successfull!");
+        
     };
     //Serial.println("Proportional");
     //Serial.println(CV);
