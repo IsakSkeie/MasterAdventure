@@ -1,0 +1,52 @@
+#%%
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import os
+import csv
+
+directory_path = os.getcwd()
+
+most_recent_file = None
+most_recent_mtime = 0
+target_character = "@"
+
+
+for filename in os.listdir(directory_path):
+    if filename.endswith(".txt"):
+        file_path = os.path.join(directory_path, filename)
+        mtime = os.path.getmtime(file_path)
+        if mtime > most_recent_mtime:
+                most_recent_mtime = mtime
+                most_recent_file = file_path
+
+if most_recent_file:
+    
+    
+    
+    print("Most recent text file: ", most_recent_file)
+    
+    
+    delimeter = ","
+    df = pd.read_csv(most_recent_file, delimiter=delimeter)
+    #print(df)
+    
+    df.plot()
+ 
+    plt.legend(loc="upper right")
+    plt.grid()
+    plt.gca().set_ylim(0, 35)
+    
+    
+    
+else:
+    print("No text files found in directory")
+    
+
+    
+
+
+
+
+
+# %%

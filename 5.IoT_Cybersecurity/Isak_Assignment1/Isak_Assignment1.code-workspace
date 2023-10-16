@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Assignment1_ HeatSim",
+			"path": "Assignment1_ HeatSim"
+		},
+		{
+			"name": "Assignment1_PID1",
+			"path": "Assignment1_PID1"
+		}
+	],
+	"settings": {
+		"arduino.additionalUrls": [
+			"http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+		]
+	}
+}

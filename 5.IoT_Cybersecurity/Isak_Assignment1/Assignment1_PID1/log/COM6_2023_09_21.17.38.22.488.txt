@@ -1,0 +1,18 @@
+.......
+Connected.
+SP: 30.00, PV: 20.88,  Error: 3.833.83
+Channel update successful.
+SP: 30.00, PV: 24.91,  Error: 2.322.32
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 25.71,  Error: 2.092.09
+Channel update successful.
+SP: 30.00, PV: 25.87,  Error: 2.112.11
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 25.90,  Error: 2.172.17
+Channel update successful.
+SP: 30.00, PV: 26.01,  Error: 2.212.21
+Problem updating channel. HTTP error code -401
+SP: 30.00, PV: 26.22,  Error: 2.202.20
+Channel update successful.
+SP: 30.00, PV: 26.18,  Error: 2.302.30
+Problem updating channel. HTTP error code -401

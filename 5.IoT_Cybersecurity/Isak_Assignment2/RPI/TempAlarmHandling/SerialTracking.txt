@@ -1,0 +1,48 @@
+import serial
+import time
+import struct
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
+from time import sleep # Import the sleep function from the time module
+import os
+import glob
+from gpiozero import PWMLED
+
+led = PWMLED(14)
+
+frequency = 1000
+
+#GPIO.setwarnings(False) # Ignore warning for now
+#GPIO.setmode(GPIO.BCM) # Use physical pin numbering
+#GPIO.setup(led_pin, GPIO.OUT, initial=GPIO.LOW) # Set pin 8 to be an output pin and set initial value to low (off)
+#pwm = GPIO.PWM(led_pin, frequency)
+
+serial1 = serial.Serial('/dev/ttyUSB0', baudrate=115200,)
+# ser = serial.Serial(
+#     port='/dev/ttyUSB0',
+#     baudrate=115200,
+#     parity=serial.PARITY_EVEN,
+#     stopbits=serial.STOPBITS_ONE,
+#     bytesize=serial.EIGHTBITS,
+#     timeout=2
+# )
+
+#pwm.start(50)
+
+while True:
+    result = serial1.read(5)
+    temp_mem = result.decode()
+    Temp = float(temp_mem)
+    print(Temp)
+    time.sleep(1)
+    
+    
+    
+    
+    if Temp > 24:
+        #GPIO.output(led_pin, GPIO.HIGH) # Turn on
+        #pwm.ChangeDutyCycle(100)
+        led.value = 1
+    else:
+        #GPIO.output(led_pin, GPIO.LOW) # Turn on
+        #pwm.ChangeDutyCycle(50)
+        led.value = 0.05

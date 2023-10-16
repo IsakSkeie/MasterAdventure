@@ -1,0 +1,12 @@
+SP: 30.00, PV: 13.98,  Error: 16.027.30
+[ 17165][E][WiFiGeneric.cpp:1578] hostByName(): DNS Failed for api.thingspeak.com
+Problem updating channel. HTTP error code -301
+SP: 30.00, PV: 7.87,  Error: 22.1310.19
+[ 29177][E][WiFiGeneric.cpp:1578] hostByName(): DNS Failed for api.thingspeak.com
+Problem updating channel. HTTP error code -301
+SP: 30.00, PV: 1.88,  Error: 28.1213.15
+[ 41189][E][WiFiGeneric.cpp:1578] hostByName(): DNS Failed for api.thingspeak.com
+Problem updating channel. HTTP error code -301
+SP: 30.00, PV: 29.55,  Error: 0.452.09
+[ 53201][E][WiFiGeneric.cpp:1578] hostByName(): DNS Failed for api.thingspeak.com
+Problem updating channel. HTTP error code -301

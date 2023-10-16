@@ -1,0 +1,141 @@
+import serial
+import time
+import struct
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
+from time import sleep # Import the sleep function from the time module
+import os
+import glob
+from gpiozero import PWMLED
+from gpiozero import Button
+import asyncio
+import psycopg2
+import requests_async as requests
+
+
+    
+pinButton = 20
+tempLimit = 24
+
+led = PWMLED(14)
+button = Button(pinButton) 
+    
+frequency = 1000
+
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+
+serial1 = serial.Serial('/dev/ttyUSB0', baudrate=115200,)
+
+global alarm_active
+global alarm_ack
+global Temp 
+    
+# Database connection parameters
+db_params = {
+"host": "localhost",
+"database": "IoT_Data",
+"user": "isak",
+"password": "Halvorsen",
+}
+
+querystring = """ INSERT INTO public."TermperatureReadings"("TimeStamp", "SensorId", "PV") VALUES (%s,%s,%s); """
+
+querystring = """ INSERT INTO public."TermperatureReadings"(
+	"TimeStamp", "SensorId", "PV", "AlarmHighLim", "AlarmActive", "AlarmAcked")
+	VALUES (%s,%s,%s,%s,%s,%s); """
+    
+async def DB_Query():
+    while True:
+        result = serial1.read(5)
+        temp_mem = result.decode()
+        Temp = float(temp_mem)
+        field = 1
+        
+        
+        try:
+            
+            
+            data_to_insert = ("NOW()",'1', f'{Temp}',f'{tempLimit}',f'{alarm_active}', f'{alarm_ack}')
+        
+            # Establish a connection to the PostgreSQL database
+            connection = psycopg2.connect(**db_params)
+
+            # Create a cursor object
+            cursor = connection.cursor()
+
+            # SQL query
+            sql_query = 	"""SELECT * FROM public."TermperatureReadings" """
+
+            # Execute the query
+            cursor.execute(querystring, data_to_insert)
+            connection.commit()
+
+            # Fetch the results (assuming you're expecting multiple rows)
+            #rows = cursor.fetchall()
+
+            # Process and print the results
+            #for row in rows:
+            #    print(row)
+
+            # Close the cursor and connection
+            cursor.close()
+            connection.close()
+
+            #Thingspeak reporting
+            ThingString = f"https://api.thingspeak.com/update?api_key=UHKJXHGQMJNDV9HD&field{field}={Temp}"
+            response = await requests.get(ThingString)
+            
+        except psycopg2.Error as error:
+            print("Error connecting to the PostgreSQL database:", error)
+        
+    
+      
+        await asyncio.sleep(10)
+    
+def ThinSpeakGET(field, pv):
+    
+    ThingString = f"https://api.thingspeak.com/update?api_key=UHKJXHGQMJNDV9HD&field{field}={pv}"
+    response = requests.get(ThingString)
+    
+
+async def main():
+    alarm_ack1 = 0
+    Temp = 0
+    periodic_task = asyncio.create_task(DB_Query())
+
+    while True:
+        
+        
+        result = serial1.read(5)
+        temp_mem = result.decode()
+        Temp = float(temp_mem)
+        print(Temp)
+        #time.sleep(0.5)
+    
+    
+        if button.is_pressed:
+            print("Button was pushed!")
+            alarm_ack1 = 0
+    
+    
+        if Temp > tempLimit:
+        
+            alarm_active = True
+            alarm_ack1 = True
+            led.value = 1
+            print("Temperature Alarm!")
+            
+        elif Temp < tempLimit and alarm_ack:
+            alarm_active = False
+            led.value = 0.05
+        elif Temp < tempLimit and not alarm_ack:
+            led.value = 0
+        await asyncio.sleep(2)    
+            
+if __name__ == "__main__":
+    
+    #Init variables
+    alarm_active = False
+    alarm_ack = False
+    Temp      = 0
+    
+    asyncio.run(main())

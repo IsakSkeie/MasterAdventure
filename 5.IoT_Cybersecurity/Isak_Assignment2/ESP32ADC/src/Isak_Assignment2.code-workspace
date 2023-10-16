@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../../MasterAdventure/5.IoT_Cybersecurity/Isak_Assignment2"
+		},
+		{
+			"name": "ESP32_ADC",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
