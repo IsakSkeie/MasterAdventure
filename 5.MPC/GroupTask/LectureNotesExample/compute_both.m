@@ -22,7 +22,7 @@ x_next = my_runge_kutta(state_ini_values,dt,u_k);
 Pc(i,1) = x_next;
 %update the state
 state_ini_values = x_next;
-138
+
 end
 %now make the objective function
 J = (Ref-Pc)'*Qe*(Ref-Pc) + u_ini'*Pu*u_ini;
@@ -32,8 +32,7 @@ myJ = J/2;
 myHeq = [];
 %For this example, there is also constraint on the rate of change of control input variables (du)
 %such that -0.1<=du<=0.1
-%since in the objective function, we don't have 'du' but only 'u', we have to calculate 'du'
-ourself.
+%since in the objective function, we don't have 'du' but only 'u', we have to calculate 'du' ourself.
 %find du from the input signals
 du = u_ini(2:end)-u_ini(1:end-1);
 %//Important Note: If the objective function was formulated such that it

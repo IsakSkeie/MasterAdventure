@@ -11,7 +11,7 @@ u_ini = ones(Np,1).*1; %the unknowns are initialized as full valve opening
 %Reference
 %make the reference vector offline (for the whole prediction horizon length).
 Ref = [ones(Np/4,1)*10e5;ones(Np/4,1)*12e5;ones(Np/4,1)*16e5;ones(Np/4,1)*11e5];
-136
+
 %make the nonlinear optimization problem and solve it
 u_k_ast = optimization_tank(u_ini,state_ini_values,dt,Ref,Np);
 %we now have optimal values of 'u' to fulfill the objective function

@@ -16,7 +16,6 @@ myJ = [];% Use for objective at xLast
 myG = [];% Use for nonlinear inequality constraint
 myHeq = [];% Use for nonlinear equality constraint
 %define the function where the objective function will be calculated
-137
 obj_func = @(u)objfun_tank(u,state_ini_values,dt,Ref,Np);
 %define the function where the nonlinear constraints will be
 %calculated (both equality and inequality constraints will be calculated in
