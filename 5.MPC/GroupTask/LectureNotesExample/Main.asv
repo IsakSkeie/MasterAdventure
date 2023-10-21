@@ -9,18 +9,16 @@ Pp_init     = 8*10^5; %Initial pressure for pump
 qBit_init   = 0.025; %Initial flow rate through drill bit
 Pp_init     = 5*10^5; %Initial pressure at controle choke valve
 
-state_ini_values = [Pp_init, qBit_init, Pp_init];
 
 %initial value for optimizer control
 u_ini = ones(Np,2); 
 
-u_ini(:,1)  = u_ini(:,1)* 0.025; %Initialize pump flow
-u_ini(:,2) = u_ini(:,2)* 70;    %Initialize choke valve opening
+u_ini(:,1) = u_ini(1) * 0.025 
 
 
 %Reference
 %make the reference vector offline (for the whole prediction horizon length).
-Ref =   ones(np, 1) * 24e6;Ref =   ones(np, 1) * 24e6;
+Ref = [ones(Np/4,1)*10e5;ones(Np/4,1)*12e5;ones(Np/4,1)*16e5;ones(Np/4,1)*11e5];
 
 %make the nonlinear optimization problem and solve it
 u_k_ast = optimization_tank(u_ini,state_ini_values,dt,Ref,Np);

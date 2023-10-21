@@ -5,7 +5,7 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np)
 Qe = eye(Np).*1; %weighting matrix for the error
 Pu = eye(Np).*1; %weighting matrix for the control inputs
 %to store the output variable
-Pc = zeros(Np,1);
+Pc = zeros(Np,4);
 %since we need to calculate the outputs for the whole prediction horizon we use a for loop and
 %solve the ODE (model of the nonlinear process) using runge kutta. To solve the ODEs we need to
 %know the initial values of the states. Thus they are passed into the “compute_both” function.
