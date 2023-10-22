@@ -1,4 +1,4 @@
-function x_next = my_runge_kutta(states_ini_values,dt,u_k_ast)
+function x_next = OilWell_runge_kutta(states_ini_values,dt,u_k_ast)
 %the 4th oder runge kutta algorithm
 K1 = tankPressure_equations([],states_ini_values,u_k_ast);
 K2 = tankPressure_equations([],states_ini_values+K1.*(dt/2),u_k_ast);
