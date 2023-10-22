@@ -8,7 +8,7 @@ dt = 3; %sampling time in seconds %dt = 6 seconds
 Pp_init     = 8*10^5; %Initial pressure for pump
 qBit_init   = 0.025; %Initial flow rate through drill bit
 Pp_init     = 5*10^5; %Initial pressure at controle choke valve
-pbit_init   = 18*10^6; %Inital pressure for Pbit
+pbit_init   = 255e5; %Inital pressure for Pbit
 
 
 state_ini_values = [Pp_init, qBit_init, Pp_init, pbit_init];
@@ -22,7 +22,7 @@ u_ini(:,2) = u_ini(:,2)* 70;    %Initialize choke valve opening
 
 %Reference
 %make the reference vector offline (for the whole prediction horizon length).
-Ref =   ones(Np, 1) * 24e6; %P_bit
+Ref =   ones(Np, 1) * 265e5; %P_bit
 
 
 %make the nonlinear optimization problem and solve it
@@ -49,11 +49,16 @@ end
 %make time steps for plotting
 tspan = linspace(0,Np-1,Np);
 figure,
-subplot(211)
+subplot(311)
 plot(tspan,Ref,'b-',tspan,Pc,'k-')
 legend('ref Pc','Pc','Orientation','horizontal')
 ylabel('Pc, Ref'); title('NL optimal control of tank pressure');
-subplot(212)
+subplot(312)
 plot(tspan,u_k_ast(:,1),'r-')
 xlabel('time [sec]'); ylabel('u');
 legend('Control input: Pump speed');
+
+subplot(313)
+plot(tspan,u_k_ast(:,2),'r-')
+xlabel('time [sec]'); ylabel('u');
+legend('Control input: Choke Valve');

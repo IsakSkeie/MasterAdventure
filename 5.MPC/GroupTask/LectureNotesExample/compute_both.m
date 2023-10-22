@@ -6,6 +6,11 @@ Qe = eye(Np).*1; %weighting matrix for the error
 Pu = eye(Np*2-1).*1; %weighting matrix for the control inputs
 %to store the output variable
 Pc = zeros(Np,1);
+
+%Parameters for constraints
+   Pfrac = 270e5; %fracture pressure
+   Pres  = 250e5; %Reservoir pressure
+
 %since we need to calculate the outputs for the whole prediction horizon we use a for loop and
 %solve the ODE (model of the nonlinear process) using runge kutta. To solve the ODEs we need to
 %know the initial values of the states. Thus they are passed into the “compute_both” function.
@@ -42,7 +47,17 @@ myHeq = [];
 %had " (du)'P du ",then we don't have to calculate 'du' here because 'du' would be passed to
 %this function “compute_both” by the optimizer and so we already would have it.
 %list the inequality constraints as column vector
-myG = [];
+
+
+myG = [ Pc - Pfrac; % Pressure in bit needs to be less than Frackture pressure
+        Pc + Pres; % Pressure in bit needs to be greater than reservoir pressure
+       u_ini(:,2) - 100;   % Highest vale opening is 100%
+       -u_ini(:,2) + 0 ;   %Lowest valve opening is 0%
+       %-du - 2; %Valve opening cannot change more than two over a timsetep  
+       %du - 2; %Valve opening cannot change more than two over a timsetep  
+    ];
+
+
 %myG =[u_ini-1; % valve opening should be less than 1
 %-u_ini+0; %valve opening should be greater than 0
 %du - (0.1); % du should be less than 0.1 for each sample
