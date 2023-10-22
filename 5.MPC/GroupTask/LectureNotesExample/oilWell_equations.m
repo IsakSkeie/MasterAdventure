@@ -1,13 +1,18 @@
-function [dot_Pp, dot_qbit, dot_Pc,Pbit, qres] = oilWell_equations(U, X)
+%function [dot_Pp, dot_qbit, dot_Pc, Pbit] = oilWell_equations(U, X)
+function Y = oilWell_equations(U, X)
 
 %States
 Pp = X(1);
 qbit = X(2);
 Pc = X(3);
 Pbit = X(4);
+
 %input
 qpump = U(1);
 uc = U(2);
+
+%
+Y = [];
 
 
 %Parameters
@@ -105,9 +110,16 @@ dot_L    = 0;
  %Conditions
 if qbit <= 0 & dot_qbit < 0
     dot_qbit = 0;
-    qbit = 0
+    qbit = 0;
 end
 
+
+
+% Assigns Output values
+Y(1) = dot_Pp;
+Y(2) = dot_qbit;
+Y(3) = dot_Pc;
+Y(4) = Pbit;
 
 
          
