@@ -43,8 +43,8 @@ du = u_ini(2:end,:)-u_ini(1:end-1,:);
 %now make the objective function
 J = 0;
 for i = 1:Np-1
-    
-    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J;
+    error = (Ref(i)-Pc(i)) * 1e-18;
+    J = Ref(i)-Pc(i)'*Qe*Ref(i)-Pc(i)  + du(i,:)*Pu*du(i,:)' + J;
     
 end
 
