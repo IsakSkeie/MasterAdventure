@@ -1,9 +1,9 @@
 clc
 clear
 %choose prediction horizon Np
-Np = 100; %Np time steps ahead in the future
+Np = 150; %Np time steps ahead in the future
 %sampling time
-dt = 1; %sampling time in seconds %dt = 6 seconds
+dt = 5; %sampling time in seconds %dt = 6 seconds
 %initial values of the states
 Pp_init     = 4e5;%8*10^5; %Initial pressure for pump
 qBit_init   = 0.025; %Initial flow rate through drill bit

@@ -5,7 +5,7 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np)
 Qe = eye(1).*1; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu(2) = 1;
-Pu(1) = 1;
+Pu(1) = 1e18;
 
 %to store the output variable
 Pc = zeros(Np,1);
@@ -43,9 +43,10 @@ du = u_ini(2:end,:)-u_ini(1:end-1,:);
 %now make the objective function
 J = 0;
 for i = 1:Np-1
+    
     J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J;
+    
 end
-
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
     
@@ -56,12 +57,12 @@ myHeq = [];
 
 
 %list the inequality constraints as column vector
-myG = [ Pc - 350e5; % Pressure in bit needs to be greater than reservoir pressure
-        -Pc + Pcoll; % Pressure in bit needs to be less than Fracture pressure
+myG = [ %-Pc + 350e5; % Pressure in bit needs to be greater than reservoir pressure
+       Pc - 270e5; % Pressure in bit needs to be less than Fracture pressure
         u_ini(:,2) - 100;     % Highest vale opening is 100%
-       -u_ini(:,2) + 0 ;      %Lowest valve opening is 0%
-        %u_ini(:,1) - 1;   % Highest pump flow is 2000l/min
-       -u_ini(:,1) + 0 ;      %Lowest pump flow is 0l/min
+       -u_ini(:,2) + 0;      %Lowest valve opening is 0%
+        u_ini(:,1) - (0.033);   % Highest pump flow is 0.25 m^3/s
+       -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
        -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
     ];
