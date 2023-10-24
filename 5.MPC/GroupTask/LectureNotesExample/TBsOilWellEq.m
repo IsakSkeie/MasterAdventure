@@ -1,6 +1,6 @@
 %function [dPc_dt, dPp_dt, dqbit_dt, P_bit, Pcoll, Pfrac, DeltaP_f_d, q_res] = OilWell(u_c, q_back, q_pump, Pc, Pp, q_bit, q_res_last)
 function Y = TBsOilWellEq(U, X)
-
+%For å gjøre ending for å sjekke om GIT funker
 %States
 Pp = X(1);
 q_bit = X(2);
