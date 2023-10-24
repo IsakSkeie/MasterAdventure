@@ -12,10 +12,18 @@ K1 = oilWell_equations(u_k_ast, states_ini_values);
 K2 = oilWell_equations(u_k_ast, states_ini_values+K1.*(dt/2));
 K3 = oilWell_equations(u_k_ast, states_ini_values+K2.*(dt/2));
 K4 = oilWell_equations(u_k_ast, states_ini_values+K3.*dt);
+
+%OilWell runge kutta for Torbjørns oilwell
+% K1 = TBsOilWellEq(u_k_ast, states_ini_values);
+% K2 = TBsOilWellEq(u_k_ast, states_ini_values+K1.*(dt/2));
+% K3 = TBsOilWellEq(u_k_ast, states_ini_values+K2.*(dt/2));
+% K4 = TBsOilWellEq(u_k_ast, states_ini_values+K3.*dt);
+
 x_next = states_ini_values + (dt/6).*(K1+2.*K2+2.*K3 + K4);
 
 %Pbit for memory
 x_next(4) = K1(4);
+%x_next(5) = K1(5);
 
 
 

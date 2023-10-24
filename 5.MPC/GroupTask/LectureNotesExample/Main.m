@@ -5,24 +5,26 @@ Np = 100; %Np time steps ahead in the future
 %sampling time
 dt = 1; %sampling time in seconds %dt = 6 seconds
 %initial values of the states
-Pp_init     = 8*10^5; %Initial pressure for pump
+Pp_init     = 4e5;%8*10^5; %Initial pressure for pump
 qBit_init   = 0.025; %Initial flow rate through drill bit
-Pp_init     = 5*10^5; %Initial pressure at controle choke valve
+Pc_init     = 5*10^5; %Initial pressure at controle choke valve
 pbit_init   = 255e5; %Inital pressure for Pbit
+q_res       = 0;
 
 
 state_ini_values = [Pp_init, qBit_init, Pp_init, pbit_init];
+%state_ini_values = [Pp_init, qBit_init, Pc_init, pbit_init, q_res];
 
 %initial value for optimizer control
 u_ini = ones(Np,2); 
 
 u_ini(:,1)  = u_ini(:,1)* 0.025; %Initialize pump flow
-u_ini(:,2) = u_ini(:,2)* 70;    %Initialize choke valve opening
+u_ini(:,2) = u_ini(:,2)* 50;    %Initialize choke valve opening
 
 
 %Reference
 %make the reference vector offline (for the whole prediction horizon length).
-Ref =   ones(Np, 1) * 260e5; %P_bit
+Ref =   ones(Np, 1) * 250e5; %P_bit
 
 
 %make the nonlinear optimization problem and solve it
