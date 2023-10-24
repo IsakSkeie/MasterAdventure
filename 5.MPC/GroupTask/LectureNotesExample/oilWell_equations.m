@@ -10,7 +10,7 @@ Pbit = X(4);
 %input
 qpump = U(1);
 uc = U(2);
-
+%qpump = 0.025;
 %
 Y = [];
 
@@ -37,7 +37,7 @@ ud = 0.015;              %kg/ms     Dynamic viscosity of the drill fluid
 bd = 3*10^8;             %N/m^2     Bulk modulus in the drill string
 ba = 2.4*10^8;           %N/m^2     Bulk modulus in the annulus
 qnom = 1500;             %l/min     Nominal flow rate of the drill fluid
-uc = 70;                 %%         Nominal choke valve opening
+%uc = 70;                 %%         Nominal choke valve opening
 g = 9.81;                %m/s^2     Acceleration due to gravity
 fd = 0.02;               %          Friction factor
 
