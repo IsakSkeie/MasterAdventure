@@ -7,6 +7,9 @@ Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu(2) = 1;
 Pu(1) = 1e15;
 
+%Pu(2) = 1e15;
+%Pu(2) = 1;
+
 %to store the output variable
 Pc = zeros(Np,1);
 
