@@ -1,9 +1,16 @@
 clc
 clear
-%choose prediction horizon Np
-Np = 100; %Np time steps ahead in the future
+%Simulation time;
+start = 0;
+stop = 1000;
 %sampling time
 dt = 4; %sampling time in seconds %dt = 6 seconds
+Tlengt = ((stop-start)/dt);
+tspan = linspace(start, stop, Tlengt);
+
+%choose prediction horizon Np
+Np = 5; %Np time steps ahead in the future
+
 %initial values of the states
 Pp_init     = 6.7e6;%8*10^5; %Initial pressure for pump
 qBit_init   = 0.025; %Initial flow rate through drill bit
@@ -30,43 +37,61 @@ u_ini(:,2) = u_ini(:,2)* 50;    %Initialize choke valve opening
 
 %Reference
 %make the reference vector offline (for the whole prediction horizon length).
-Ref =   ones(Np, 1) * 250e5; %P_bit
+Ref =   ones(Tlengt+Np, 1) * 250e5; %P_bit
+Refp = zeros(Tlengt, 1);
+RefMPC = zeros(Np, 1);
 
+Pc = zeros(Tlengt,1);
+u_valve = zeros(Tlengt,1);
+u_pump = zeros(Tlengt,1);
 
-%make the nonlinear optimization problem and solve it
-u_k_ast = optimization_tank(u_ini,state_ini_values,dt,Ref,Np);
-%we now have optimal values of 'u' to fulfill the objective function
-%we can use the optimal values of 'u' to calculate the variables of interest
-%to us.
-%the ouput variables and the states are of interest. They should be
-%calculated using the optimal values of 'u'. We use the model to calculate
-%the output and the states.
-%for storing
-%storage place for the output
-Pc = zeros(Np,1);
-%Important note: We don't need this loop for MPC, only for NL opt. control
-for i = 1:Np
-%calculate the outputs: for this example, outputs are the states
-%store the outputs
-Pc(i,1) = state_ini_values(4);
-%update the state with the optimal control inputs
-%with RK method
-x_next = OilWell_runge_kutta(state_ini_values,dt,u_k_ast(i,:));
-state_ini_values = x_next;
+timePsample = zeros(Tlengt,1);
+
+for i=1:Tlengt+Np
+    if (i>=100)
+        Ref(i) = Ref(i) - 3e5;
+    end
 end
-%make time steps for plotting
-tspan = linspace(0,Np-1,Np);
+
+for i=1:Tlengt
+
+    for j=1:Np
+        RefMPC(j) = Ref(i+j);
+    end
+    tic
+    %make the nonlinear optimization problem and solve it
+    %u_k_ast = ones(Np, 2);
+    %u_k_ast(:,2) = 70;
+    u_k_ast = optimization_tank(u_ini,state_ini_values,dt,RefMPC,Np);
+    u = u_k_ast(1,:);
+    timePsample(i) = toc;
+
+    x_next = OilWell_runge_kutta(state_ini_values,dt,u);
+    
+    state_ini_values = x_next;
+
+    %storing of values for plotting
+    u_pump(i) = u(1);
+    u_valve(i) = u(2);
+    Pc(i,1) = state_ini_values(4);
+    Refp(i,1) = RefMPC(1);
+    i = i
+end
+
+
+%plotting
 figure,
 subplot(311)
-plot(tspan,Ref,'b-',tspan,Pc,'k-')
+plot(tspan,Refp,'b-',tspan,Pc,'k-')
 legend('ref Pc','Pc','Orientation','horizontal')
 ylabel('Pc, Ref'); title('NL optimal control of tank pressure');
+
 subplot(312)
-plot(tspan,u_k_ast(:,1),'r-')
+plot(tspan,u_pump,'r-')
 xlabel('time [sec]'); ylabel('u');
 legend('Control input: Pump speed');
 
 subplot(313)
-plot(tspan,u_k_ast(:,2),'r-')
+plot(tspan,u_valve,'r-')
 xlabel('time [sec]'); ylabel('u');
 legend('Control input: Choke Valve');
