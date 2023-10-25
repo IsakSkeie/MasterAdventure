@@ -62,7 +62,7 @@ for i=1:Tlengt
     %make the nonlinear optimization problem and solve it
     %u_k_ast = ones(Np, 2);
     %u_k_ast(:,2) = 70;
-    u_k_ast = optimization_tank(u_ini,state_ini_values,dt,RefMPC,Np,i*dt);
+    u_k_ast = optimization_tank(u_ini,state_ini_values,dt,RefMPC,Np,i*dt, tspan);
     u = u_k_ast(1,:);
     timePsample(i) = toc;
 
@@ -99,5 +99,5 @@ legend('Control input: Choke Valve');
 %%
 figure,
 plot(tspan,timePsample,'b-')
-legend('Time usage for one run','Orientation','horizontal')
-ylabel('seconds, time'); title('Time usage for MPC to calculate');
+legend('Time usage ','Pc','Orientation','horizontal')
+ylabel('Pc, Ref'); title('NL optimal control of tank pressure');

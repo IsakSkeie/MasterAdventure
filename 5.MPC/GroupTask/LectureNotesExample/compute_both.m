@@ -1,4 +1,4 @@
-function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np)
+function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np,t)
 %this is the function where we compute the objective function and the
 %constraints together at the same time.
 %weighting matrices for error and control inputs
@@ -18,12 +18,20 @@ Pc = zeros(Np,1);
    Pres  = 250e5; %Reservoir pressure
    Pcoll = 220e5; %Collaps perssure
 
+%Stopping pump
+
+
 %since we need to calculate the outputs for the whole prediction horizon we use a for loop and
 %solve the ODE (model of the nonlinear process) using runge kutta. To solve the ODEs we need to
 %know the initial values of the states. Thus they are passed into the “compute_both” function.
 for i = 1:Np
     %find out which control input to use for each time step within the prediction horizon.
     u_k = u_ini(i,:);
+    if t>900 && t<1000
+        u_k(1) = 0;
+    elseif t>1500 &&  t<1600
+        u_k(1) = 0;
+    end
     %use runge kutta to update the states
     x_next = OilWell_runge_kutta(state_ini_values,dt,u_k);
     %use the states to calculate the output
