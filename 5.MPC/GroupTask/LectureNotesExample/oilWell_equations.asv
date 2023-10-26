@@ -1,5 +1,5 @@
 %function [dot_Pp, dot_qbit, dot_Pc, Pbit] = oilWell_equations(U, X)
-function Y = oilWell_equations(U, X)
+function Y = oilWell_equations(U, X,t)
 
 %States
 Pp = X(1);
@@ -10,7 +10,9 @@ Pbit = X(4);
 %input
 qpump = U(1);
 uc = U(2);
-qpump = 0.025;
+
+
+%qpump = 0.025;
 %
 Y = [];
 

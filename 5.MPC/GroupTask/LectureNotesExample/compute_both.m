@@ -1,11 +1,11 @@
-function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np,t)
+function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np)
 %this is the function where we compute the objective function and the
 %constraints together at the same time.
 %weighting matrices for error and control inputs
-Qe = eye(1).*1; %weighting matrix for the error
+Qe = eye(1).*10; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
-Pu(2) = 1;
-Pu(1) = 1e15;
+Pu(2) = 1e10;
+Pu(1) = 1e10;
 
 %Pu(2) = 1e15;
 %Pu(2) = 1;
@@ -27,11 +27,6 @@ Pc = zeros(Np,1);
 for i = 1:Np
     %find out which control input to use for each time step within the prediction horizon.
     u_k = u_ini(i,:);
-    if t>900 && t<1000
-        u_k(1) = 0;
-    elseif t>1500 &&  t<1600
-        u_k(1) = 0;
-    end
     %use runge kutta to update the states
     x_next = OilWell_runge_kutta(state_ini_values,dt,u_k);
     %use the states to calculate the output
@@ -72,10 +67,12 @@ myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressu
        Pc - 270e5; % Pressure in bit needs to be less than Fracture pressure
         u_ini(:,2) - 100;     % Highest vale opening is 100%
         -u_ini(:,2) + 0;      %Lowest valve opening is 0%
-        u_ini(:,1) - (0.033);   % Highest pump flow is 0.25 m^3/s
+        u_ini(:,1) - (0.0167);   % Highest pump flow is 0.25 m^3/s
        -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
        -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
+       -du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
+        du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
     ];
 
 %myG =[u_ini-1; % valve opening should be less than 1

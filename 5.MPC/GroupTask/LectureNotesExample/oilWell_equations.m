@@ -6,12 +6,13 @@ Pp = X(1);
 qbit = X(2);
 Pc = X(3);
 Pbit = X(4);
+qpump =  X(5);
+%qpump = 0.025;
 
 %input
-qpump = U(1);
+qback = U(1);
 uc = U(2);
 
-%qpump = 0.025;
 %
 Y = [];
 
@@ -50,7 +51,7 @@ fd = 0.02;               %          Friction factor
 %deltaP_af = 0;           %N/m^2      Pressure difference due to friction in annulus
 %Pbit = 0;                %N/m^2      Bottom hole pressure 
 %qres = 0;                %m^3/s      Flow rate of reservoir fluid
-qback = 0;               %m^3/s      Flow rate of Back pressure pump
+%qback = 0;               %m^3/s      Flow rate of Back pressure pump
 %qchoke = 0;              %m^3/s      Flow rate through choke valve
  
               
@@ -121,6 +122,7 @@ Y(1) = dot_Pp;
 Y(2) = dot_qbit;
 Y(3) = dot_Pc;
 Y(4) = Pbit;
+Y(5) = qpump;
 
 
          
