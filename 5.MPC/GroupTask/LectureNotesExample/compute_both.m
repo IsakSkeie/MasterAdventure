@@ -4,8 +4,9 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np)
 %weighting matrices for error and control inputs
 Qe = eye(1).*10; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
-Pu(2) = 1e10;
-Pu(1) = 1e10;
+Pu(2) = 1e10; %Valve
+Pu(1) = 1e17; %Pumpe
+
 
 %Pu(2) = 1e15;
 %Pu(2) = 1;
@@ -49,9 +50,9 @@ du = u_ini(2:end,:)-u_ini(1:end-1,:);
 %now make the objective function
 J = 0;
 for i = 1:Np-1
-    error = (Ref(i)-Pc(i)) * 50e-15;
+    %error = (Ref(i)-Pc(i)) * 50e-15;
  
-    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J;
+    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J + (u_ini(i,1))*Qe*(u_ini(i,1))';
 end
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
@@ -71,8 +72,8 @@ myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressu
        -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
        -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
-       -du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
-        du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
+       %-du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
+        %du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
     ];
 
 %myG =[u_ini-1; % valve opening should be less than 1

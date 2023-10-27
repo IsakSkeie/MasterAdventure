@@ -2,7 +2,7 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 4600;
+stop = 500;
 %sampling time
 dt = 4; %sampling time in seconds %dt = 6 seconds
 Tlengt = ((stop-start)/dt);
@@ -61,7 +61,7 @@ for i=1:Tlengt
 end
 
 for i=1:Tlengt
-
+    %Setting the horizon Refference
     for j=1:Np
         RefMPC(j) = Ref(i+j);
     end
@@ -75,10 +75,11 @@ for i=1:Tlengt
     u_k_ast = optimization_tank(u_ini,state_ini_values,dt,RefMPC,Np);
     u = u_k_ast(1,:);
     timePsample(i) = toc;
-
+    
     x_next = OilWell_runge_kutta(state_ini_values,dt,u);
     
     state_ini_values = x_next;
+    u_ini = u_k_ast;
 
     %storing of values for plotting
     u_pump(i) = u(1);
@@ -89,8 +90,8 @@ for i=1:Tlengt
 end
 
 
-u_pump = u_pump*60000;
-qpump = qpump*60000;
+%u_pump = u_pump*60000;
+%qpump = qpump*60000;
 
 %plotting
 figure,
@@ -101,21 +102,21 @@ ylabel('Pc, Ref'); title('NL optimal control of tank pressure');
 
 subplot(412)
 plot(tspan,u_pump,'r-')
-xlabel('time [sec]'); ylabel('u');
-legend('Control input: Pump speed [l/min]');
+xlabel('time [sec]'); ylabel('u [l/min]');
+legend('Control input: Pump speed');
 
 subplot(413)
 plot(tspan,u_valve,'r-')
-xlabel('time [sec]'); ylabel('u');
+xlabel('time [sec]'); ylabel('u [%]');
 legend('Control input: Choke Valve');
 
 subplot(414)
 plot(tspan,qpump,'magenta')
-xlabel('time [sec]'); ylabel('u');
+xlabel('time [sec]'); ylabel('flow [l/min]');
 legend('Control input: Mud pump');
 
 %%
-% figure,
-% plot(tspan,timePsample,'b-')
-% legend('Time usage for one run','Orientation','horizontal')
-% ylabel('seconds, time'); title('Time usage for MPC to calculate');
+ figure,
+ plot(tspan,timePsample,'b-')
+ legend('Time usage for one run','Orientation','horizontal')
+ ylabel('seconds, time'); title('Time usage for MPC to calculate');
