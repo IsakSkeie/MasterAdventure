@@ -1,0 +1,102 @@
+import tkinter as tk
+from tkinter import ttk
+import asyncio
+
+# Function to calculate PV
+def calculate_pv(principal, rate, time):
+    return principal / (1 + (rate / 100) * (time / 12))
+
+# Function to calculate PI control (replace with your simulation logic)
+def calculate_pi_control(p, i, error):
+    control_signal = p * error + i * sum_error
+    return control_signal
+
+# Function to update the simulation status
+def update_simulation_status():
+    if not simulation_mode.get():  # If in real-world mode
+        # Replace this logic with your Raspberry Pi GPIO code
+        # For now, simulate real-world data
+        real_world_data = 1000  # Example real-world data, you can change this
+        pv = real_world_data
+        control_signal = 0.0  # No control signal in real-world mode
+    else:  # If in simulation mode
+        try:
+            principal_amount = float(principal_entry.get())
+            interest_rate = float(interest_rate_entry.get())
+            simulation_duration = int(simulation_duration_entry.get())
+            pv = calculate_pv(principal_amount, interest_rate, simulation_duration)
+            
+            setpoint = 1000  # Example setpoint, you can change this
+            error = setpoint - pv
+            
+            p = float(proportional_entry.get())
+            i = float(integral_entry.get())
+            
+            control_signal = calculate_pi_control(p, i, error)
+        except ValueError:
+            result_pane.config(text="Invalid input")
+            return
+
+    result_pane.config(text=f"Present Value (PV): ${pv:.2f}\n"
+                            f"Control Signal (PI): {control_signal:.2f}")
+
+    # Schedule the next update
+    app.after(1000, update_simulation_status)  # Update every 1 second (adjust as needed)
+
+app = tk.Tk()
+app.title("Simulation Application")
+
+notebook = ttk.Notebook(app)
+notebook.pack(fill='both', expand=True)
+
+settings_pane = ttk.Frame(notebook)
+notebook.add(settings_pane, text="Simulation Settings")
+
+status_pane = ttk.Frame(notebook)
+notebook.add(status_pane, text="Simulation Status")
+
+tk.Label(settings_pane, text="Simulation Name:").pack()
+simulation_name_entry = tk.Entry(settings_pane)
+simulation_name_entry.pack()
+
+tk.Label(settings_pane, text="Simulation Duration (months):").pack()
+simulation_duration_entry = tk.Entry(settings_pane)
+simulation_duration_entry.insert(0, "12")  # Default value for simulation duration
+simulation_duration_entry.pack()
+
+tk.Label(settings_pane, text="Principal Amount:").pack()
+principal_entry = tk.Entry(settings_pane)
+principal_entry.insert(0, "10000.00")  # Default value for principal amount
+principal_entry.pack()
+
+tk.Label(settings_pane, text="Interest Rate (%):").pack()
+interest_rate_entry = tk.Entry(settings_pane)
+interest_rate_entry.insert(0, "5.0")  # Default value for interest rate
+interest_rate_entry.pack()
+
+tk.Label(settings_pane, text="Proportional (P):").pack()
+proportional_entry = tk.Entry(settings_pane)
+proportional_entry.insert(0, "0.1")  # Default value for P
+proportional_entry.pack()
+
+tk.Label(settings_pane, text="Integral (I):").pack()
+integral_entry = tk.Entry(settings_pane)
+integral_entry.insert(0, "0.01")  # Default value for I
+integral_entry.pack()
+
+# Button to start the simulation (update the status)
+start_button = ttk.Button(settings_pane, text="Start Simulation", command=update_simulation_status)
+start_button.pack()
+
+# Toggle button for simulation mode (0 for real-world, 1 for simulation)
+simulation_mode = tk.BooleanVar(value=True)
+toggle_simulation_button = ttk.Checkbutton(settings_pane, text="Simulation Mode", variable=simulation_mode)
+toggle_simulation_button.pack()
+
+result_pane = ttk.Label(status_pane, text="Present Value (PV): $0.00\nControl Signal (PI): 0.00")
+result_pane.pack()
+
+# Schedule the first update
+app.after(1000, update_simulation_status)  # Update every 1 second (adjust as needed)
+
+app.mainloop()
