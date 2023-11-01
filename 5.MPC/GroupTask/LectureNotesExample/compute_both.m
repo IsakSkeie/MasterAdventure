@@ -2,11 +2,11 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref, Np, pipeC
 %this is the function where we compute the objective function and the
 %constraints together at the same time.
 %weighting matrices for error and control inputs
-Qe = eye(1).*10; %weighting matrix for the error
+Qe = eye(1).*1; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
-Pu(2) = 1e10; %Valve
-Pu(1) = 1e18; %Pumpe
+Pu(2) = 8e10; %Valve
+Pu(1) = 8e18; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
