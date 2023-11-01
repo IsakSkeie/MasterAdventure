@@ -7,9 +7,10 @@ Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu(2) = 1e10; %Valve
 Pu(1) = 1e17; %Pumpe
 
+n_uGroup        = 4; %Number of groups for deviation control variables
+GroupInterval   = Np / 4;
 
-%Pu(2) = 1e15;
-%Pu(2) = 1;
+
 
 %to store the output variable
 Pc = zeros(Np,1);
@@ -58,9 +59,17 @@ end
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
     
 myJ = J;
+
 %if there are equaltiy constraints, it should be listed as a column vector
-%here we don't have equality constraints so we use empty matrix
 myHeq = [];
+%Create vector for equality constraint for grouping
+for i = 2:Np
+    if mod(i, GroupInterval) ~= 0 
+        tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
+        myHeq = vertcat(myHeq, tempGroup);
+       
+    end
+end
 
 
 %list the inequality constraints as column vector

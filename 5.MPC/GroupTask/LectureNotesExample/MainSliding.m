@@ -9,7 +9,8 @@ Tlengt = ((stop-start)/dt);
 tspan = linspace(start, stop, Tlengt);
 
 %choose prediction horizon Np
-Np = 10; %Np time steps ahead in the future
+Np = 20; %Np time steps ahead in the future
+
 
 %initial values of the states
 Pp_init     = 6.7e6;%8*10^5; %Initial pressure for pump
