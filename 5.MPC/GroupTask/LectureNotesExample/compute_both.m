@@ -64,7 +64,7 @@ myJ = J;
 myHeq = [];
 %Create vector for equality constraint for grouping
 for i = 2:Np
-    if mod(i, GroupInterval) ~= 0 
+    if i ~= 3 & i ~= 6 & i ~= 10  
         tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
         myHeq = vertcat(myHeq, tempGroup);
        
