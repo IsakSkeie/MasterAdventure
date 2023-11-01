@@ -49,7 +49,8 @@ u_pump = zeros(Tlengt,1);
 
 timePsample = zeros(Tlengt,1);
 
-qpump = ones(Tlengt,1)*q_pump_init;
+qpump = ones(Tlengt+Np,1)*q_pump_init;
+pipeConnections = ones(Np, 1);
 qpump(1) = 0;
 for i=1:Tlengt
      if(i*dt>=5 && i*dt < 500)
@@ -62,18 +63,29 @@ for i=1:Tlengt
 end
 
 for i=1:Tlengt
+
+    %Setting timesteps for when pipe connection is active
+    
+
     %Setting the horizon Refference
     for j=1:Np
         RefMPC(j) = Ref(i+j);
+        
+       
+        if qpump(j+i) == 0.025 
+            pipeConnections(j) = 0;
+        end
     end
     
+      
+
     state_ini_values(5) = qpump(i);
 
     tic
     %make the nonlinear optimization problem and solve it
     %u_k_ast = ones(Np, 2);
     %u_k_ast(:,2) = 70;
-    u_k_ast = optimization_tank(u_ini,state_ini_values,dt,RefMPC,Np);
+    u_k_ast = optimization_tank(u_ini,state_ini_values,dt,RefMPC,Np, pipeConnections);
     u = u_k_ast(1,:);
     timePsample(i) = toc;
     
@@ -112,7 +124,7 @@ xlabel('time [sec]'); ylabel('u [%]');
 legend('Control input: Choke Valve');
 
 subplot(414)
-plot(tspan,qpump,'magenta')
+plot(tspan,qpump(1:size(tspan,2)),'magenta')
 xlabel('time [sec]'); ylabel('flow [l/min]');
 legend('Control input: Mud pump');
 

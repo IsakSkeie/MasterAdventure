@@ -1,11 +1,12 @@
-function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref,Np)
+function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref, Np, pipeConnections)
 %this is the function where we compute the objective function and the
 %constraints together at the same time.
 %weighting matrices for error and control inputs
 Qe = eye(1).*10; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
+Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
 Pu(2) = 1e10; %Valve
-Pu(1) = 1e17; %Pumpe
+Pu(1) = 5e16; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
@@ -53,22 +54,34 @@ J = 0;
 for i = 1:Np-1
     %error = (Ref(i)-Pc(i)) * 50e-15;
  
-    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J + (u_ini(i,1))*Qe*(u_ini(i,1))';
+    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J + (u_ini(i,1))*Pu_Pump*(u_ini(i,1))';
 end
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
     
 myJ = J;
+
 %if there are equaltiy constraints, it should be listed as a column vector
-%here we don't have equality constraints so we use empty matrix
 myHeq = [];
-muHeqtest = [];
 %Create vector for equality constraint for grouping
 for i = 2:Np
-    if mod(i, GroupInterval) ~= 0 
-        tempGroup = [u_ini(i,:) - u_ini(i-1,:)];
-        myHeq = horzcat(myHeq, tempGroup);
+    if i ~= 3 & i ~= 6 & i ~= 10  
+        tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
+        myHeq = vertcat(myHeq, tempGroup);
+       
+    end
 end
+
+%Create equality constraint for back pump when pipe is not connected
+
+for i = 1:Np
+  
+    if pipeConnections(i) == 0
+       tempConstraint =  [u_ini(i, 1)];
+       myHeq = vertcat(myHeq, tempConstraint);   
+    end 
+
+end 
 
 
 %list the inequality constraints as column vector
@@ -84,8 +97,10 @@ myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressu
         %du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
     ];
 
-%myG =[u_ini-1; % valve opening should be less than 1
-%-u_ini+0; %valve opening should be greater than 0
-%du - (0.1); % du should be less than 0.1 for each sample
-%-du-(0.1); % du should be greater than -0.1 for each sample
-%];
+
+
+
+
+%Add constraint for back pump, to only run when pipe connections are
+%performed
+

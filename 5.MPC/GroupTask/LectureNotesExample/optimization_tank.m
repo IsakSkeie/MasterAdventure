@@ -1,4 +1,4 @@
-function u = optimization_tank(u_ini,state_ini_values,dt,Ref,Np)
+function u = optimization_tank(u_ini,state_ini_values,dt,Ref,Np, pipeConnections)
 %In this function we:
 %define functions for objective and constraints
 %choose the slover types + other options to the solver
@@ -29,7 +29,7 @@ cons_func = @(u)confun_tank(u,state_ini_values,dt,Ref,Np);
 if ~isequal(u,uLast) %check if computation is necessary
 % disp('button pressed: objective call');
 % pause;
-[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np);
+[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np, pipeConnections);
 uLast = u;
 end
 %now compute objective function
@@ -39,7 +39,7 @@ end
 if ~isequal(u,uLast) %check if computation is necessary
 % disp('button pressed: constraint call');
 % pause;
-[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np);
+[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np, pipeConnections);
 uLast = u;
 end
 %now compute constraints
