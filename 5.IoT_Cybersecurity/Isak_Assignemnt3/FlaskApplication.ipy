@@ -1,0 +1,45 @@
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Sample initial temperature data
+temperature_readings = [{'id': 1, 'value': 25.5}, {'id': 2, 'value': 26.2}]
+temperature_id_counter = 3  # Counter for generating unique temperature IDs
+
+# Route to get the latest temperature reading (GET request)
+@app.route('/api/temperature', methods=['GET'])
+def get_latest_temperature():
+    if not temperature_readings:
+        return jsonify({'message': 'No temperature readings available'}), 404
+
+    latest_temperature = temperature_readings[-1]
+    return jsonify({'latest_temperature': latest_temperature})
+
+# Route to add a new temperature reading (POST request)
+@app.route('/api/temperature', methods=['POST'])
+def add_temperature():
+    global temperature_id_counter
+
+    # Get the data from the request's JSON payload
+    new_temperature_data = request.get_json()
+
+    # Validate the required fields in the JSON payload
+    if 'value' not in new_temperature_data:
+        return jsonify({'error': 'Temperature value is required'}), 400
+
+    # Create a new temperature reading
+    new_temperature = {
+        'id': temperature_id_counter,
+        'value': new_temperature_data['value']
+    }
+
+    # Increment the temperature ID counter for the next reading
+    temperature_id_counter += 1
+
+    # Add the new temperature reading to the list
+    temperature_readings.append(new_temperature)
+
+    return jsonify({'temperature_reading': new_temperature}), 201  # 201 status code indicates successful creation
+
+if __name__ == '__main__':
+    app.run(debug=True)

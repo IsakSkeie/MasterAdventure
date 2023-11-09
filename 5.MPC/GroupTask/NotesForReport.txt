@@ -1,0 +1,50 @@
+MPC Report:
+	-Theory
+		-Process Description
+			Describe the problem that needs to be solved
+			How is it going to be solved
+		
+		-Mathematical models
+		
+		-Model constraints
+		
+	-Methods
+		-Open Loop simulation in Matlab
+			-How is open loop simulation used on Oil well drilling?
+			 *Need to split up Simulink model or visualize model from Model IO
+			-What can Open loop simulation tell us about the system?
+			
+		
+		-Non-Linear MPC
+			-How is Non-Linear MPC used for controlling Pipe connections?
+				
+			-Objective function
+				-Which parts of the system needs to be balanced against each other
+				-How is this formulated into a cost function
+			-Constraints
+				-Why are constraints needed for this system? WHich physical limitations are there?
+				-What are the inequality constraints? Which ones comes from task description, 7
+					and which ones are deduced from task description.
+				-What are the equality constraints? Whats their origin?
+			
+			-Optimization problem reduction
+				-
+			
+	Results
+	
+		Open Loop simulation in matlab
+		
+		Non-Linear MPC
+			
+			Objective function
+			
+			Constraints
+			
+			Input control priortization
+			
+			Optimization problem reduction
+			
+			
+			
+	
+			

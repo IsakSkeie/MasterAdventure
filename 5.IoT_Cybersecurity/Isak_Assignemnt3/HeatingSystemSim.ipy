@@ -1,0 +1,49 @@
+#%%
+import time
+
+
+
+theta_t         = 22
+global PreviousTime
+PreviousTime = 0
+Tenv            = 22.5
+Tout            = 18
+Kh              = 3.5
+
+
+
+
+def dot_HeaterSim(u):
+    
+   return (1/theta_t)*(-Tout + (Kh*u + Tenv))
+ 
+ 
+def FE(dot_x, x_prev, dt):
+    
+    x = x_prev + dt*dot_x
+    return x
+
+    
+
+
+if __name__ == "__main__":
+    
+    data = []
+    x = Tout
+    dt = 0.5
+    n = 0
+    while(True):
+        time.sleep(dt)
+        xdot = dot_HeaterSim(0)
+        x = FE(xdot, x, dt)
+        data.append(x)
+        
+        print(x)
+        
+        if n > 20:
+            break
+        n= n+1
+        
+    
+    
+    
