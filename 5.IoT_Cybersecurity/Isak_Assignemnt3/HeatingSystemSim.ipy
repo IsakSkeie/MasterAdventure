@@ -1,49 +1,105 @@
 #%%
-import time
+import asyncio
+import requests
+import aiohttp
+import asyncio
+from matplotlib import pyplot as plt
 
+theta_t = 22
+Tenv = 22.5
+Tout = 18
+Kh = 3.5
+iError = 0
 
-
-theta_t         = 22
-global PreviousTime
-PreviousTime = 0
-Tenv            = 22.5
-Tout            = 18
-Kh              = 3.5
-
-
-
-
-def dot_HeaterSim(u):
+async def perform_post_request(url, data):
+    headers = {
+        'Content-Type': 'application/json',  # Set the content type to JSON
+    }
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json=data, headers=headers) as response:
+            return await response.text()
+        
+        
+        
+async def print_data(data):
     
-   return (1/theta_t)*(-Tout + (Kh*u + Tenv))
- 
- 
-def FE(dot_x, x_prev, dt):
+   
+   # URL of the Flask server
+    url = "http://localhost:5000/api/temperature"
+
+    # Example POST request
+    API_data = {'value': data}
+    try:
+        # response = requests.post(f"{base_url}", json=new_temperature_reading)
+
+        # # Print the response from the server
+        # print("POST Response:")
+        # print(response.status_code)
+        # print(response.json())  # Assuming the server returns JSON data
+
+         print(data)
+    except: 
+        print("Unable to Post data")
     
-    x = x_prev + dt*dot_x
+
+
+
+
+async def dot_HeaterSim(u):
+    return (1/theta_t) * (-Tout + (Kh*u + Tenv))
+
+
+async def FE(dot_x, x_prev, dt):
+    x = x_prev + dt * dot_x
     return x
 
+
+async def PI(ki, pi, sp, pv, dt):
+    global iError
+    error = sp - pv
+    iError = iError + pi * error
+    cv = iError + error * ki
+    return cv
+
+
+async def simulation():
+    data = []
+    x = Tout
+    dt = 0.1
+    tspan = 200
+    n = 0
+
+    kp = 5
+    ki = 0.1
+    sp = 30
     
+    
+    # URL of the Flask server
+    url = "http://localhost:5000/api/temperature"
+
+   
+
+    while n < tspan:
+        await asyncio.sleep(dt)  # Asynchronous sleep
+        xdot = await dot_HeaterSim(0)
+        x = await FE(xdot, x, dt)
+        data.append(x)
+        n = n + 1
+        
+        
+        # Example POST request
+        API_data = {'value': x}
+        print(x)
+        if n % 50 == 0:  # Print data every 2 seconds (4 * dt)
+            response = await perform_post_request(url, API_data)
+            print(response)
+
+    
+    
+    plt.plot(data)
+    plt.show()
 
 
 if __name__ == "__main__":
-    
-    data = []
-    x = Tout
-    dt = 0.5
-    n = 0
-    while(True):
-        time.sleep(dt)
-        xdot = dot_HeaterSim(0)
-        x = FE(xdot, x, dt)
-        data.append(x)
-        
-        print(x)
-        
-        if n > 20:
-            break
-        n= n+1
-        
-    
-    
-    
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(simulation())
