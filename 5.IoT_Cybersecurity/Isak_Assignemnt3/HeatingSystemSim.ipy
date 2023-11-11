@@ -21,26 +21,6 @@ async def perform_post_request(url, data):
         
         
         
-async def print_data(data):
-    
-   
-   # URL of the Flask server
-    url = "http://localhost:5000/api/temperature"
-
-    # Example POST request
-    API_data = {'value': data}
-    try:
-        # response = requests.post(f"{base_url}", json=new_temperature_reading)
-
-        # # Print the response from the server
-        # print("POST Response:")
-        # print(response.status_code)
-        # print(response.json())  # Assuming the server returns JSON data
-
-         print(data)
-    except: 
-        print("Unable to Post data")
-    
 
 
 
@@ -72,13 +52,13 @@ async def simulation():
     kp = 5
     ki = 0.1
     sp = 30
+    oldSP = 0
     
-    
-    # URL of the Flask server
-    url = "http://localhost:5000/api/temperature"
+ 
 
    
-
+    
+    
     while n < tspan:
         await asyncio.sleep(dt)  # Asynchronous sleep
         xdot = await dot_HeaterSim(0)
@@ -91,9 +71,19 @@ async def simulation():
         API_data = {'value': x}
         print(x)
         if n % 50 == 0:  # Print data every 2 seconds (4 * dt)
+            # URL of the Flask server
+            url = "http://localhost:5000/api/temperature"
             response = await perform_post_request(url, API_data)
             print(response)
 
+
+        if sp != oldSP:
+            API_data = {'value': sp}
+            # URL of the Flask server
+            url = "http://localhost:5000/api/setpoint"
+            response = await perform_post_request(url, API_data)
+            oldSP = sp
+            print(response)
     
     
     plt.plot(data)

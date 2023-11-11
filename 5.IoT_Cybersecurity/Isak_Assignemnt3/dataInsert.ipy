@@ -1,4 +1,7 @@
 import pyodbc
+import requests
+import time
+
 
 # Set up the database connection
 connection_string = 'DRIVER={SQL Server};SERVER=OSL-0687\SQLEXPRESS;DATABASE=HeatingSystem;UID=Isak;PWD=SecurePassword'
@@ -7,10 +10,30 @@ cursor = connection.cursor()
 
 
 
+
 # Insert data into the table
+while (True):
+    
+    url = 'http://localhost:5000/api/temperature'
+    response = requests.get(url)
 
-cursor.execute("EXECUTE  [dbo].[InsertData]  22 ,99 ")
+    if response.status_code == 200:
+        data = response.json()
+        latest_temperature = data['latest_temperature']
+        setpoint = data['setpoint']
+        print(f'Latest Temperature: {latest_temperature["value"]}°C')
+        print(f'Setpoint: {setpoint}°C')
+    else:
+        print(f'Error: {response.status_code} - {response.json()}')
+        
+    
+    
+    time.sleep(5)
+    latest_temperature = latest_temperature["value"]
+    setpoint =              setpoint
+    cursor.execute(f"EXECUTE  [dbo].[InsertData]  {latest_temperature} , {setpoint} ")
+    connection.commit()
+    # Commit the transaction and close the connection
 
-# Commit the transaction and close the connection
-connection.commit()
+
 connection.close()

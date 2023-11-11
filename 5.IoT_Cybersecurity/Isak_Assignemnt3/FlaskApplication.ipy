@@ -1,20 +1,24 @@
-#%%
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Sample initial temperature data
+# Sample initial temperature and setpoint data
 temperature_readings = [{'id': 1, 'value': 25.5}, {'id': 2, 'value': 26.2}]
 temperature_id_counter = 3  # Counter for generating unique temperature IDs
+setpoint = 25.0  # Initial setpoint value
 
-# Route to get the latest temperature reading (GET request)
+# Route to get the latest temperature reading and setpoint (GET request)
 @app.route('/api/temperature', methods=['GET'])
 def get_latest_temperature():
     if not temperature_readings:
         return jsonify({'message': 'No temperature readings available'}), 404
 
     latest_temperature = temperature_readings[-1]
-    return jsonify({'latest_temperature': latest_temperature})
+    response = {
+        'latest_temperature': latest_temperature,
+        'setpoint': setpoint
+    }
+    return jsonify(response)
 
 # Route to add a new temperature reading (POST request)
 @app.route('/api/temperature', methods=['POST'])
@@ -40,7 +44,28 @@ def add_temperature():
     # Add the new temperature reading to the list
     temperature_readings.append(new_temperature)
 
-    return jsonify({'temperature_reading': new_temperature}), 201  # 201 status code indicates successful creation
+    response = {
+        'temperature_reading': new_temperature,
+        'setpoint': setpoint
+    }
+    return jsonify(response), 201  # 201 status code indicates successful creation
+
+# Route to update the setpoint (POST request)
+@app.route('/api/setpoint', methods=['POST'])
+def update_setpoint():
+    global setpoint
+
+    # Get the data from the request's JSON payload
+    setpoint_data = request.get_json()
+
+    # Validate the required fields in the JSON payload
+    if 'value' not in setpoint_data:
+        return jsonify({'error': 'Setpoint value is required'}), 400
+
+    # Update the setpoint value
+    setpoint = setpoint_data['value']
+
+    return jsonify({'setpoint': setpoint}), 200  # 200 status code indicates a successful update
 
 if __name__ == '__main__':
     app.run(debug=True)
