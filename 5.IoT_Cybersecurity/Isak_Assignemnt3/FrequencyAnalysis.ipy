@@ -1,0 +1,44 @@
+import scipy.signal
+import matplotlib.pyplot as plt
+import numpy as np
+
+theta_t = 22  # Replace with the actual value of theta_t
+Tenv = 22.5  # Replace with the actual value of Tenv
+
+# Define the transfer function
+numerator = [Tenv + 1/theta_t]
+denominator = [1, 1/theta_t]
+
+sys = scipy.signal.TransferFunction(numerator, denominator)
+
+# Define the frequency range for analysis
+freq_range = np.logspace(-1, 2, 1000)
+
+# Compute frequency response
+omega, mag, phase = scipy.signal.bode(sys, freq_range)
+
+
+poles = np.roots(denominator)
+if np.all(np.real(poles) < 0):
+    print("The system is stable.")
+else:
+    print("The system is not stable.")
+
+# Plot Bode magnitude and phase plots
+plt.figure()
+plt.subplot(2, 1, 1)
+plt.semilogx(omega, mag)
+plt.grid()
+plt.xlabel('Frequency [rad/s]')
+plt.ylabel('Magnitude [dB]')
+
+plt.subplot(2, 1, 2)
+plt.semilogx(omega, phase)
+plt.grid()
+plt.xlabel('Frequency [rad/s]')
+plt.ylabel('Phase [degrees]')
+
+plt.show()
+
+
+

@@ -1,0 +1,29 @@
+﻿@page "/"
+@using DataMonitor;
+@using Microsoft.EntityFrameworkCore;
+@using NewDataMonitor;
+
+<PageTitle>Index</PageTitle>
+
+@foreach(var emp in Temperatures)
+
+{
+    <p>@emp.PV
+    </p>
+
+    <br />
+    <br />
+}
+
+
+@inject AppDBContext dbContext
+
+@code {
+    List<TemperatureData> Temperatures = new List<TemperatureData>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Temperatures = await dbContext.Temperatures.ToListAsync();
+    }
+
+}

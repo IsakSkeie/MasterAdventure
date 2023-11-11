@@ -56,11 +56,11 @@ async def simulation():
     data = []
     x = Tout
     dt = 0.1
-    tspan = 200
+    tspan = 300
     n = 0
 
     kp = 2
-    ki = 0.1
+    ki = 0.2
     sp = 30
     oldSP = 0
     
