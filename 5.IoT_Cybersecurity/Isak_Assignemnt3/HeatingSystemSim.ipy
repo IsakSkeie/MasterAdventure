@@ -3,10 +3,14 @@ import asyncio
 import requests
 import aiohttp
 import asyncio
+import numpy as np
 from matplotlib import pyplot as plt
+
+
 
 theta_t = 22
 Tenv = 22.5
+global Tout
 Tout = 18
 Kh = 3.5
 iError = 0
@@ -26,7 +30,10 @@ async def perform_post_request(url, data):
 
 
 async def dot_HeaterSim(u):
-    return (1/theta_t) * (-Tout + (Kh*u + Tenv))
+    global Tout
+    x = (1/theta_t) * (-Tout + (Kh*u + Tenv))
+
+    return x
 
 
 async def FE(dot_x, x_prev, dt):
@@ -34,42 +41,46 @@ async def FE(dot_x, x_prev, dt):
     return x
 
 
-async def PI(ki, pi, sp, pv, dt):
+async def PI(ki, kp, sp, pv, dt):
     global iError
     error = sp - pv
-    iError = iError + pi * error
-    cv = iError + error * ki
+    
+    iError = iError + ki * error
+    cv = iError + error * kp
+    print(f"Control Value {cv}")
     return cv
 
 
 async def simulation():
+    global Tout
     data = []
     x = Tout
     dt = 0.1
     tspan = 200
     n = 0
 
-    kp = 5
+    kp = 2
     ki = 0.1
     sp = 30
     oldSP = 0
     
- 
 
-   
-    
     
     while n < tspan:
         await asyncio.sleep(dt)  # Asynchronous sleep
-        xdot = await dot_HeaterSim(0)
+        cv = await PI(ki, kp, sp, x, dt)
+        
+        
+        xdot = await dot_HeaterSim(cv)
         x = await FE(xdot, x, dt)
+        Tout = x
         data.append(x)
         n = n + 1
         
         
         # Example POST request
         API_data = {'value': x}
-        print(x)
+        print(f"Temperature: {x}")
         if n % 50 == 0:  # Print data every 2 seconds (4 * dt)
             # URL of the Flask server
             url = "http://localhost:5000/api/temperature"
@@ -86,7 +97,14 @@ async def simulation():
             print(response)
     
     
+   
+    sp_data = np.ones(len(data))*sp
+    
+    
     plt.plot(data)
+    plt.plot(sp_data)
+    
+    plt.grid()
     plt.show()
 
 

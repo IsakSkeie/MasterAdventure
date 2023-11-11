@@ -1,21 +1,25 @@
+#%%
 import requests
 
 # URL of the Flask server
 base_url = "http://localhost:5000/api/temperature"
+url = 'http://localhost:5000/api/setpoint'
 
 # Example POST request
-new_temperature_reading = {'value': 25.8}
-response = requests.post(f"{base_url}", json=new_temperature_reading)
-
+new_temperature_reading = {'value': 24.8}
+response = requests.post(base_url, json=new_temperature_reading)
 # Print the response from the server
 print("POST Response:")
 print(response.status_code)
 print(response.json())  # Assuming the server returns JSON data
 
+
+
+
 # Example GET request
 response = requests.get(f"{base_url}")
 
-# Print the response from the server
+#Print the response from the server
 print("\nGET Response:")
 print(response.status_code)
 print(response.json())  # Assuming the server returns JSON data
