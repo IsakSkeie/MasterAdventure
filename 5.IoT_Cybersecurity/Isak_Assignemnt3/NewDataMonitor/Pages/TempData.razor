@@ -1,0 +1,60 @@
+﻿
+@using DataMonitor;
+@using Microsoft.EntityFrameworkCore;
+@using NewDataMonitor;
+@using System.Linq;
+
+
+
+
+
+@page "/TempTable"
+
+
+<h1>Temperature Table</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>TimeStamp</th>
+            <th>Process value</th>
+            <th>Setpoint</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var temp in latest20Temps)
+        {
+            <tr>
+                <td>@temp.TimeStamp</td>
+                <td>@temp.PV</td>
+                <td>@temp.SP</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@inject AppDBContext dbContext
+
+@code {
+    List<TemperatureData> Temperatures = new List<TemperatureData>();
+
+    List<TemperatureData> latest20Temps = new List<TemperatureData>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Temperatures = await dbContext.Temperatures.ToListAsync();
+        latest20Temps = Temperatures.OrderByDescending(p => p.Id).Take(40).ToList();
+    }
+}
+
+
+
+
+
+
+
+
+
+

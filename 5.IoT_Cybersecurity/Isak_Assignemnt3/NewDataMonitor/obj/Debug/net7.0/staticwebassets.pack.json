@@ -57,6 +57,62 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.cjs.map",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.cjs.map"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.js",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.js"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.js.map",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.js.map"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.min.js",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.min.js"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.umd.js",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.umd.js"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.umd.js.map",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.umd.js.map"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\chart.umd.min.js",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\chart.umd.min.js"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\helpers.cjs.map",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\helpers.cjs.map"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\helpers.js",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\helpers.js"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\helpers.js.map",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\helpers.js.map"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\helpers.min.js",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\helpers.min.js"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\index.d.ts",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\index.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\index.umd.d.ts",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\index.umd.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\isak.skeie\\Documents\\MasterAdventure\\5.IoT_Cybersecurity\\Isak_Assignemnt3\\NewDataMonitor\\wwwroot\\lib\\Chart.js\\types.d.ts",
+      "PackagePath": "staticwebassets\\lib\\Chart.js\\types.d.ts"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.NewDataMonitor.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

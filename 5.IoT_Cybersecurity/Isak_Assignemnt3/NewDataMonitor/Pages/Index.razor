@@ -5,15 +5,46 @@
 
 <PageTitle>Index</PageTitle>
 
-@foreach(var emp in Temperatures)
 
-{
-    <p>@emp.PV
-    </p>
 
-    <br />
-    <br />
-}
+
+
+
+
+<h1>Temperature readings</h1>
+
+
+
+<ul>
+    <li>Total Temperature readings: @Temperatures.Count()</li>
+
+    @if (Temperatures.Any())
+    {
+        <li>Average Temp: @Temperatures.Average(p => p.PV)</li>
+
+        <li>
+            Standard Deviation: @CalculateStandardDeviation(Temperatures.Select(p => (double)p.PV))
+        </li>
+        <li>
+            Minimum Temp: @Temperatures.Min(p => p.PV)
+        </li>
+        <li>
+            Maximum Temp: @Temperatures.Max(p => p.PV)
+        </li>
+
+    }
+    else
+    {
+        <li>Average Temp: No data available</li>
+
+
+        <li>Standard Deviation: No data available</li>
+        <li>Minimum Age: No data available</li>
+        <li>Maximum Age: No data available</li>
+    }
+
+    <!-- Add more statistics as needed -->
+</ul>
 
 
 @inject AppDBContext dbContext
@@ -21,9 +52,60 @@
 @code {
     List<TemperatureData> Temperatures = new List<TemperatureData>();
 
+
+
     protected override async Task OnInitializedAsync()
     {
         Temperatures = await dbContext.Temperatures.ToListAsync();
+
     }
 
+
+    private double CalculateStandardDeviation(IEnumerable<double> values)
+    {
+        double average = values.Average();
+        double variance = values.Select(val => Math.Pow(val - average, 2)).Average();
+        return Math.Sqrt(variance);
+    }
 }
+
+
+
+@* <h1>Temperature readings</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>TimeStamp</th>
+            <th>Process value</th>
+            <th>Setpoint</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var temp in latest20Temps)
+        {
+            <tr>
+                <td>@temp.TimeStamp</td>
+                <td>@temp.PV</td>
+                <td>@temp.SP</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@inject AppDBContext dbContext
+
+@code {
+    List<TemperatureData> Temperatures = new List<TemperatureData>();
+
+    List<TemperatureData> latest20Temps = new List<TemperatureData>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Temperatures = await dbContext.Temperatures.ToListAsync();
+        latest20Temps = Temperatures.OrderByDescending(p => p.Id).Take(40).ToList();
+    }
+}
+ *@

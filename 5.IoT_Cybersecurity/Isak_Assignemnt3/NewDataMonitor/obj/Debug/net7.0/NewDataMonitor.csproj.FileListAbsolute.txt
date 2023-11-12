@@ -74,3 +74,4 @@ C:\Users\isak.skeie\Documents\MasterAdventure\5.IoT_Cybersecurity\Isak_Assignemn
 C:\Users\isak.skeie\Documents\MasterAdventure\5.IoT_Cybersecurity\Isak_Assignemnt3\NewDataMonitor\obj\Debug\net7.0\NewDataMonitor.pdb
 C:\Users\isak.skeie\Documents\MasterAdventure\5.IoT_Cybersecurity\Isak_Assignemnt3\NewDataMonitor\obj\Debug\net7.0\NewDataMonitor.genruntimeconfig.cache
 C:\Users\isak.skeie\Documents\MasterAdventure\5.IoT_Cybersecurity\Isak_Assignemnt3\NewDataMonitor\obj\Debug\net7.0\ref\NewDataMonitor.dll
+C:\Users\isak.skeie\Documents\MasterAdventure\5.IoT_Cybersecurity\Isak_Assignemnt3\NewDataMonitor\bin\Debug\net7.0\libman.json
