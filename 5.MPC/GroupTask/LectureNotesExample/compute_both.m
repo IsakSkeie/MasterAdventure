@@ -6,7 +6,7 @@ Qe = eye(1).*1; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
 Pu(2) = 5e10; %Valve
-Pu(1) = 3e18; %Pumpe
+Pu(1) = 1e8; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
@@ -75,12 +75,10 @@ myHeq = [];
 %Create equality constraint for back pump when pipe is not connected
 
 for i = 1:Np
-  
     if pipeConnections(i) == 0
        tempConstraint =  [u_ini(i, 1)];
        myHeq = vertcat(myHeq, tempConstraint);   
     end 
-
 end 
 
 
