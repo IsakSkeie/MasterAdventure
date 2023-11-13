@@ -56,7 +56,7 @@ async def simulation():
     data = []
     x = Tout
     dt = 0.1
-    tspan = 2000
+    tspan = 500
     n = 0
 
     kp = 0.1
@@ -78,7 +78,7 @@ async def simulation():
         n = n + 1
         
         
-        # Example POST request
+        #POST request
         API_data = {'value': x}
         print(f"Temperature: {x}")
         if n % 50 == 0:  # Print data every 2 seconds (4 * dt)
