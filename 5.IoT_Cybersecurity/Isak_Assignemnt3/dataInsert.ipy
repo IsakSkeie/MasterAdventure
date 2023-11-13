@@ -4,7 +4,10 @@ import time
 
 
 # Set up the database connection
+
 connection_string = 'DRIVER={SQL Server};SERVER=OSL-0687\SQLEXPRESS;DATABASE=HeatingSystem;UID=Isak;PWD=SecurePassword'
+connection_string = 'DRIVER={SQL Server};Server=tcp:sql-express.database.windows.net,1433;Database=HeatingSystem;Uid=isak;Pwd=SecurePassword!;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
 connection = pyodbc.connect(connection_string)
 cursor = connection.cursor()
 
