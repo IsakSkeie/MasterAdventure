@@ -5,8 +5,8 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref, Np, pipeC
 Qe = eye(1).*1; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
-Pu(2) = 8e10; %Valve
-Pu(1) = 8e18; %Pumpe
+Pu(2) = 5e10; %Valve
+Pu(1) = 3e18; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
@@ -64,13 +64,13 @@ myJ = J;
 %if there are equaltiy constraints, it should be listed as a column vector
 myHeq = [];
 %Create vector for equality constraint for grouping
-for i = 2:Np
-    if i ~= 3 & i ~= 6 & i ~= 10  
-        tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
-        myHeq = vertcat(myHeq, tempGroup);
-       
-    end
-end
+% for i = 2:Np
+%     if i ~= 3 & i ~= 6 & i ~= 10  
+%         tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
+%         myHeq = vertcat(myHeq, tempGroup);
+% 
+%     end
+% end
 
 %Create equality constraint for back pump when pipe is not connected
 
@@ -93,8 +93,7 @@ myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressu
        -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
        -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
-       %-du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
-        %du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
+      
     ];
 
 
