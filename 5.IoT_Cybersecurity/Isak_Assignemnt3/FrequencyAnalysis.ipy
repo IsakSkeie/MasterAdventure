@@ -20,7 +20,7 @@ omega, mag, phase = scipy.signal.bode(sys, freq_range)
 
 poles = np.roots(denominator)
 if np.all(np.real(poles) < 0):
-    print("The system is stable.")
+    print(f"Real part of pole is placed at {np.real(poles)}")
 else:
     print("The system is not stable.")
 
