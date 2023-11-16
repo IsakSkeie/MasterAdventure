@@ -80,7 +80,7 @@ for i=1:Tlengt
         end
     end
     
-      pipeConnections(1)
+     
 
     state_ini_values(5) = qpump(i);
 
@@ -132,6 +132,8 @@ xlabel('time [sec]'); ylabel('flow [l/min]');
 legend('Control input: Mud pump');
 
 %%
+
+TotalTime = sum(timePsample)
  figure,
  plot(tspan,timePsample,'b-')
  legend('Time usage for one run','Orientation','horizontal')

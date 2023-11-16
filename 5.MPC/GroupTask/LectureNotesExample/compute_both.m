@@ -5,8 +5,8 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref, Np, pipeC
 Qe = eye(1).*1; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
-Pu(2) = 5e10; %Valve
-Pu(1) = 1e8; %Pumpe
+Pu(2) = 3e13; %Valve
+Pu(1) = 3e16; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
