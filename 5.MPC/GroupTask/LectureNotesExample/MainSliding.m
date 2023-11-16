@@ -2,7 +2,7 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 500;
+stop = 2000;
 %sampling time
 dt = 4; %sampling time in seconds %dt = 6 seconds
 Tlengt = ((stop-start)/dt);
@@ -74,6 +74,8 @@ for i=1:Tlengt
        
         if qpump(j+i) == 0.025 
             pipeConnections(j) = 0;
+        else 
+            pipeConnections(j) = 1;
         end
     end
     
