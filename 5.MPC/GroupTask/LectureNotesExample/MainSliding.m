@@ -2,7 +2,7 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 2000;
+stop = 500;
 %sampling time
 dt = 4; %sampling time in seconds %dt = 6 seconds
 Tlengt = ((stop-start)/dt);

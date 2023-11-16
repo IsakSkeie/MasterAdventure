@@ -9,7 +9,7 @@ Pu(2) = 3e13; %Valve
 Pu(1) = 3e16; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
-GroupInterval   = Np / 4;
+GroupInterval   = Np / n_uGroup;
 
 
 
@@ -65,7 +65,7 @@ myJ = J;
 myHeq = [];
 %Create vector for equality constraint for grouping
 % for i = 2:Np
-%     if i ~= 3 & i ~= 6 & i ~= 10  
+%     if mod(i, GroupInterval) ~= 0
 %         tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
 %         myHeq = vertcat(myHeq, tempGroup);
 % 
