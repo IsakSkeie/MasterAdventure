@@ -2,10 +2,10 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 2000;
+stop = 1000;
 %sampling time
-dt = 4; %sampling time in seconds %dt = 6 seconds
-Tlengt = ((stop-start)/dt);
+dt = 6; %sampling time in seconds %dt = 6 seconds
+Tlengt = ceil((stop-start)/dt);
 tspan = linspace(start, stop, Tlengt);
 
 %choose prediction horizon Np
@@ -13,18 +13,15 @@ Np = 20; %Np time steps ahead in the future
 
 
 %initial values of the states
-Pp_init     = 6.7e6;%8*10^5; %Initial pressure for pump
-qBit_init   = 0.025; %Initial flow rate through drill bit
-Pc_init     = 8.9e6; %Initial pressure at controle choke valve
-pbit_init   = 255e5; %Inital pressure for Pbit
+
 q_res       = 0;
 
 
-Pp_init     = 6.5e6;%8*10^5; %Initial pressure for pump
+Pp_init     = 7.2e6;%8*10^5; %Initial pressure for pump
 qBit_init   = 0.025; %Initial flow rate through drill bit
-Pc_init     = 6.5^7; %Initial pressure at controle choke valve
-pbit_init   = 255e5; %Inital pressure for Pbit
-q_pump_init = 0.025; %Initialize pump flow
+Pc_init     = 7.2e6; %Initial pressure at controle choke valve
+pbit_init   = 248e5; %Inital pressure for Pbit
+q_pump_init = 0.0; %Initialize pump flow
 
 
 state_ini_values = [Pp_init, qBit_init, Pp_init, pbit_init, q_pump_init];
@@ -49,11 +46,11 @@ u_pump = zeros(Tlengt,1);
 
 timePsample = zeros(Tlengt,1);
 
-qpump = ones(Tlengt+Np,1)*q_pump_init;
+qpump = ones(Tlengt+Np,1)*0.025;
 pipeConnections = ones(Np, 1);
 qpump(1) = 0;
 for i=1:Tlengt
-     if(i*dt>=5 && i*dt < 500)
+     if(i*dt>=dt*2 && i*dt < 500)
           qpump(i) = min(qpump(i-1) + 0.000333,0.025);
      elseif (i*dt>=1000 && i*dt < 1000+10*60)
         qpump(i) = max(qpump(i-1) - 0.000333,0);

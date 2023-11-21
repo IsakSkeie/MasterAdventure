@@ -5,8 +5,8 @@ function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref, Np, pipeC
 Qe = eye(1).*1; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
-Pu(2) = 8e10; %Valve
-Pu(1) = 8e18; %Pumpe
+Pu(2) = 1; %Valve
+Pu(1) = 1; %Pumpe
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
@@ -28,6 +28,7 @@ Pc = zeros(Np,1);
 %solve the ODE (model of the nonlinear process) using runge kutta. To solve the ODEs we need to
 %know the initial values of the states. Thus they are passed into the “compute_both” function.
 for i = 1:Np
+
     %find out which control input to use for each time step within the prediction horizon.
     u_k = u_ini(i,:);
     %use runge kutta to update the states
@@ -41,13 +42,18 @@ for i = 1:Np
 
     %update the state
     state_ini_values = x_next;
+    
+
 
 end
 %For this example, there is also constraint on the rate of change of control input variables (du)
 %such that -0.1<=du<=0.1
 %since in the objective function, we don't have 'du' but only 'u', we have to calculate 'du' ourself.
 %find du from the input signals
-du = u_ini(2:end,:)-u_ini(1:end-1,:);
+
+
+
+du = (u_ini(2:end,:)-u_ini(1:end-1,:));
 
 %now make the objective function
 J = 0;
@@ -64,24 +70,25 @@ myJ = J;
 %if there are equaltiy constraints, it should be listed as a column vector
 myHeq = [];
 %Create vector for equality constraint for grouping
-for i = 2:Np
-    if i ~= 3 & i ~= 6 & i ~= 10  
-        tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
-        myHeq = vertcat(myHeq, tempGroup);
-       
-    end
-end
+% 
+% for i = 2:Np
+%     if i ~= 3 & i ~= 6 & i ~= 10  
+%         tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
+%         myHeq = vertcat(myHeq, tempGroup);
+% 
+%     end
+% end
 
 %Create equality constraint for back pump when pipe is not connected
 
-for i = 1:Np
-  
-    if pipeConnections(i) == 0
-       tempConstraint =  [u_ini(i, 1)];
-       myHeq = vertcat(myHeq, tempConstraint);   
-    end 
-
-end 
+% for i = 1:Np
+% 
+%     if pipeConnections(i) == 0
+%        tempConstraint =  [u_ini(i, 1)];
+%        myHeq = vertcat(myHeq, tempConstraint);   
+%     end 
+% 
+% end 
 
 
 %list the inequality constraints as column vector
@@ -91,9 +98,9 @@ myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressu
         -u_ini(:,2) + 0;      %Lowest valve opening is 0%
         u_ini(:,1) - (0.0167);   % Highest pump flow is 0.25 m^3/s
        -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
-       -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
+       -du(:,2) + 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
-       %-du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
+       %-du(:,1) + 0.0021;          %Valve opening cannot change more than two over a timsetep  
         %du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
     ];
 
