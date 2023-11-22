@@ -2,9 +2,9 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 500;
+stop = 2000;
 %sampling time
-dt = 6; %sampling time in seconds %dt = 6 seconds
+dt = 8; %sampling time in seconds %dt = 6 seconds
 Tlengt = ceil((stop-start)/dt);
 tspan = linspace(start, stop, Tlengt);
 
@@ -30,8 +30,8 @@ state_ini_values = [Pp_init, qBit_init, Pp_init, pbit_init, q_pump_init];
 %initial value for optimizer control
 u_ini = ones(Np,2); 
 
-u_ini(:,1)  = u_ini(:,1)* 0.0; %Initialize pump flow
-u_ini(:,2) = u_ini(:,2)* 100;    %Initialize choke valve opening
+u_ini(:,1)  = u_ini(:,1)* 0.025; %Initialize pump flow
+u_ini(:,2) = u_ini(:,2)* 70;    %Initialize choke valve opening
 
 
 %Reference
