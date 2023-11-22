@@ -9,8 +9,6 @@ Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
 Pu(2) = 3e10; %Valve
 Pu(1) = 2e14; %Pumpe
 
-R = 2e12; 
-
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
 
@@ -65,10 +63,6 @@ for i = 1:Np-1
      %Q_debug = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))
      %P_debug = abs(du(i,:)*Pu*du(i,:)')
     J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i)) + abs(du(i,:)*Pu*du(i,:)') + J ;
-
-    if pipeConnections(i) == 0
-        J = u_ini(i,1)'*R* u_ini(i,1) + J;
-     end 
 end
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
@@ -79,13 +73,13 @@ myJ = J;
 myHeq = [];
 %Create vector for equality constraint for grouping
 
-% for i = 2:Np
-%     if i ~= 3 & i ~= 6 & i ~= 10  
-%         tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
-%         myHeq = vertcat(myHeq, tempGroup);
-% 
-%     end
-% end
+for i = 2:Np
+    if i ~= 3 & i ~= 6 & i ~= 10  
+        tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
+        myHeq = vertcat(myHeq, tempGroup);
+
+    end
+end
 
 %Create equality constraint for back pump when pipe is not connected
 % 
