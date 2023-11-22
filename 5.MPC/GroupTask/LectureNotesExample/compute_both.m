@@ -7,9 +7,9 @@ Pu = eye(2).*1; %weighting matrix for the control inputs
 R  = eye(1).*1; %Wighting matrix for relaxed constraint on back pump
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
 Pu(2) = 3e10; %Valve
-Pu(1) = 2e14; %Pumpe
+Pu(1) = 4e14; %Pumpe
 
-R = 2e12; 
+R = 1e11; 
 
 n_uGroup        = 4; %Number of groups for deviation control variables
 GroupInterval   = Np / 4;
@@ -65,10 +65,8 @@ for i = 1:Np-1
      %Q_debug = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))
      %P_debug = abs(du(i,:)*Pu*du(i,:)')
     J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i)) + abs(du(i,:)*Pu*du(i,:)') + J ;
-
-    if pipeConnections(i) == 0
-        J = u_ini(i,1)'*R* u_ini(i,1) + J;
-     end 
+    J =  (u_ini(i,1)'*R* u_ini(i,1)) + J;
+     
 end
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
@@ -89,14 +87,21 @@ myHeq = [];
 
 %Create equality constraint for back pump when pipe is not connected
 % 
-% for i = 1:Np
-% 
-%     if pipeConnections(i) == 0
-%        tempConstraint =  [u_ini(i, 1)];
-%        myHeq = vertcat(myHeq, tempConstraint);   
-%     end 
-% 
-% end 
+for i = 1:Np
+
+    if pipeConnections(i) == 0 
+       tempConstraint =  [u_ini(i, 1)];
+       myHeq = vertcat(myHeq, tempConstraint);   
+
+    else 
+       tempConstraint =  [u_ini(i, 1) - u_ini(i, 1)];
+       myHeq = vertcat(myHeq, tempConstraint);   
+ 
+    end 
+
+
+
+end 
 
 
 %list the inequality constraints as column vector
@@ -108,8 +113,8 @@ myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressu
        -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
        -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
-       %-du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
-        %du(:,1) - 0.0021;          %Valve opening cannot change more than two over a timsetep  
+       -du(:,1) - 0.002;          %Valve opening cannot change more than two over a timsetep  
+        du(:,1) - 0.002;          %Valve opening cannot change more than two over a timsetep  
     ];
 
 
