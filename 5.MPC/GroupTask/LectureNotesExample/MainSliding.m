@@ -2,7 +2,7 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 1000;
+stop = 500;
 %sampling time
 dt = 6; %sampling time in seconds %dt = 6 seconds
 Tlengt = ceil((stop-start)/dt);
@@ -18,7 +18,7 @@ q_res       = 0;
 
 
 Pp_init     = 7.2e6;%8*10^5; %Initial pressure for pump
-qBit_init   = 0.025; %Initial flow rate through drill bit
+qBit_init   = 0.0; %Initial flow rate through drill bit
 Pc_init     = 7.2e6; %Initial pressure at controle choke valve
 pbit_init   = 248e5; %Inital pressure for Pbit
 q_pump_init = 0.0; %Initialize pump flow
@@ -30,8 +30,8 @@ state_ini_values = [Pp_init, qBit_init, Pp_init, pbit_init, q_pump_init];
 %initial value for optimizer control
 u_ini = ones(Np,2); 
 
-u_ini(:,1)  = u_ini(:,1)* 0.025; %Initialize pump flow
-u_ini(:,2) = u_ini(:,2)* 75;    %Initialize choke valve opening
+u_ini(:,1)  = u_ini(:,1)* 0.0; %Initialize pump flow
+u_ini(:,2) = u_ini(:,2)* 100;    %Initialize choke valve opening
 
 
 %Reference

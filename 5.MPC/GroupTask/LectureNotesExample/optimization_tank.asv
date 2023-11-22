@@ -10,7 +10,7 @@ function u = optimization_tank(u_ini,state_ini_values,dt,Ref,Np, pipeConnections
 %options for chosing the type of method for optimization and other options
 %ops = optimset('Algorithm','sqp','Display','off','MaxIter',5000);
 %ops =optimset('Algorithm','interior-point','Display','off','MaxIter',5000);
-ops = optimset('Algorithm','active-set','Display','off','MaxIter',4000);
+ops = optimset('Algorithm','active-set','Display','off','MaxIter',2000);
 uLast = [];% Last place compute_both was called
 myJ = [];% Use for objective at xLast
 myG = [];% Use for nonlinear inequality constraint

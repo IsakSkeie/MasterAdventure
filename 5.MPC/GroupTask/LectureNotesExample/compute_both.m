@@ -60,7 +60,7 @@ J = 0;
 for i = 1:Np-1
     %error = (Ref(i)-Pc(i)) * 50e-15;
  
-    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))  + du(i,:)*Pu*du(i,:)' + J ;%+ (u_ini(i,1))*Pu_Pump*(u_ini(i,1))';
+    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i)) + J;%  + du(i,:)*Pu*du(i,:)' + J ;
 end
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
