@@ -4,7 +4,7 @@ clear
 start = 0;
 stop = 2000;
 %sampling time
-dt = 8; %sampling time in seconds %dt = 6 seconds
+dt = 6; %sampling time in seconds %dt = 6 seconds
 Tlengt = ceil((stop-start)/dt);
 tspan = linspace(start, stop, Tlengt);
 

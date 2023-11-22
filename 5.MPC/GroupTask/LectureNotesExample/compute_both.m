@@ -82,14 +82,14 @@ myHeq = [];
 
 %Create equality constraint for back pump when pipe is not connected
 % 
-for i = 1:Np
-
-    if pipeConnections(i) == 0
-       tempConstraint =  [u_ini(i, 1)];
-       myHeq = vertcat(myHeq, tempConstraint);   
-    end 
-
-end 
+% for i = 1:Np
+% 
+%     if pipeConnections(i) == 0
+%        tempConstraint =  [u_ini(i, 1)];
+%        myHeq = vertcat(myHeq, tempConstraint);   
+%     end 
+% 
+% end 
 
 
 %list the inequality constraints as column vector
