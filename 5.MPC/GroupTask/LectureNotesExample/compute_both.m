@@ -79,13 +79,13 @@ myJ = J;
 myHeq = [];
 %Create vector for equality constraint for grouping
 
-% for i = 2:Np
-%     if i ~= 3 & i ~= 6 & i ~= 10  
-%         tempGroup = [u(i,:)' - u(i-1,:)'];
-%         myHeq = vertcat(myHeq, tempGroup);
-% 
-%     end
-% end
+for i = 3:Np
+    if i ~= 4 & i ~= 7 & i ~= 11  
+        tempGroup = [u(i,:)' - u(i-1,:)'];
+        myHeq = vertcat(myHeq, tempGroup);
+
+    end
+end
 
 %Create equality constraint for back pump when pipe is not connected
 
