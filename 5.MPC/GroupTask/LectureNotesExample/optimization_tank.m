@@ -25,14 +25,11 @@ cons_func = @(u)confun_tank(u,state_ini_values,dt,Ref,Np);
 [u,fval,exitflag,output,solutions] = fmincon(obj_func,u_ini,[],[],[],[],[],[],cons_func,ops);
 
 
-u(1,:) = uLast(1,:);
-u
-
     function J = objfun_tank(u,state_ini_values,dt,Ref,Np)
 if ~isequal(u,uLast) %check if computation is necessary
 % disp('button pressed: objective call');
 % pause;
-[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np, pipeConnections);
+[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np, pipeConnections, u_ini(1,:));
 uLast = u;
 end
 %now compute objective function
@@ -42,7 +39,7 @@ end
 if ~isequal(u,uLast) %check if computation is necessary
 % disp('button pressed: constraint call');
 % pause;
-[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np, pipeConnections);
+[myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref,Np, pipeConnections, u_ini(1,:));
 uLast = u;
 end
 %now compute constraints

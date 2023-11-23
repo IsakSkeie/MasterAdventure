@@ -1,18 +1,19 @@
-function [myJ myG myHeq] = compute_both(u_ini,state_ini_values,dt,Ref, Np, pipeConnections)
+function [myJ myG myHeq] = compute_both(u,state_ini_values,dt,Ref, Np, pipeConnections, u_ini)
 %this is the function where we compute the objective function and the
 %constraints together at the same time.
 %weighting matrices for error and control inputs
-Qe = eye(1).*0.01; %weighting matrix for the error
+Qe = eye(1).*0.001; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 R  = eye(1).*1; %Wighting matrix for relaxed constraint on back pump
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
-Pu(2) = 3e10; %Valve
-Pu(1) = 4e14; %Pumpe
+Pu(2) = 4e10; %Valve
+Pu(1) = 2e15; %Pumpe
+
 
 R = 1e11; 
 
 n_uGroup        = 4; %Number of groups for deviation control variables
-GroupInterval   = Np / 4;
+GroupInterval   = (Np) / 4;
 
 
 
@@ -33,7 +34,7 @@ Pc = zeros(Np,1);
 for i = 1:Np
 
     %find out which control input to use for each time step within the prediction horizon.
-    u_k = u_ini(i,:);
+    u_k = u(i,:);
     %use runge kutta to update the states
     x_next = OilWell_runge_kutta(state_ini_values,dt,u_k);
     %use the states to calculate the output
@@ -55,19 +56,20 @@ end
 %find du from the input signals
 
 
-
-du = (u_ini(2:end,:)-u_ini(1:end-1,:));
+u = [u_ini(1,:); u];
+du = (u(2:end,:)-u(1:end-1,:));
 
 %now make the objective function
 J = 0;
 for i = 1:Np-1
-    %error = (Ref(i)-Pc(i)) * 50e-15;
-     %Q_debug = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i))
-     %P_debug = abs(du(i,:)*Pu*du(i,:)')
-    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i)) + abs(du(i,:)*Pu*du(i,:)') + J ;
-    J =  (u_ini(i,1)'*R* u_ini(i,1)) + J;
-     
+
+    J = (Ref(i)-Pc(i))'*Qe*(Ref(i)-Pc(i)) + du(i,:)*Pu*du(i,:)' + J ;
+
+    
 end
+
+
+%P_debug = du(1,:)*Pu*du(1,:)'
 
  %J = (Ref-Pc)'*Qe(i)*(Ref-Pc);%  + u_ini(i,:)*Pu*u_ini(i,:)' + J;
     
@@ -79,38 +81,36 @@ myHeq = [];
 
 % for i = 2:Np
 %     if i ~= 3 & i ~= 6 & i ~= 10  
-%         tempGroup = [u_ini(i,:)' - u_ini(i-1,:)'];
+%         tempGroup = [u(i,:)' - u(i-1,:)'];
 %         myHeq = vertcat(myHeq, tempGroup);
 % 
 %     end
 % end
 
 %Create equality constraint for back pump when pipe is not connected
-% 
+
 for i = 1:Np
 
     if pipeConnections(i) == 0 
-       tempConstraint =  [u_ini(i, 1)];
+       tempConstraint =  [u(i, 1)];
        myHeq = vertcat(myHeq, tempConstraint);   
 
     else 
-       tempConstraint =  [u_ini(i, 1) - u_ini(i, 1)];
+        
+       tempConstraint =  [u(i, 1) - u(i, 1)];
        myHeq = vertcat(myHeq, tempConstraint);   
- 
+
     end 
-
-
-
 end 
 
 
 %list the inequality constraints as column vector
-myG = [ -Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressure
+myG = [-Pc + 220e5; % Pressure in bit needs to be greater than reservoir pressure
        Pc - 270e5; % Pressure in bit needs to be less than Fracture pressure
-        u_ini(:,2) - 100;     % Highest vale opening is 100%
-        -u_ini(:,2) + 0;      %Lowest valve opening is 0%
-        u_ini(:,1) - (0.0167);   % Highest pump flow is 0.25 m^3/s
-       -u_ini(:,1) + 0 ;      %Lowest pump flow is 0 l/min
+        u(:,2) - 100;     % Highest vale opening is 100%
+        -u(:,2) + 0;      %Lowest valve opening is 0%
+        u(:,1) - (0.0167);   % Highest pump flow is 0.25 m^3/s
+       -u(:,1) + 0 ;      %Lowest pump flow is 0 l/min
        -du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
         du(:,2) - 2;          %Valve opening cannot change more than two over a timsetep  
        -du(:,1) - 0.002;          %Valve opening cannot change more than two over a timsetep  
