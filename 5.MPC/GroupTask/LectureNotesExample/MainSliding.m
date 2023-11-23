@@ -2,7 +2,7 @@ clc
 clear
 %Simulation time;
 start = 0;
-stop = 1000;
+stop = 4800;
 %sampling time
 dt = 6; %sampling time in seconds %dt = 6 seconds
 Tlengt = ceil((stop-start)/dt);
@@ -50,11 +50,18 @@ qpump = ones(Tlengt+Np,1)*0.025;
 pipeConnections = ones(Np, 1);
 qpump(1) = 0;
 for i=1:Tlengt
+    %Start up of mud pump
      if(i*dt>=dt*2 && i*dt < 500)
           qpump(i) = min(qpump(i-1) + 0.000333,0.025);
+    %First pipe connection
      elseif (i*dt>=1000 && i*dt < 1000+10*60)
         qpump(i) = max(qpump(i-1) - 0.000333,0);
-     elseif(i*dt >= 1000+10*60 && i*dt< 1000+15*60)
+     elseif(i*dt >= 1000+10*60 && i*dt< 1000+20*60)
+         qpump(i) = min(qpump(i-1) + 0.000333,0.025);
+    %Second pipe connection
+     elseif (i*dt>=3000 && i*dt < 3000+10*60)
+        qpump(i) = max(qpump(i-1) - 0.000333,0);
+     elseif(i*dt >= 3000+10*60 && i*dt< 3000+25*60)
          qpump(i) = min(qpump(i-1) + 0.000333,0.025);
      end
 end
@@ -98,7 +105,7 @@ for i=1:Tlengt
     u_valve(i) = u(2);
     Pc(i,1) = x_next(4);
     Refp(i,1) = RefMPC(1);
-    i
+    i*dt
 end
 
 
