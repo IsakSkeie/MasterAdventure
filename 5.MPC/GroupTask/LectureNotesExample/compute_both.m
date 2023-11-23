@@ -87,6 +87,17 @@ for i = 3:Np
     end
 end
 
+%Create vector for equality constraint for grouping
+% for i = 3:Np
+%     if mod(i, GroupInterval) ~= 0
+%         tempGroup = [u(i,:)' - u(i-1,:)'];
+%         myHeq = vertcat(myHeq, tempGroup);
+% 
+%     end
+% end
+
+
+
 %Create equality constraint for back pump when pipe is not connected
 
 for i = 1:Np
@@ -96,7 +107,7 @@ for i = 1:Np
        myHeq = vertcat(myHeq, tempConstraint);   
 
     else 
-        
+
        tempConstraint =  [u(i, 1) - u(i, 1)];
        myHeq = vertcat(myHeq, tempConstraint);   
 

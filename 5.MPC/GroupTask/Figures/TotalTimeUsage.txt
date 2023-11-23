@@ -1,0 +1,11 @@
+Regular:
+	398.7113s
+
+BackPumpConstraint:
+	417.4601s
+
+Grouping:
+	238.3918s
+	
+IntervalGrouping:
+	198.0056s
