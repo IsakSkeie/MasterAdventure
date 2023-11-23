@@ -6,7 +6,7 @@ Qe = eye(1).*0.001; %weighting matrix for the error
 Pu = eye(2).*1; %weighting matrix for the control inputs
 R  = eye(1).*1; %Wighting matrix for relaxed constraint on back pump
 Pu_Pump = eye(1).*1000; %Weight matrix for Back pump control input
-Pu(2) = 4e10; %Valve
+Pu(2) = 6e10; %Valve
 Pu(1) = 2e15; %Pumpe
 
 
