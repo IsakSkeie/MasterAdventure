@@ -18,10 +18,82 @@
     </nav>
 
     <title>IMRAD Report</title>
-    <section id="introduction">
-        <h2>Introduction</h2>
-        <p>This is the introduction section of the IMRAD report.</p>
-        <!-- Additional content for the introduction -->
+    <section id="method">
+        <h2>Methods</h2>
+        <h3>Hardware Overview</h3>
+        <p>In setting up the temperature management system,                 <br>
+            several hardware components are needed. Both for development,   <br>
+            but also for further production of the project. All of the      <br>
+            hardware components are listed in Table #. The RPI hosts        <br>
+            the MQTT broker, the relational database, the temperature       <br>
+            handling, as well as the alarm handling. The ESP32 functions     <br>
+            as an Analog to Digital converter, transmitting temperature     <br>
+            readings to the RPI, either through the Serial protocol over    <br>
+            USB, or through the MQTT broker. The remaining hardware         <br>
+            components are quite simple and self-explanatory in their table rows. </p>
+       
+            <table border="1">
+                <thead>
+                  <tr>
+                    <th>Hardware</th>
+                    <th>Description</th>
+        
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Raspberry Pi 4</td>
+                    <td>Small Linux based computer with IO</td>
+                    
+                  </tr>
+                  <tr>
+                    <td>esp32</td>
+                    <td>Microcontroller with built in WiFi</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>Thermistor</td>
+                    <td>Analog temperature sensor</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>Router</td>
+                    <td>Wireless access for components</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>Resistors</td>
+                    <td>1k and 10k ohm</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>Jumper Wires</td>
+                    <td>For circuit connections</td>
+                 
+                  </tr>
+
+                  <tr>
+                    <td>Breadboards</td>
+                    <td>For Circuit development</td>
+                 
+                  </tr>
+
+                  <tr>
+                    <td>Push Button</td>
+                    <td>Operator interface for alarm system</td>
+                 
+                  </tr>
+
+                  <tr>
+                    <td>LED</td>
+                    <td>Operator interface for alarm system</td>
+                 
+                  </tr>
+
+
+
+                </tbody>
+              </table>
     </section>
 
 </body>
