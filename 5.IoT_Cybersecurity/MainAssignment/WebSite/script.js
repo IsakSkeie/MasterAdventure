@@ -1,24 +1,37 @@
-// JavaScript to handle smooth scrolling for section links
-document.querySelectorAll('#sidepane a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const pageUrl = this.getAttribute('href');
-        fetch(pageUrl)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('content').innerHTML = html;
-                history.pushState({ page: pageUrl }, '', pageUrl);
-            });
-    });
-});
-
-// Handle popstate event to enable browser back/forward navigation
-window.addEventListener('popstate', function (event) {
-    const pageUrl = event.state ? event.state.page : 'index.html'; // Default to index.html
-    fetch(pageUrl)
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('content').innerHTML = html;
+// JavaScript using jQuery for AJAX and history management
+$(document).ready(function () {
+    // Function to load content dynamically
+    function loadContent(pageUrl) {
+        $.ajax({
+            url: pageUrl,
+            method: 'GET',
+            success: function (html) {
+                $('#content').html(html);
+            },
+            error: function () {
+                console.error('Error loading content.');
+            }
         });
-});
+    }
+
+//     // Event listener for sidepane links
+//     $('#sidepane a').on('click', function (e) {
+//         e.preventDefault();
+
+//         const pageUrl = $(this).attr('href');
+//         loadContent(pageUrl);
+
+//         // Update browser history
+//         history.pushState({ page: pageUrl }, '', pageUrl);
+//     });
+
+//     // Event listener for popstate (back/forward) navigation
+//     $(window).on('popstate', function (event) {
+//         const pageUrl = event.originalEvent.state ? event.originalEvent.state.page : 'index.html';
+//         loadContent(pageUrl);
+//     });
+
+//     // Load initial content based on current URL
+//     const initialPageUrl = window.location.pathname.substring(1) || 'index.html';
+//     loadContent(initialPageUrl);
+// });

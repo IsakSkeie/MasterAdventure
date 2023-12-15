@@ -20,8 +20,60 @@
     <title>IMRAD Report</title>
     <section id="results">
         <h2>Results</h2>
-        <p>Present the results of your study.</p>
-        <!-- Additional content for the results section -->
+        <h3>>Video Presentation of results</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pmq1I9-BT8o" frameborder="0" allowfullscreen></iframe>
+
+        <h3>Temperature readings</h3>
+        <p>
+            For temperature data, there’s two ways of measuring the data, and three ways 
+            of transmitting the data. Looking first at the two different ways of measuring. 
+            Both the thermistor and the DS18B20 are satisfactory. They showed a temperature 
+            not far from each other around room temperature, and had a steady realistic 
+            increase when heated up by pressing them between two fingers. Without having a 
+            control value to compare them to, it’s hard to make any assumptions of which one 
+            where the most accurate. But with the thermistor readings being based on the chosen 
+            electrical components and the measured voltage scaling in the code. It’s reasonable 
+            to assume that the digital temperature sensor is more accurate, as well as more linear. 
+            Although the digital temperature sensor appears more accurate, there’s also the 
+            transmitting method which must be taken into account. Using 1-wire is an easy method 
+            for digital data transfer but is limited in its scalability. The same applies to data 
+            transmission over Serial. A bit more cumbersome to set up the correct messaging 
+            encoding/decoding, to make it result in usable floats. But not very scalable. Using 
+            MQTT on the other hand, was with the MQTT broker the easiest way to transfer the temperature 
+            data, and by far the most scalable solution.
+        </p>
+
+        <h3>Alarm Handling</h3>
+        <p>
+            The Alarm system fulfills its purpose to easily interact with the RPI as well as 
+            showing off the customizable capabilities provided by the RPI’s GPIO. The distinction between an 
+            active and an unacknowledged inactive alarm is clear in the illuminating degree of the LED. 
+            The button also works as intended for acknowledging the alarm.
+        </p>
+
+        <h3>Data Handling</h3>
+        <p>
+            Data handling consists of two parts, the first one being the transmitting of data,
+            and the other being the storing of data. The transmission is done locally with MQTT. 
+            The data is easily published and subscribed to through the broker running on the RPI. 
+            With a wide range of IoT devices supporting the protocol, like the esp32 running a C++ program. 
+            The other way data is being transmitted is with REST API to the cloud. A widespread protocol working 
+            safely without problems. For data storage the database Postgres has been set up. 
+            Data is successfully being stored and used by other applications.
+        </p>
+
+        <h3>Data Analysis and visualization</h3>
+        <p>
+            The temperature data is mainly visualized through ThingSpeak. 
+            This works as intended and the accessibility of the data is greatly improved. 
+            The use of REST API made it easy to post the data, albeit with a low resolution. 
+            For some instances a higher resolution might be necessary. The process of analyzing 
+            the data is both simple and streamlined. The database querying makes the analysis 
+            process easy to adapt to other datasets and other systems. The data analysis script 
+            also provides an useful bar graph clearly illustrating the different statistics like 
+            mean, median, upper and lower percentiles. 
+        </p>
+
     </section>
 
 </body>

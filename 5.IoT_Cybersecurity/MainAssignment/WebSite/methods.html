@@ -18,18 +18,18 @@
     </nav>
 
     <title>IMRAD Report</title>
-    <section id="method">
+    <section id="content">
         <h2>Methods</h2>
         <h3>Hardware Overview</h3>
-        <p>In setting up the temperature management system,                 <br>
-            several hardware components are needed. Both for development,   <br>
-            but also for further production of the project. All of the      <br>
-            hardware components are listed in Table #. The RPI hosts        <br>
-            the MQTT broker, the relational database, the temperature       <br>
-            handling, as well as the alarm handling. The ESP32 functions     <br>
-            as an Analog to Digital converter, transmitting temperature     <br>
-            readings to the RPI, either through the Serial protocol over    <br>
-            USB, or through the MQTT broker. The remaining hardware         <br>
+        <p>In setting up the temperature management system,                 
+            several hardware components are needed. Both for development,   
+            but also for further production of the project. All of the      
+            hardware components are listed in Table #. The RPI hosts        
+            the MQTT broker, the relational database, the temperature       
+            handling, as well as the alarm handling. The ESP32 functions     
+            as an Analog to Digital converter, transmitting temperature     
+            readings to the RPI, either through the Serial protocol over    
+            USB, or through the MQTT broker. The remaining hardware         
             components are quite simple and self-explanatory in their table rows. </p>
        
             <table border="1">
@@ -94,6 +94,179 @@
 
                 </tbody>
               </table>
+
+              <br> <br> <br> <br> <br> <br>
+              <h3>Software Overview</h3>
+
+              <p>
+                Creating an application with programs running on both a windows PC, <br>
+                 a Raspberry Pi running Linux, and a ESP32 microcontroller          <br>
+                 requires an array of software. With Visual studio Code being       <br>
+                  at the core of it. Through the SSH extension for VS Code.         <br>
+                  Its possible to connect to the Raspberry Pi over the SSH protocol. <br>
+                  This allows for development on the local computer, with the codebase <br>
+                  residing on the Raspberry Pi. This eliminates the need for graphically <br>
+                  interfacing the RPI, minimizing the strain on the RPI. An additional <br>
+                  extension for VS Code is Platform IO, this functions the same way <br>
+                  as Arduino IDE. Development for the ESP32 module was done through <br>
+                  this extension. For the MQTT broker, a broker called Mosquitto was <br>
+                  used, this was run on the Raspberry Pi and handled publish/subscribe. <br>
+                  Postgres DB was the chosen relational database, it was initially <br>
+                  intended to use Mongo DB locally on the RPI, but was not possible <br>
+                  due to incompatible chip architecture. 
+
+              </p>
+
+
+
+              <table border="1">
+                <thead>
+                  <tr>
+                    <th>Software</th>
+                    <th>Description</th>
+        
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Visual Studio Code</td>
+                    <td>IDE for programming</td>
+                    
+                  </tr>
+                  <tr>
+                    <td>VS Code: SSH</td>
+                    <td>Extension for remote work with VS code</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>VS Code: Platform IO</td>
+                    <td>Extension for Microcontroller development</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>Mosquitto MQTT broker</td>
+                    <td>Broker, handling the MQTT protocol</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>Postrgres SB</td>
+                    <td>Relational Database</td>
+                 
+                  </tr>
+                  <tr>
+                    <td>ThingSpeak</td>
+                    <td>Cloudbased service for presenting data</td>
+                 
+                  </tr>
+
+                  <tr>
+                    <td>Python </td>
+                    <td>Programming language used on the RPI</td>
+                 
+                  </tr>
+
+                  <tr>
+                    <td>C++</td>
+                    <td>Programming language used on microcontroller</td>
+                 
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+              <br> <br> <br> <br> <br>
+
+              <h3>Topology</h3>
+              <p>
+                For development, easy access to all the programmable    <br>
+                components was vital. Developing code directly on the RPI <br>
+                would make it cumbersome, as its straining on the RPI’s <br>
+                processor, and the need for ESP32 programming would require <br>
+                one to switch between developing environments. The SSH <br>
+                extension for Visual Studio Code was used, this allowed <br>
+                development on both the ESP32 and RPI to be performed at <br>
+                the same time. For accessing the RPI over SSH, a new network <br>
+                was established with a separate router. With the RPI connected <br>
+                to a router, the database- and MQTT server was made accessible, <br>
+                for the local computer and the ESP32. Additionally, internet <br>
+                access was required for the RPI, for the OS to be updated <br>
+                and specific python packages installed for the project. <br>
+                The RPI was therefore connected to the router over ethernet,<br> 
+                while at the same time connected to a separate Wifi network with internet access. <br>
+
+                <img src="images/Topology.png" alt="Description of the image">
+              </p>
+
+
+              <h3>Temperature Handling</h3>
+              <p>
+                The raspberry receives as mentioned temperature readings in 
+                three different ways. The DS18B20 reads the temperature and transmits it
+                 digitally through the 1-Wire protocol to the RPI. On the RPI the values can 
+                 be found under “/sys/bus/w1/devices/”, the data is accessed through a python 
+                 script, together with the OS library. The second way the RPI receives 
+                 temperature readings is through a thermistor. The RPI is lacking Analog inputs
+                  on its GPIO, am ESP32 is therefore used as an ADC. The microcontroller ESP32 
+                  enables temperature data to be transmitted through WiFi, Bluetooth, and as for 
+                  this case, through Serial over USB. The ESP32 reads the analog voltage readings 
+                  through the thermistor, scales the data, applies a Low pass filter, before transmitting 
+                  it digitally over Serial. On the RPI a python script receives the data with the help 
+                  of a Serial library on “/dev/ttyUSB0”. The third and preferred way 
+                  to transmit temperature data is over the MQTT protocol. The ESP32 is 
+                  connected to the router over Wifi, temperature data is published to a MQTT 
+                  broker running on the RPI. On the ESP32, a C++ program is running, that uses
+                   a Wi-Fi library, as well as a MQTT library to be able to publish the data 
+                   to the RPI. A python script running on the RPI subscribes to the same topic 
+                   as the ESP32 is publishing on, this gives access to the live temperature data on the RPI for further processing.
+
+              </p>
+              <img src="images/esp32_Pins.png" alt="Description of the image">
+              <img src="images/ThermistorCircuit.png" alt="Description of the image">
+              
+              <h3>Alarm Handling</h3>
+              <p>
+                The temperature data is to be utilized in an alarm system. The alarm system 
+                is built on Python and hosted on the RPI. When the temperature reaches above 
+                a certain threshold, the LED indicates an active alarm. When the temperature 
+                reaches below the same threshold, the LED gets dimmed, indicating an unacknowledged 
+                alarm. The alarm will then be able to acknowledge by pressing the button. This turns 
+                off the LED. Both of the schematics in Figure # are connected to a small breadboard and 
+                connected to the RPI. 
+              </p>
+
+              <img src="images/RPI_Pins.png" alt="Description of the image">
+              <img src="images/ButtonCircuit.png" alt="Description of the image">
+              <img src="images/LEDCircuit.jpg" alt="Description of the image">
+
+
+              <h3>Data Handling</h3>
+              <p>
+                The temperature readings are to be stored in a database together with the states of the alarm system.
+                 A Postgres Database server is set up on the RPI. On the database a single table is set up, the temperature 
+                 process values, the alarm set-point and the alarm state is stored. Running in parallel on the RPI is a MQTT broker. 
+                 The Open-Source version Mosquito is used as the MQTT broker, configured to run without any credentials on the local 
+                 ip-address of the RPI for easy access. Transmitting the data from the ESP32 is as mentioned above, published 
+                 through a Wifi connection over the MQTT protocol. The python script running on the RPI subrscribing to the temperature 
+                 data is inserting the live temperature data into the Postgres table.
+              </p>
+
+
+              <h3>Data visualization and Analysis</h3>
+              <p>
+                The data produced from the temperature values and alarm system, is visualized through the cloud platform Thingspeak. 
+                Its then analyzed with the help of the Pandas library on python. The python script running on the RPI that’s subscribing to 
+                the temperature data over MQTT is also sending the temperature values to Thingspeak. This is done with the help of the Requests 
+                library, the REST API protocol is used to send a HTTPS put command, sending the data securely to the cloud platform. 
+                The temperature data is then plotted in Line graphs. For data analysis, a separate python script running locally on the PC is used. 
+                The python script queries the temperature data from the database running on the RPI. The temperature data is then structured into a Pandas 
+                Dataframe. Making it easy to utilize the Analyze function for pandas Dataframes and for plotting, both for temperature value line plotting, 
+                as well bar graphs for the analysis results.
+              </p>
+
+              <img src="images/DataFlow.png" alt="Description of the image">
+
+
     </section>
 
 </body>

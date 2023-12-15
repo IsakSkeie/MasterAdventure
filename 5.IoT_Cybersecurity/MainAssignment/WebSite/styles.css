@@ -20,7 +20,11 @@ header {
     padding: 1m;
     width: 6%;
     height: 100vh;
+    position: fixed;
     box-sizing: border-box; /* Ensures padding and border are included in the width */
+
+
+    border-right: 1px solid #aaa;
 }
 
 #sidepane ul {
@@ -39,6 +43,36 @@ header {
 }
 
 #content {
+
+    margin-left: 6%;
+    width: 80%;
+    padding: 20px;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    
+}
+
+
+#method {
+
+    margin-left: 6%;
+    width: 80%;
+    padding: 20px;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    
+}
+
+#introduction {
+
+    margin-left: 6%;
+    width: 80%;
+    padding: 20px;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    
+}
+
+#results {
+
+    margin-left: 6%;
     width: 80%;
     padding: 20px;
     box-sizing: border-box; /* Ensures padding and border are included in the width */
@@ -47,7 +81,7 @@ header {
 
 section {
     margin-bottom: 40px;
-    color: bisque;
+    
 }
 
 footer {
@@ -58,4 +92,11 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+
+
+p {
+    max-width: 500px; /* Adjust the value as needed */
+    overflow-wrap: break-word;
 }

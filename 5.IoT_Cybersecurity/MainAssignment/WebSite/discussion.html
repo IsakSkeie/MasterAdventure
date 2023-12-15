@@ -18,10 +18,46 @@
     </nav>
 
     <title>IMRAD Report</title>
-    <section id="results">
+    <section id="content">
         <h2>Discussion</h2>
-        <p>Present the discussion of your study.</p>
-        <!-- Additional content for the results section -->
+        <h3>Temperature Readings</h3>
+        <p>
+            The procedure of sending temperature data over MQTT proved to be a good solution,
+            with an improved scalability and accessibility over physical wiring the temperature 
+            sensors. With the digital temperature sensor DS18B20 established as the preferred temperature 
+            sensor, it should have been connected to the esp32, removing the initial necessity of an ADC, 
+            but maintain the benefits of using MQTT. Before sending the temperature system to production. 
+            Scaling the system should be tested. With the RPI subscribing to several topics, for different data sources.
+        </p>
+
+        <h3>Alarm Handling</h3>
+        <p>
+            The specified way of handling the alarms is a rather crude approach, only highlighting the use 
+            of GPIO pins on the RPI. A more intuitive and accessible solution would have been to host a webpage 
+            on the RPI, with extended functionality based on the LED and button. With a webpage for alarm handling,
+             it would also be possible to incorporate the data visualization and analysis. The data will in this case 
+             only be accessible locally, but all the features specified in the task description would be in one place.
+        </p>
+
+        <h3>Data Handling</h3>
+        <p>
+            Evaluating data handling in the system, there’s two things to consider. The accessibility of the data, 
+            and the protection of the data. Sending and receiving the data is done through well-established protocols like MQTT, 
+            serial and REST API. The data transfer through MQTT could have been more structured. Using topics to sort the data. 
+            It could be sorted by sensor type, sensor location etc. Making the specific data points more accessible once the system is scaled. 
+            Protecting the data must be handled both in the communication protocol level, as well as for the database. 
+            MQTT has a well established system for handling its cyber security, with credentials, tokens, and topic related 
+            access. For development, the broker was set up without any security, focusing rather on showing that it works. 
+            But if this were to be pushed into production, the brokers security measures would need to be configured. For the REST API connection, 
+            there’s already a token in place, supplied by the cloud service, making the connection secure. The REST API connection 
+            could be further improved by encrypting the token in the script where it is used. For database access, 
+            login credentials were set up from the start. For this system it seems like a sufficiently precautious measure.
+             But if the system was to be scaled up. One could consider setting up different users with specific access.
+
+        </p>
+
+
+
     </section>
 
 </body>
