@@ -1,0 +1,40 @@
+
+
+
+Topics:
+	Linearization
+		-Operating Point
+		
+	Augmented models
+		-Integral Action
+		-DeltaU
+		-MPC  + I controller
+	
+	
+	
+	Model Delay
+		-Output delay
+		-Input delay (same as Output delay)
+	
+	
+	Stability
+		-Infinite Horizon
+	
+	
+	Feasability
+		-Soft constraints
+		-
+	
+	
+	Model Computational Speed
+		-Control input grouping 
+		-lagrange multiplier
+		-QR factorization
+		
+		
+	Multi Objective
+		-Dominating Objective
+		-Non-Dominating Objective
+			-Weighted sum
+			-Goal Attainment
+			

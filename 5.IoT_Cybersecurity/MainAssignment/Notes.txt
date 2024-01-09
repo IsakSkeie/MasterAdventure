@@ -1,0 +1,116 @@
+RPi for IoT 
+Introduction:
+	
+		
+	-Task Structure
+		-User interfacing on an  embedded level for RPI
+			-Through Alarm system
+		-RPI GPIO capabilites
+			-Through Temperature sensors
+		-Data management, how is data moved and stored?
+			-Database setup
+			-MQTT 
+			-Cloud based data management
+			
+	-The reason?
+		-RPI possibilites
+		-Different IoT technologies
+			-Communication Protocolls
+			-Embedded computing
+			-Microcontrollers
+			-Cloud technologies	
+	
+	-Task deviation
+		-RPI server Hosting
+			-Better suited for production
+			-More independent
+			
+		-ESP32 MQTT publish
+			-Free's RPI
+			-Better IoT Mindset
+			-Wireless
+
+
+Methods:
+	-How
+		-Hardware overview
+		-Software Overview
+		-Hardware configuration
+		-RPI IO interfacing
+		-ADC for RPI
+		-Network configuration for development
+		
+		
+		
+	-Temperature handling
+		-Tested two different temp sensors
+		-1-wire and Serial
+		-ESP32 as ADC
+		
+	-Alarm Handling
+		-RPI Python script
+		-
+		
+	-DB handling
+		-Mongo DB setup
+		-DB interfacing
+		-
+		
+		
+	-MQTT
+		-MQTT broker setup
+		-MQTT broker publish/subscribe
+		
+		-
+		
+		
+	-Thingpseak setup
+		-Thingspeak cloud setup
+		-Thingpseak interfacing
+		
+		
+		
+	-Data analysis
+		-Data collection
+		-Data handling
+
+
+Result:
+	-Temperature readings
+		-Compare the two methods
+		-Which works best?
+		
+	-Alarm Handling
+		-Does it work?
+		-Use case from an operators perspective
+		
+	-Mongo DB
+		-data succesfully stored? 
+		-Data accesibility 
+		-ready for deployment?
+	
+	-MQTT 
+		-MQTT succesfully running
+		-ready for deployment?
+		
+	-Thingspeak
+		-Is data being posted?
+		
+	-Data Analysis
+		-Right type of analysis?
+		-Is the data quality and amount sufficient?
+		-
+
+
+Discussion:
+	-Temperature handling
+	
+	-Alarm handling
+	
+	-Mongo DB
+	
+	
+
+		
+	
+		

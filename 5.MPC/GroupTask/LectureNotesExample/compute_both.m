@@ -75,44 +75,44 @@ end
     
 myJ = J;
 
-%if there are equaltiy constraints, it should be listed as a column vector
+% %if there are equaltiy constraints, it should be listed as a column vector
 myHeq = [];
-%Create vector for equality constraint for grouping
-
-for i = 3:Np
-    if i ~= 4 & i ~= 7 & i ~= 11  
-        tempGroup = [u(i,:)' - u(i-1,:)'];
-        myHeq = vertcat(myHeq, tempGroup);
-
-    end
-end
-
-%Create vector for equality constraint for grouping
+% %Create vector for equality constraint for grouping
+% 
 % for i = 3:Np
-%     if mod(i, GroupInterval) ~= 0
+%     if i ~= 4 & i ~= 7 & i ~= 11  
 %         tempGroup = [u(i,:)' - u(i-1,:)'];
 %         myHeq = vertcat(myHeq, tempGroup);
 % 
 %     end
 % end
-
-
-
-%Create equality constraint for back pump when pipe is not connected
-
-for i = 1:Np
-
-    if pipeConnections(i) == 0 
-       tempConstraint =  [u(i, 1)];
-       myHeq = vertcat(myHeq, tempConstraint);   
-
-    else 
-
-       tempConstraint =  [u(i, 1) - u(i, 1)];
-       myHeq = vertcat(myHeq, tempConstraint);   
-
-    end 
-end 
+% 
+% %Create vector for equality constraint for grouping
+% % for i = 3:Np
+% %     if mod(i, GroupInterval) ~= 0
+% %         tempGroup = [u(i,:)' - u(i-1,:)'];
+% %         myHeq = vertcat(myHeq, tempGroup);
+% % 
+% %     end
+% % end
+% 
+% 
+% 
+% %Create equality constraint for back pump when pipe is not connected
+% 
+% for i = 1:Np
+% 
+%     if pipeConnections(i) == 0 
+%        tempConstraint =  [u(i, 1)];
+%        myHeq = vertcat(myHeq, tempConstraint);   
+% 
+%     else 
+% 
+%        tempConstraint =  [u(i, 1) - u(i, 1)];
+%        myHeq = vertcat(myHeq, tempConstraint);   
+% 
+%     end 
+% end 
 
 
 %list the inequality constraints as column vector

@@ -4,7 +4,7 @@ clear
 start = 0;
 stop = 2000;
 
-stop = 4800;
+stop = 500;
 %sampling time
 dt = 6; %sampling time in seconds %dt = 6 seconds
 Tlengt = ceil((stop-start)/dt);
